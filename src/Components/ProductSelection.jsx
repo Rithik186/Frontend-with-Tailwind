@@ -392,7 +392,7 @@ const ProductSelection = () => {
               type="text"
               value={newDispute}
               onChange={(e) => setNewDispute(e.target.value)}
-              placeholder={language === "English" ? "Enter your query..." : "உங்கள் கேள்வியை உள்ளிடவும்..."}
+              placeholder={language === "English" ? "Reply to query..." : "வாடிக்கையாளர்களின் கேள்விக்கு பதில்..."}
               className="w-full p-3 rounded-lg border border-teal-200 mb-3"
             />
             <button
@@ -404,16 +404,6 @@ const ProductSelection = () => {
             {disputes.map((dispute, index) => (
               <p key={index} className="mt-2 text-teal-700">{dispute}</p>
             ))}
-          </div>
-
-          {/* Weather Widget (Placeholder) */}
-          <div className="p-6 bg-white/90 rounded-2xl shadow-lg">
-            <h2 className="text-xl font-bold text-teal-800 mb-4">
-              {language === "English" ? "Weather Info" : "வானிலை தகவல்"}
-            </h2>
-            <p className="text-teal-700">
-              {language === "English" ? "Weather data coming soon..." : "வானிலை தரவு விரைவில் வரும்..."}
-            </p>
           </div>
         </motion.div>
       </motion.div>

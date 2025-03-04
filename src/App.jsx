@@ -1,18 +1,22 @@
-import Dashboard from "./Components/Dashboard.jsx";
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import ProductSelection from "./Components/ProductSelection.jsx";
+import Dashboard from './Components/Dashboard.jsx'; // Renamed Home to Dashboard
+import ProductSelection from './Components/ProductSelection.jsx';
+import Home from './Components/Home.jsx';
 
-function App(){
-  
+function App() {
   return (
-    <><><title>FARMER TO CONSUMER PLATFORM</title></><Router>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/addpro" element={<ProductSelection />} />
-
-      </Routes>
-    </Router></>
-
+    <Router>
+      <div className="App">
+        {/* If you want a title, use a Helmet component or update index.html */}
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/getstarted" element={<Dashboard />} />
+          <Route path="/addpro" element={<ProductSelection />} />
+        </Routes>
+      </div>
+    </Router>
   );
 }
+
 export default App;

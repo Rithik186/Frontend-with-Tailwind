@@ -1,1 +1,10 @@
 @import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+.glow-effect {
+  transition: all 0.3s ease;
+}
+.glow-effect:hover {
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}

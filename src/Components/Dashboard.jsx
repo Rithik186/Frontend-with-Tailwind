@@ -6,7 +6,7 @@ import { Bar, Pie } from "react-chartjs-2";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement);
 
-// Language translations (unchanged from your original)
+// Language translations (unchanged)
 const translations = {
   en: {
     helloFarmer: "Hello, Farmer!",
@@ -20,7 +20,7 @@ const translations = {
     currentOrders: "Current Orders",
     totalEarnings: "Total Earnings",
     marketPrices: "Market Prices",
-    sellSurplus: "Sell Surplus",
+    sellSurplus: "Sell Surplus Product",
     addProduct: "Add Product",
     cropRecommendation: "Crop Recommendation",
     ordersGraph: "Orders Graph",
@@ -107,13 +107,18 @@ const translations = {
 };
 
 const Dashboard = () => {
-  // Utility Functions
+  // Utility Functions (unchanged)
   const randomEarnings = () => Math.floor(Math.random() * 100000);
   const randomPrices = () => ({
-    Carrots: Math.floor(Math.random() * 200),
-    Tomatoes: Math.floor(Math.random() * 300),
-    Onions: Math.floor(Math.random() * 400),
+    Carrots: Math.floor(Math.random() * 100),
+    Tomatoes: Math.floor(Math.random() * 150),
+    Onions: Math.floor(Math.random() * 200),
   });
+
+  const randomCropRecommendation = () => {
+    const crops = ["Tomatoes", "Carrots", "Potatoes", "Onions", "Cucumbers"];
+    return crops[Math.floor(Math.random() * crops.length)];
+  };
 
   const generateOrdersData = () => ({
     labels: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
@@ -122,7 +127,7 @@ const Dashboard = () => {
       data: Array.from({ length: 7 }, () => Math.floor(Math.random() * 100)),
       backgroundColor: "rgba(167, 243, 208, 0.6)",
       borderColor: "rgba(16, 185, 129, 1)",
-      borderWidth: 2,
+      borderWidth: 1,
     }],
   });
 
@@ -145,11 +150,10 @@ const Dashboard = () => {
         "rgba(16, 185, 129, 1)",
         "rgba(139, 92, 246, 1)",
       ],
-      borderWidth: 2,
+      borderWidth: 1,
     }],
   });
 
-  // Mock YouTube Video Fallback
   const generateMockVideo = () => ({
     title: "Farming Technology Overview",
     thumbnail: "https://via.placeholder.com/320x180?text=Farming+Video",
@@ -161,7 +165,7 @@ const Dashboard = () => {
   const [location, setLocation] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const [fullScreenGraph, setFullScreenGraph] = useState(null);
+  const [fullScreenGraph, setFullScreenGraph] = useState(false); // Changed to boolean for showing both charts
   const [fromCurrency, setFromCurrency] = useState("USD");
   const [toCurrency, setToCurrency] = useState("INR");
   const [amount, setAmount] = useState(1);
@@ -171,17 +175,23 @@ const Dashboard = () => {
     { id: 2, name: "Tomatoes", image: "https://images.unsplash.com/photo-1607305387299-a3d9611cd469" },
     { id: 3, name: "Potatoes", image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655" },
     { id: 4, name: "Onions", image: "https://images.unsplash.com/photo-1618512496248-a07fecec27cd" },
+    { id: 5, name: "Cucumbers", image: "https://images.unsplash.com/photo-1607305387299-a3d9611cd469" },
+    { id: 6, name: "Peppers", image: "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37" },
+    { id: 7, name: "Lettuce", image: "https://images.unsplash.com/photo-1607305387299-a3d9611cd469" },
+    { id: 8, name: "Broccoli", image: "https://images.unsplash.com/photo-1518977676601-b53f82aba655" },
+    { id: 9, name: "Spinach", image: "https://images.unsplash.com/photo-1618512496248-a07fecec27cd" },
   ]);
   const [language, setLanguage] = useState("en");
   const [earnings] = useState(randomEarnings());
   const [prices] = useState(randomPrices());
   const [ordersData] = useState(generateOrdersData());
   const [analyticsData] = useState(generateAnalyticsData());
+  const [cropRecommendation] = useState(randomCropRecommendation());
   const [newsData, setNewsData] = useState(null);
   const [youtubeVideo, setYoutubeVideo] = useState(null);
   const [error, setError] = useState(null);
 
-  // Weather Fetch (OpenWeatherMap API)
+  // Weather Fetch (unchanged)
   useEffect(() => {
     const fetchWeather = async (lat, lon) => {
       try {
@@ -201,9 +211,6 @@ const Dashboard = () => {
         setWeather(weatherData);
         setLocation(locationData[0]);
       } catch (error) {
-        console.error("Error fetching weather/location:", error);
-        setWeather(null);
-        setLocation(null);
         setError("Failed to fetch weather data");
       }
     };
@@ -211,17 +218,14 @@ const Dashboard = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => fetchWeather(position.coords.latitude, position.coords.longitude),
-        (error) => {
-          console.error("Geolocation error:", error);
-          setError("Geolocation access denied");
-        }
+        () => setError("Geolocation access denied")
       );
     } else {
-      setError("Geolocation is not supported by this browser");
+      setError("Geolocation not supported");
     }
   }, []);
 
-  // Currency Conversion (ExchangeRate-API)
+  // Currency Conversion (unchanged)
   useEffect(() => {
     const convertCurrency = async () => {
       try {
@@ -233,19 +237,16 @@ const Dashboard = () => {
         const rate = data.rates[toCurrency];
         setConvertedAmount((amount * rate).toFixed(2));
       } catch (error) {
-        console.error("Error converting currency:", error);
-        setConvertedAmount(null);
         setError("Failed to convert currency");
       }
     };
     if (amount && fromCurrency && toCurrency) convertCurrency();
   }, [amount, fromCurrency, toCurrency]);
 
-  // Fetch News and YouTube Videos with Fallback
+  // Fetch News and YouTube Videos (unchanged)
   useEffect(() => {
     const fetchNewsAndVideos = async () => {
       try {
-        // Fetch News from NewsAPI
         const newsResponse = await fetch(
           `https://newsapi.org/v2/everything?q=farming+agriculture&apiKey=c10e12d1c86649488db6669f6f0b6fee&language=en&pageSize=10`
         );
@@ -254,7 +255,6 @@ const Dashboard = () => {
         const randomNews = newsData.articles[Math.floor(Math.random() * newsData.articles.length)];
         setNewsData(randomNews);
 
-        // Fetch YouTube Videos with Fallback
         let youtubeData = null;
         try {
           const youtubeResponse = await fetch(
@@ -269,11 +269,9 @@ const Dashboard = () => {
             url: `https://www.youtube.com/watch?v=${randomVideo.id.videoId}`,
           });
         } catch (youtubeError) {
-          console.error("YouTube fetch error:", youtubeError);
-          setYoutubeVideo(generateMockVideo()); // Fallback to mock video
+          setYoutubeVideo(generateMockVideo());
         }
 
-        // Periodic Rotation
         const interval = setInterval(() => {
           const newNews = newsData.articles[Math.floor(Math.random() * newsData.articles.length)];
           setNewsData(newNews);
@@ -286,15 +284,14 @@ const Dashboard = () => {
               url: `https://www.youtube.com/watch?v=${newVideo.id.videoId}`,
             });
           } else {
-            setYoutubeVideo(generateMockVideo()); // Continue with mock if YouTube failed initially
+            setYoutubeVideo(generateMockVideo());
           }
         }, 10000);
 
         return () => clearInterval(interval);
       } catch (error) {
-        console.error("Error fetching news/videos:", error);
         setNewsData(null);
-        setYoutubeVideo(generateMockVideo()); // Fallback for both if NewsAPI fails too
+        setYoutubeVideo(generateMockVideo());
         setError("Failed to fetch news or videos");
       }
     };
@@ -302,17 +299,17 @@ const Dashboard = () => {
     fetchNewsAndVideos();
   }, []);
 
-  // Chart Options
+  // Chart Options (adjusted for smaller size)
   const chartOptions = {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { position: "top", labels: { color: "#1e3a8a" } },
-      title: { display: true, text: translations[language].ordersGraph, color: "#1e3a8a" },
+      legend: { position: "top", labels: { color: "#1e3a8a", font: { size: 10 } } },
+      title: { display: true, text: translations[language].ordersGraph, color: "#1e3a8a", font: { size: 12 } },
     },
     scales: {
-      x: { ticks: { color: "#1e3a8a" } },
-      y: { ticks: { color: "#1e3a8a" } },
+      x: { ticks: { color: "#1e3a8a", font: { size: 8 } } },
+      y: { ticks: { color: "#1e3a8a", font: { size: 8 } } },
     },
   };
 
@@ -320,30 +317,30 @@ const Dashboard = () => {
     responsive: true,
     maintainAspectRatio: false,
     plugins: {
-      legend: { position: "top", labels: { color: "#1e3a8a" } },
-      title: { display: true, text: translations[language].analytics, color: "#1e3a8a" },
+      legend: { position: "top", labels: { color: "#1e3a8a", font: { size: 10 } } },
+      title: { display: true, text: translations[language].analytics, color: "#1e3a8a", font: { size: 12 } },
     },
   };
 
-  // Animation Variants
+  // Animation Variants (adjusted for faster transitions)
   const pageVariants = {
     initial: { opacity: 0 },
-    animate: { opacity: 1, transition: { duration: 0.5, ease: "easeInOut" } },
+    animate: { opacity: 1, transition: { duration: 0.3, ease: "easeInOut" } },
   };
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 50, scale: 0.9 },
+    hidden: { opacity: 0, y: 30, scale: 0.9 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
-      transition: { duration: 0.8, ease: "easeOut", when: "beforeChildren", staggerChildren: 0.1, type: "spring", stiffness: 120 },
+      transition: { duration: 0.5, ease: "easeOut", when: "beforeChildren", staggerChildren: 0.05, type: "spring", stiffness: 120 },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, scale: 0.8, y: 20 },
-    visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", type: "spring", stiffness: 100 } },
+    hidden: { opacity: 0, scale: 0.8, y: 10 },
+    visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.4, ease: "easeOut", type: "spring", stiffness: 100 } },
   };
 
   const getWeatherEmoji = (description) => {
@@ -371,11 +368,11 @@ const Dashboard = () => {
   if (error) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
-        <div className="text-center p-6 bg-white rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold text-red-600 mb-2">Error</h2>
-          <p className="text-gray-700">{error}</p>
+        <div className="text-center p-4 bg-white rounded-lg shadow-lg">
+          <h2 className="text-lg font-bold text-red-600 mb-1">Error</h2>
+          <p className="text-gray-700 text-sm">{error}</p>
           <button
-            className="mt-4 px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
+            className="mt-2 px-4 py-1 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700"
             onClick={() => window.location.reload()}
           >
             Retry
@@ -387,111 +384,120 @@ const Dashboard = () => {
 
   return (
     <motion.div
-      className={`min-h-screen p-6 ${darkMode ? "bg-gray-900 text-white" : "bg-gradient-to-br from-emerald-50 via-amber-50 to-indigo-50 text-gray-900"}`}
+      className={`min-h-screen max-h-screen p-4 flex flex-col ${darkMode ? "bg-gray-900 text-white" : "bg-gradient-to-br from-emerald-50 via-amber-50 to-indigo-50 text-gray-900"}`}
       variants={pageVariants}
       initial="initial"
       animate="animate"
     >
       {fullScreenGraph && (
         <motion.div
-          className="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50"
+          className="fixed inset-0 bg-white bg-opacity-80 flex items-center justify-center z-50"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
         >
-          <div className="bg-white p-6 rounded-2xl w-11/12 max-w-4xl relative shadow-2xl">
-            <button className="absolute top-4 right-4 text-3xl text-gray-600 hover:text-gray-800" onClick={() => setFullScreenGraph(null)}>×</button>
-            {fullScreenGraph === "orders" && <Bar data={ordersData} options={chartOptions} />}
-            {fullScreenGraph === "analytics" && <Pie data={analyticsData} options={pieOptions} />}
+          <div className="bg-white p-4 rounded-2xl w-11/12 max-w-5xl relative shadow-2xl">
+            <button className="absolute top-2 right-2 text-2xl text-gray-600 hover:text-gray-800" onClick={() => setFullScreenGraph(false)}>×</button>
+            <div className="flex justify-center space-x-4">
+              <div className="w-1/2 h-57">
+                <h3 className="text-center text-lg font-semibold text-rose-800 mb-2">Orders Graph</h3>
+                <Bar data={ordersData} options={chartOptions} />
+              </div>
+              <div className="w-1/2 h-50">
+                <h3 className="text-center text-lg font-semibold text-rose-800 mb-2">Analytics</h3>
+                <Pie data={analyticsData} options={pieOptions} />
+              </div>
+            </div>
           </div>
         </motion.div>
       )}
 
       {/* Header */}
       <motion.div
-        className="flex flex-col md:flex-row justify-between items-center mb-8 bg-white/90 backdrop-blur-md p-6 rounded-2xl shadow-xl border border-emerald-100"
+        className="flex flex-col md:flex-row justify-between items-center mb-3 bg-transparent/90 backdrop-blur-md p-3 rounded-2xl shadow-lg border border-emerald-100"
         variants={containerVariants}
       >
-        <div className="flex items-center space-x-6 mb-4 md:mb-0 relative">
+        <div className="flex items-center space-x-7 mb-2 md:mb-0 relative">
           <motion.img
             src="https://i.pinimg.com/736x/a8/f4/6a/a8f46ad882c293af8c3fe011ce13bbb0.jpg"
             alt="Farmer Logo"
-            className="w-28 h-28 rounded-full border-4 border-emerald-300 object-cover shadow-md"
+            className="w-25 h-25 rounded-full border-2 border-emerald-300 object-cover shadow-md"
             whileHover={{ scale: 1.1, rotate: 360 }}
             transition={{ duration: 0.5 }}
           />
-          <motion.h1
-            className="text-4xl font-extrabold tracking-tight text-emerald-800"
-            whileHover={{ scale: 1.05 }}
-          >
-            {translations[language].helloFarmer}
-          </motion.h1>
-          <div className="flex space-x-4">
-            <motion.button
-              className="px-6 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 shadow-lg text-lg font-medium"
-              onClick={() => setShowSettings(!showSettings)}
+          <div>
+            <motion.h1
+              className="text-2xl font-extrabold tracking-tight text-emerald-800"
               whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
             >
-              {translations[language].settings}
-            </motion.button>
-            <motion.button
-              className="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 shadow-lg text-lg font-medium"
-              onClick={() => alert(translations[language].help)}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              {translations[language].help}
-            </motion.button>
-          </div>
-          {showSettings && (
-            <motion.div
-              className="absolute top-full left-0 mt-3 p-6 bg-white rounded-2xl shadow-2xl border border-emerald-200 z-20"
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -10 }}
-              transition={{ duration: 0.3 }}
-            >
-              <button
-                className="px-6 py-3 bg-emerald-600 text-white rounded-xl hover:bg-emerald-700 shadow-lg w-full mb-3"
-                onClick={() => setDarkMode(!darkMode)}
+              {translations[language].helloFarmer}
+            </motion.h1>
+            <div className="flex space-x-2 mt-3">
+              <motion.button
+                className="px-4 py-1 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 shadow-md text-sm"
+                onClick={() => setShowSettings(!showSettings)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                {darkMode ? translations[language].lightMode : translations[language].darkMode}
-              </button>
-              <div className="flex space-x-3">
-                {["en", "ta", "hi"].map((lang) => (
-                  <motion.button
-                    key={lang}
-                    className="px-4 py-2 bg-indigo-100 text-indigo-800 rounded-xl hover:bg-indigo-200 shadow-md"
-                    onClick={() => setLanguage(lang)}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    {lang === "en" ? "English" : lang === "ta" ? "தமிழ்" : "हिंदी"}
-                  </motion.button>
-                ))}
-              </div>
-            </motion.div>
-          )}
+                {translations[language].settings}
+              </motion.button>
+              <motion.button
+                className="px-4 py-1 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-md text-sm"
+                onClick={() => alert(translations[language].help)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                {translations[language].help}
+              </motion.button>
+            </div>
+            {showSettings && (
+              <motion.div
+                className="absolute top-full left-0 mt-2 p-4 bg-white rounded-2xl shadow-2xl border border-emerald-200 z-20"
+                initial={{ opacity: 0, y: -10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+              >
+                <button
+                  className="px-4 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 shadow-md w-full mb-2 text-sm"
+                  onClick={() => setDarkMode(!darkMode)}
+                >
+                  {darkMode ? translations[language].lightMode : translations[language].darkMode}
+                </button>
+                <div className="flex space-x-2">
+                  {["en", "ta", "hi"].map((lang) => (
+                    <motion.button
+                      key={lang}
+                      className="px-3 py-1 bg-indigo-100 text-indigo-800 rounded-lg hover:bg-indigo-200 shadow-md text-sm"
+                      onClick={() => setLanguage(lang)}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      {lang === "en" ? "English" : lang === "ta" ? "தமிழ்" : "हिंदी"}
+                    </motion.button>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </div>
         </div>
 
-        <div className="flex space-x-4 mb-4 md:mb-0 w-full md:w-1/2">
+        <div className="flex space-x-5 mb-2 md:mb-0 w-full md:w-1/2 h-40 rounded-4xl">
           {["confirmed", "dispatched", "cancelled"].map((status, index) => (
             <motion.div
               key={status}
               variants={itemVariants}
-              className={`p-4 rounded-2xl shadow-lg border flex-1 ${status === "confirmed"
+              className={`p-2 rounded-lg shadow-md border flex-1 ${status === "confirmed"
                 ? "bg-emerald-100 border-emerald-200"
                 : status === "dispatched"
                 ? "bg-amber-100 border-amber-200"
-                : "bg-rose-100 border-rose-200"} hover:shadow-xl hover:scale-105 transition-all duration-300`}
+                : "bg-rose-100 border-rose-200"} hover:shadow-lg hover:scale-105 transition-all duration-300`}
             >
-              <h3 className={`font-bold text-lg ${status === "confirmed" ? "text-emerald-800" : status === "dispatched" ? "text-amber-800" : "text-rose-800"}`}>
+              <h3 className={`font-bold text-sm ${status === "confirmed" ? "text-emerald-800" : status === "dispatched" ? "text-amber-800" : "text-rose-800"}`}>
                 {translations[language][status]}
               </h3>
-              <p className={`mt-2 ${status === "confirmed" ? "text-emerald-900" : status === "dispatched" ? "text-amber-900" : "text-rose-900"}`}>
+              <p className={`mt-1 text-xs ${status === "confirmed" ? "text-emerald-900" : status === "dispatched" ? "text-amber-900" : "text-rose-900"}`}>
                 Order #{127 + index * 2} - ₹{4000 - index * 1500}
               </p>
-              <p className={`mt-1 ${status === "confirmed" ? "text-emerald-900" : status === "dispatched" ? "text-amber-900" : "text-rose-900"}`}>
+              <p className={`mt-1 text-xs ${status === "confirmed" ? "text-emerald-900" : status === "dispatched" ? "text-amber-900" : "text-rose-900"}`}>
                 Order #{128 + index * 2} - ₹{2500 - index * 700}
               </p>
             </motion.div>
@@ -500,28 +506,28 @@ const Dashboard = () => {
 
         <motion.div
           variants={itemVariants}
-          className="p-4 bg-gradient-to-r from-indigo-100 via-blue-100 to-cyan-100 rounded-2xl shadow-xl border border-indigo-200 hover:shadow-2xl hover:scale-105 transition-all duration-300 w-full md:w-1/4"
+          className="p-2 bg-gradient-to-r from-indigo-100 via-blue-100 to-cyan-100 rounded-lg shadow-md border border-indigo-200 hover:shadow-lg hover:scale-105 transition-all duration-300 md:w-1/4"
         >
-          <h3 className="font-bold text-lg text-indigo-800 mb-2">{translations[language].weather}</h3>
-          {!weather && <p className="text-gray-600">{translations[language].enableLocation}</p>}
+          <h3 className="font-bold text-sm text-indigo-800 mb-1">{translations[language].weather}</h3>
+          {!weather && <p className="text-gray-600 text-xs">{translations[language].enableLocation}</p>}
           {weather && location && (
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="mt-4 text-center"
+              className="mt-1 text-center"
             >
               <motion.div
                 animate={{ rotate: [0, 10, -10, 0], scale: [1, 1.1, 1] }}
                 transition={{ repeat: Infinity, duration: 3 }}
                 className="inline-block"
               >
-                <span className="text-5xl">{getWeatherEmoji(weather.weather[0].description)}</span>
+                <span className="text-3xl">{getWeatherEmoji(weather.weather[0].description)}</span>
               </motion.div>
-              <p className="text-xl font-semibold text-indigo-900 mt-2 capitalize">{weather.weather[0].description}</p>
-              <p className="text-3xl font-bold text-cyan-800">{weather.main.temp}°C</p>
-              <p className="text-sm text-gray-700">Location: {location.name}, {location.country}</p>
+              <p className="text-sm font-semibold text-indigo-900 mt-1 capitalize">{weather.weather[0].description}</p>
+              <p className="text-lg font-bold text-cyan-800">{weather.main.temp}°C</p>
+              <p className="text-xs text-gray-700">Location: {location.name}, {location.country}</p>
               <motion.p
-                className="text-sm text-gray-600"
+                className="text-xs text-gray-600"
                 animate={{ opacity: [0.5, 1, 0.5] }}
                 transition={{ repeat: Infinity, duration: 2 }}
               >
@@ -532,51 +538,58 @@ const Dashboard = () => {
         </motion.div>
       </motion.div>
 
-      {/* Main Grid */}
+      {/* Main Grid (Four Columns) */}
       <motion.div
-        className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        className="grid grid-cols-1 md:grid-cols-4 gap-4 flex-1 overflow-hidden"
         variants={containerVariants}
       >
-        {/* Left Column */}
-        <div className="space-y-6">
-          {[
-            { title: "previousOrders", color: "amber", data: ["Order #123 - ₹5,000", "Order #124 - ₹3,500"] },
-            { title: "currentOrders", color: "emerald", data: ["Order #125 - ₹2,000 (Pending)", "Order #126 - ₹1,500 (Processing)"] },
-            { title: "totalEarnings", color: "purple", data: [`₹${earnings}`] },
-          ].map((section) => (
-            <motion.div
-              key={section.title}
-              variants={itemVariants}
-              className={`p-6 bg-${section.color}-100/90 rounded-2xl shadow-lg border border-${section.color}-200 hover:shadow-xl hover:scale-105 transition-all duration-300`}
-            >
-              <h3 className={`font-bold text-xl text-${section.color}-800`}>{translations[language][section.title]}</h3>
-              {section.data.map((item, index) => (
-                <p key={index} className={`mt-${index === 0 ? 2 : 1} text-${section.color}-900 ${section.title === "totalEarnings" ? "text-3xl font-semibold" : ""}`}>
-                  {item}
-                </p>
-              ))}
-            </motion.div>
-          ))}
+        {/* Column 1 (Far Left) */}
+        <div className="space-y-4 ml-2">
+          <motion.div
+            variants={itemVariants}
+            className="p-3 bg-purple-100/90 rounded-lg shadow-md border border-purple-200 hover:shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            <h3 className="font-bold text-sm text-purple-800">{translations[language].totalEarnings}</h3>
+            <p className="mt-1 text-lg font-semibold text-purple-900">₹{earnings}</p>
+          </motion.div>
 
           <motion.div
             variants={itemVariants}
-            className="p-6 bg-gradient-to-r from-amber-100 via-emerald-100 to-purple-100 rounded-2xl shadow-lg border border-purple-200 hover:shadow-xl hover:scale-105 transition-all duration-300"
+            className="p-3 bg-emerald-100/90 rounded-lg shadow-md border border-emerald-200 hover:shadow-lg hover:scale-105 transition-all duration-300"
           >
-            <h3 className="font-bold text-xl text-purple-800 mb-3">{translations[language].currencyConverter}</h3>
+            <h3 className="font-bold text-sm text-emerald-800">{translations[language].currentOrders}</h3>
+            <p className="mt-1 text-xs text-emerald-900">Order #125 - ₹2,000 (Pending)</p>
+            <p className="mt-1 text-xs text-emerald-900">Order #126 - ₹1,500 (Processing)</p>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="p-3 bg-amber-100/90 rounded-lg shadow-md border border-amber-200 hover:shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            <h3 className="font-bold text-sm text-amber-800">{translations[language].previousOrders}</h3>
+            <p className="mt-1 text-xs text-amber-900">Order #123 - ₹5,000</p>
+            <p className="mt-1 text-xs text-amber-900">Order #124 - ₹3,500</p>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="p-3 bg-gradient-to-r from-amber-100 via-emerald-100 to-purple-100 rounded-lg shadow-md border border-purple-200 hover:shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            <h3 className="font-bold text-sm text-purple-800 mb-1">{translations[language].currencyConverter}</h3>
             <input
               type="number"
               placeholder={translations[language].enterAmount}
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              className="p-3 w-full rounded-xl text-gray-800 bg-white/95 border border-purple-300 focus:ring-2 focus:ring-purple-500 focus:outline-none transition-all duration-300 shadow-sm"
+              className="p-2 w-full rounded-lg text-gray-800 bg-white/95 border border-purple-300 focus:ring-1 focus:ring-purple-500 focus:outline-none transition-all duration-300 shadow-sm text-xs"
             />
-            <div className="flex space-x-3 mt-3">
+            <div className="flex space-x-2 mt-2">
               {["fromCurrency", "toCurrency"].map((type) => (
                 <select
                   key={type}
                   value={type === "fromCurrency" ? fromCurrency : toCurrency}
                   onChange={(e) => type === "fromCurrency" ? setFromCurrency(e.target.value) : setToCurrency(e.target.value)}
-                  className="p-3 w-1/2 rounded-xl text-gray-800 bg-white/95 border border-purple-300 focus:ring-2 focus:ring-purple-500 focus:outline-none transition-all duration-300 shadow-sm"
+                  className="p-2 w-1/2 rounded-lg text-gray-800 bg-white/95 border border-purple-300 focus:ring-1 focus:ring-purple-500 focus:outline-none transition-all duration-300 shadow-sm text-xs"
                 >
                   {Object.entries(currencyFlags).map(([code, flag]) => (
                     <option key={code} value={code}>{code} {flag}</option>
@@ -585,7 +598,7 @@ const Dashboard = () => {
               ))}
             </div>
             <motion.button
-              className="mt-4 px-6 py-3 bg-purple-600 text-white rounded-xl hover:bg-purple-700 shadow-lg w-full"
+              className="mt-2 px-4 py-1 bg-purple-600 text-white rounded-lg hover:bg-purple-700 shadow-md w-full text-sm"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -593,7 +606,7 @@ const Dashboard = () => {
             </motion.button>
             {convertedAmount && (
               <motion.p
-                className="mt-3 text-purple-900 font-semibold text-center"
+                className="mt-2 text-purple-900 font-semibold text-center text-xs"
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
               >
@@ -603,129 +616,129 @@ const Dashboard = () => {
           </motion.div>
         </div>
 
-        {/* Middle Column */}
-        <div className="space-y-6">
+        {/* Column 2 (Left-Middle) */}
+        <div className="space-y-4">
           <motion.div
             variants={itemVariants}
-            className="p-6 bg-orange-100/90 rounded-2xl shadow-lg border border-orange-200 hover:shadow-xl hover:scale-105 transition-all duration-300"
+            className="p-3 bg-indigo-100/90 rounded-lg shadow-md border border-indigo-200 hover:shadow-lg hover:scale-105 transition-all duration-300 h-30 w-90"
           >
-            <h3 className="font-bold text-xl text-orange-800">{translations[language].marketPrices}</h3>
-            <ul className="mt-2 space-y-2 text-orange-900">
-              {Object.entries(prices).map(([item, price]) => (
-                <li key={item}>{item}: ₹{price}/kg</li>
-              ))}
-            </ul>
+            <h3 className="font-bold text-sm text-indigo-800">{translations[language].sellSurplus}</h3>
           </motion.div>
 
           <motion.div
             variants={itemVariants}
-            className="p-6 bg-indigo-100/90 rounded-2xl shadow-lg border border-indigo-200 hover:shadow-xl hover:scale-105 transition-all duration-300"
+            className="p-3 bg-orange-100/90 rounded-lg shadow-md border border-orange-200 hover:shadow-lg hover:scale-105 transition-all duration-300"
           >
-            <h3 className="font-bold text-xl text-indigo-800">{translations[language].sellSurplus}</h3>
-            <Link to="/addpro">
-              <motion.button
-                className="mt-3 px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 shadow-lg w-full"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {translations[language].addProduct}
-              </motion.button>
-            </Link>
-          </motion.div>
-
-          <motion.div
-            variants={itemVariants}
-            className="p-6 bg-rose-100/90 rounded-2xl shadow-lg border border-rose-200 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-            onClick={() => setFullScreenGraph("orders")}
-          >
-            <h3 className="font-bold text-xl text-rose-800">{translations[language].ordersGraph}</h3>
-            <div className="mt-3 h-40">
-              <Bar data={ordersData} options={chartOptions} />
+            <h3 className="font-bold text-sm text-orange-800 mb-1">{translations[language].cropRecommendation}</h3>
+            <p className="text-orange-900 text-xs">Recommended Crop: {cropRecommendation}</p>
+            <div className="mt-2">
+              <h4 className="font-semibold text-sm text-orange-800">{translations[language].marketPrices}</h4>
+              <ul className="mt-1 space-y-1 text-orange-900 text-xs">
+                {Object.entries(prices).map(([item, price]) => (
+                  <li key={item}>{item}: ₹{price}/kg</li>
+                ))}
+              </ul>
             </div>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="p-3 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-lg shadow-md border border-emerald-200 hover:shadow-lg transition-all duration-300"
+          >
+            <h3 className="font-bold text-sm text-emerald-800 mb-1">{translations[language].farmingNews}</h3>
+            {newsData ? (
+              <div>
+                <p className="text-emerald-900 text-xs mb-2">{newsData.title}</p>
+                {youtubeVideo && (
+                  <div className="flex flex-col items-center">
+                    <p className="font-semibold text-teal-800 text-xs mb-1">Recommended Video</p>
+                    <a href={youtubeVideo.url} target="_blank" rel="noopener noreferrer">
+                      <motion.img
+                        src={youtubeVideo.thumbnail}
+                        alt={youtubeVideo.title}
+                        className="w-24 h-14 object-cover rounded-lg shadow-sm"
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      <p className="text-xs text-teal-900 mt-1 text-center">{youtubeVideo.title}</p>
+                    </a>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <p className="text-emerald-900 text-xs">Loading news...</p>
+            )}
           </motion.div>
         </div>
 
-        {/* Right Column */}
-        <div className="space-y-6">
+        {/* Column 3 (Right-Middle) */}
+        <div className="space-y-4">
           <motion.div
             variants={itemVariants}
-            className="p-6 bg-teal-100/90 rounded-2xl shadow-lg border border-teal-200 hover:shadow-xl hover:scale-105 transition-all duration-300"
+            className="p-3 bg-rose-100/90 rounded-lg shadow-md border border-rose-200 hover:shadow-lg hover:scale-105 transition-all duration-300 cursor-pointer"
+            onClick={() => setFullScreenGraph(true)} // Will open the full-screen view with both charts
           >
-            <h3 className="font-bold text-xl text-teal-800">{translations[language].yourProducts}</h3>
-            <div className="grid grid-cols-2 gap-3 mt-3">
-              {selectedProducts.map((product) => (
+            <h3 className="font-bold text-sm text-rose-800 mb-1">Analytics & Orders Graph</h3>
+            <div className="mt-1 h-24">
+              <Bar data={ordersData} options={chartOptions} /> {/* Default to Orders Graph */}
+            </div>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="p-3 bg-teal-100/90 rounded-lg shadow-md border border-teal-200 hover:shadow-lg hover:scale-105 transition-all duration-300 w-70 h-60"
+          >
+            <h3 className="font-bold text-sm text-teal-800 mb-1">{translations[language].yourProducts}</h3>
+            <div className="grid grid-cols-3 gap-2 mt-1">
+              {selectedProducts.slice(0, 9).map((product) => (
                 <motion.img
                   key={product.id}
                   src={product.image}
                   alt={product.name}
-                  className="w-full h-28 object-cover rounded-xl border border-teal-300 shadow-sm"
+                  className="w-14 h-14 object-cover rounded-lg border border-teal-300 shadow-sm"
                   whileHover={{ scale: 1.1 }}
                   transition={{ duration: 0.3 }}
                 />
               ))}
             </div>
           </motion.div>
+        </div>
 
-          <motion.div
-            variants={itemVariants}
-            className="p-6 bg-cyan-100/90 rounded-2xl shadow-lg border border-cyan-200 hover:shadow-xl hover:scale-105 transition-all duration-300 cursor-pointer"
-            onClick={() => setFullScreenGraph("analytics")}
+        {/* Column 4 (Far Right) */}
+        <div className="space-y-7 flex flex-col items-center mt-30">
+          <motion.button
+            className="w-70 h-10 px-2 py-1 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 shadow-md text-sm"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => alert(translations[language].newMessage)}
           >
-            <h3 className="font-bold text-xl text-cyan-800">{translations[language].analytics}</h3>
-            <div className="mt-3 h-44">
-              <Pie data={analyticsData} options={pieOptions} />
-            </div>
-          </motion.div>
-
-          {/* News Container */}
-          <motion.div
-            variants={itemVariants}
-            className="p-6 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-2xl shadow-lg border border-emerald-200 hover:shadow-xl transition-all duration-300"
+            {translations[language].newMessage}
+          </motion.button>
+          <motion.button
+            className="w-70 h-10 px-2 py-1 bg-purple-600 text-white rounded-lg hover:bg-purple-700 shadow-md text-sm"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => alert(translations[language].feedback)}
           >
-            <h3 className="font-bold text-xl text-emerald-800 mb-3">{translations[language].farmingNews}</h3>
-            {newsData ? (
-              <>
-                <p className="text-emerald-900 mb-4">{newsData.title}</p>
-                {youtubeVideo && (
-                  <div className="flex flex-col items-center">
-                    <p className="font-semibold text-teal-800 mb-2">Recommended Video</p>
-                    <a href={youtubeVideo.url} target="_blank" rel="noopener noreferrer">
-                      <motion.img
-                        src={youtubeVideo.thumbnail}
-                        alt={youtubeVideo.title}
-                        className="w-48 h-28 object-cover rounded-xl shadow-md"
-                        whileHover={{ scale: 1.05 }}
-                        transition={{ duration: 0.3 }}
-                      />
-                      <p className="text-sm text-teal-900 mt-2 text-center">{youtubeVideo.title}</p>
-                    </a>
-                  </div>
-                )}
-              </>
-            ) : (
-              <p className="text-emerald-900">Loading news...</p>
-            )}
-          </motion.div>
-
-          {/* Buttons */}
-          <div className="flex flex-col space-y-3">
-            {[
-              { text: "addProduct", color: "emerald" },
-              { text: "withdrawProduct", color: "orange" },
-              { text: "feedback", color: "purple" },
-              { text: "newMessage", color: "indigo" },
-            ].map((btn) => (
-              <motion.button
-                key={btn.text}
-                className={`w-full h-16 px-6 py-4 bg-${btn.color}-600 text-white rounded-xl hover:bg-${btn.color}-700 shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 font-medium`}
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => alert(translations[language][btn.text])}
-              >
-                {translations[language][btn.text]}
-              </motion.button>
-            ))}
-          </div>
+            {translations[language].feedback}
+          </motion.button>
+          <motion.button
+            className="w-70 h-10 px-2 py-1 bg-orange-600 text-white rounded-lg hover:bg-orange-700 shadow-md text-sm"
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => alert(translations[language].withdrawProduct)}
+          >
+            {translations[language].withdrawProduct}
+          </motion.button>
+          <Link to="/addpro">
+            <motion.button
+              className="w-70 h-10 px-2 py-1 bg-emerald-600 text-white rounded-lg hover:bg-emerald-700 shadow-md text-sm"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {translations[language].addProduct}
+            </motion.button>
+          </Link>
         </div>
       </motion.div>
     </motion.div>
