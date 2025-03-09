@@ -1,0 +1,558 @@
+{
+  "1": {
+    "category": "Vegetables",
+    "image": "https://www.bigbasket.com/media/uploads/p/xxl/10000070_16-fresho-carrot-orange.jpg",
+    "name": "Fresh Carrot",
+    "price": "100",
+    "tamilName": "கேரட்",
+    "weight": "1kg"
+  },
+  "2": {
+    "category": "Vegetables",
+    "image": "https://www.bbassets.com/media/uploads/p/l/40130385_8-fresho-tomato-local-organically-grown.jpg",
+    "name": "Organic Tomatoes",
+    "price": "199",
+    "tamilName": "தக்காளி",
+    "weight": "1kg"
+  },
+  "3": {
+    "category": "Fruits",
+    "image": "https://www.bbassets.com/media/uploads/p/l/20000964_11-fresho-green-apple.jpg",
+    "name": "Green Apples",
+    "price": "250",
+    "tamilName": "பச்சை ஆப்பிள்கள்",
+    "weight": "1kg"
+  },
+  "4": {
+    "category": "Fruits",
+    "image": "https://www.bbassets.com/media/uploads/p/l/10000025_32-fresho-banana-robusta.jpg",
+    "name": "Bananas",
+    "price": "50",
+    "tamilName": "வாழைப்பழம்",
+    "weight": "1kg"
+  },
+  "5": {
+    "category": "Seeds",
+    "image": "https://cbx-prod.b-cdn.net/COLOURBOX47480356.jpg?width=800&height=800&quality=70",
+    "name": "Almond Seeds",
+    "price": "500",
+    "tamilName": "பாதாம் விதைகள்",
+    "weight": "1kg"
+  },
+  "6": {
+    "category": "Dairy Products",
+    "image": "https://img.freepik.com/free-photo/fresh-milk-bottle-glass_1150-17631.jpg",
+    "name": "Fresh Milk",
+    "price": "40",
+    "tamilName": "பால்",
+    "weight": "1kg"
+  },
+  "7": {
+    "category": "Dairy Products",
+    "image": "https://www.allrecipes.com/thmb/PwgOsAXFGvpolr0hUiB7pVlS75k=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Yellow-vs-White-Cheddar-Cheese-4x3-de76c824c4814aa8a5d52569d572713d.png",
+    "name": "Cheese",
+    "price": "180",
+    "tamilName": "சீஸ்",
+    "weight": "1kg"
+  },
+  "8": {
+    "category": "Fertilizers",
+    "image": "https://www.bbassets.com/media/uploads/p/l/40008672_5-natures-plus-organic-fertiliser.jpg",
+    "name": "Organic Fertilizer",
+    "price": "1200",
+    "tamilName": "ஆர்கானிக் உரம்",
+    "weight": "1kg"
+  },
+  "9": {
+    "category": "Fruits",
+    "image": "https://www.bbassets.com/media/uploads/p/l/10000263_14-fresho-strawberry.jpg",
+    "name": "Strawberries",
+    "price": "249",
+    "tamilName": "ஸ்ட்ராபெர்ரி",
+    "weight": "1kg"
+  },
+  "10": {
+    "category": "Dairy Products",
+    "image": "https://www.bbassets.com/media/uploads/p/l/40023473_6-fresho-cabbage-organically-grown.jpg",
+    "name": "Cabbage",
+    "price": "120",
+    "tamilName": "முட்டைக்கோஸ்",
+    "weight": "1kg"
+  },
+  "11": {
+    "category": "Seeds",
+    "image": "https://m.media-amazon.com/images/I/71yz2Pi2SBL._AC_UF1000,1000_QL80_.jpg",
+    "name": "Sunflower Seeds",
+    "price": "80",
+    "tamilName": "சூரியகாந்தி விதைகள்",
+    "weight": "1kg"
+  },
+  "12": {
+    "category": "Dairy Products",
+    "image": "https://5.imimg.com/data5/FN/OM/MY-23458232/fresh-butter-500x500.jpg",
+    "name": "Butter",
+    "price": "99",
+    "tamilName": "வெண்ணெய்",
+    "weight": "1kg"
+  },
+  "13": {
+    "category": "Fruits",
+    "image": "https://www.bbassets.com/media/uploads/p/l/40229414_5-fresho-grapes-black-imported.jpg",
+    "name": "Black Grapes",
+    "price": "220",
+    "tamilName": "கருப்பு திராட்சை",
+    "weight": "1kg"
+  },
+  "14": {
+    "category": "Seeds",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl1uFxggfeCevz0KDDxI0yRFtimetZlW8gBg&s",
+    "name": "Walnut Seeds",
+    "price": "600",
+    "tamilName": "வால்நட் விதைகள்",
+    "weight": "1kg"
+  },
+  "15": {
+    "category": "Dairy Products",
+    "image": "https://www.bbassets.com/media/uploads/p/l/40232043_5-tasties-whole-wheat-bread.jpg",
+    "name": "Whole Wheat Bread",
+    "price": "80",
+    "tamilName": "முழு கோதுமை ரொட்டி",
+    "weight": "1kg"
+  },
+  "16": {
+    "category": "Vegetables",
+    "image": "https://www.bbassets.com/media/uploads/p/l/10000063_21-fresho-broccoli.jpg",
+    "name": "Broccoli",
+    "price": "150",
+    "tamilName": "ப்ரோக்கோலி",
+    "weight": "1kg"
+  },
+  "17": {
+    "category": "Seeds",
+    "image": "https://www.bigbasket.com/media/uploads/p/l/40210969_2-super-saver-cashews.jpg",
+    "name": "Cashew Nuts",
+    "price": "750",
+    "tamilName": "முந்திரி",
+    "weight": "1kg"
+  },
+  "18": {
+    "category": "Dairy Products",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5WhsVF0dPYb_uCLSQBM9h5YV28R6rx1BUgQ&s",
+    "name": "Soy Milk",
+    "price": "120",
+    "tamilName": "சோயா பால்",
+    "weight": "1kg"
+  },
+  "19": {
+    "category": "Dairy Products",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE0FvAhZ2WHLHm2ct5sSG4qWz3zDnFZb68Dg&s",
+    "name": "Paneer",
+    "price": "180",
+    "tamilName": "பன்னீர்",
+    "weight": "1kg"
+  },
+  "20": {
+    "category": "Fruits",
+    "image": "https://www.bbassets.com/media/uploads/p/l/10000384_11-fresho-orange-kinnow.jpg",
+    "name": "Oranges",
+    "price": "200",
+    "tamilName": "ஆரஞ்சு",
+    "weight": "1kg"
+  },
+  "21": {
+    "category": "Dairy Products",
+    "image": "https://www.inspiredtaste.net/wp-content/uploads/2020/06/Homemade-Almond-Butter-Recipe-1200.jpg",
+    "name": "Peanut Butter",
+    "price": "350",
+    "tamilName": "வேர்க்கடலை வெண்ணெய்",
+    "weight": "1kg"
+  },
+  "23": {
+    "category": "Seeds",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvZjGXEwMOZGqAA8Hci-B0z7bAoUyH-DiABg&s",
+    "name": "Chia Seeds",
+    "price": "300",
+    "tamilName": "சியா விதைகள்",
+    "weight": "1kg"
+  },
+  "24": {
+    "category": "Seeds",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRllzjvljJNOZtXHWCf4e0Pcc9Lgh0vEq30cA&s",
+    "name": "Pistachios",
+    "price": "900",
+    "tamilName": "பிஸ்தா",
+    "weight": "1kg"
+  },
+  "25": {
+    "category": "Seeds",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf2eV4W2kvtv0U0eKWRUak0R35oTbMrsI0OQ&s",
+    "name": "Pumpkin Seeds",
+    "price": "450",
+    "tamilName": "பூசணி விதைகள்",
+    "weight": "1kg"
+  },
+  "26": {
+    "category": "Seeds",
+    "image": "https://images.onlymyhealth.com/imported/images/2024/June/26_Jun_2024/mn-brown-rice.jpg",
+    "name": "Brown Rice",
+    "price": "110",
+    "tamilName": "பழுப்பு அரிசி",
+    "weight": "1kg"
+  },
+  "27": {
+    "category": "Seeds",
+    "image": "https://imgs.littleextralove.com/wp-content/uploads/2022/11/quinoa-for-hair-feat.jpg",
+    "name": "Quinoa",
+    "price": "500",
+    "tamilName": "குயினோவா",
+    "weight": "1kg"
+  },
+  "28": {
+    "category": "Fruits",
+    "image": "https://www.bbassets.com/media/uploads/p/l/10000312_21-fresho-avocado.jpg",
+    "name": "Avocado",
+    "price": "400",
+    "tamilName": "வெண்ணெய் பழம்",
+    "weight": "1kg"
+  },
+  "29": {
+    "category": "Vegetables",
+    "image": "https://www.bbassets.com/media/uploads/p/l/10000273_17-fresho-mushrooms-button.jpg",
+    "name": "Mushrooms",
+    "price": "220",
+    "tamilName": "காளான்",
+    "weight": "1kg"
+  },
+  "30": {
+    "category": "Vegetables",
+    "image": "https://www.bigbasket.com/media/uploads/p/l/40217496_3-fresho-spinach-hydroponically-grown.jpg",
+    "name": "Spinach",
+    "price": "80",
+    "tamilName": "கீரை",
+    "weight": "1kg"
+  },
+  "32": {
+    "category": "Fruits",
+    "image": "https://www.bbassets.com/media/uploads/p/l/30009286_12-fresho-blueberry.jpg",
+    "name": "Blueberries",
+    "price": "280",
+    "tamilName": "ப்ளூபெர்ரி",
+    "weight": "1kg"
+  },
+  "33": {
+    "category": "Fruits",
+    "image": "https://www.bigbasket.com/media/uploads/p/l/40099570_2-fresho-raspberry.jpg",
+    "name": "Raspberries",
+    "price": "320",
+    "tamilName": "ராஸ்பெர்ரி",
+    "weight": "1kg"
+  },
+  "34": {
+    "category": "Herbs",
+    "image": "https://kumarmetal.com/wp-content/uploads/2021/08/setting-up-virgin-coconut-oil-plant.jpg",
+    "name": "Coconut Oil",
+    "price": "350",
+    "tamilName": "தேங்காய் எண்ணெய்",
+    "weight": "1kg"
+  },
+  "35": {
+    "category": "Herbs",
+    "image": "https://www.tatasimplybetter.com/cdn/shop/files/DSC09606_2048x2048.jpg?v=1734608321",
+    "name": "Olive Oil",
+    "price": "500",
+    "tamilName": "ஆலிவ் எண்ணெய்",
+    "weight": "1kg"
+  },
+  "36": {
+    "category": "Seeds",
+    "image": "https://domf5oio6qrcr.cloudfront.net/medialibrary/5961/cba8bd1b-be70-4f55-8818-9caf1b3df3de.jpg",
+    "name": "Flaxseeds",
+    "price": "180",
+    "tamilName": "ஆளி விதைகள்",
+    "weight": "1kg"
+  },
+  "37": {
+    "category": "Herbs",
+    "image": "https://5.imimg.com/data5/UD/MB/MY-42635865/natural-honey-500x500.jpg",
+    "name": "Honey",
+    "price": "300",
+    "tamilName": "தேன்",
+    "weight": "1kg"
+  },
+  "38": {
+    "category": "Dairy Products",
+    "image": "https://www.inspiredtaste.net/wp-content/uploads/2020/06/Homemade-Almond-Butter-Recipe-1200.jpg",
+    "name": "Almond Butter",
+    "price": "450",
+    "tamilName": "பாதாம் வெண்ணெய்",
+    "weight": "1kg"
+  },
+  "40": {
+    "category": "Vegetables",
+    "image": "https://www.bbassets.com/media/uploads/p/l/40211817_3-fresho-zucchini-green.jpg",
+    "name": "Zucchini",
+    "price": "140",
+    "tamilName": "சீமை சுரைக்காய்",
+    "weight": "1kg"
+  },
+  "41": {
+    "category": "Fruits",
+    "image": "https://www.bigbasket.com/media/uploads/p/l/40324153_2-fresho-mango-badami.jpg",
+    "name": "Mangoes",
+    "price": "250",
+    "tamilName": "மாங்காய்",
+    "weight": "1kg"
+  },
+  "42": {
+    "category": "Vegetables",
+    "image": "https://www.bbassets.com/media/uploads/p/l/10000318_14-fresho-lettuce-green.jpg",
+    "name": "Lettuce",
+    "price": "90",
+    "tamilName": "லெட்டூஸ்",
+    "weight": "1kg"
+  },
+  "43": {
+    "category": "Dairy Products",
+    "image": "https://www.bbassets.com/media/uploads/p/l/150502_6-fresho-farm-eggs-table-tray-medium-antibiotic-residue-free.jpg",
+    "name": "Eggs",
+    "price": "160",
+    "tamilName": "முட்டை",
+    "weight": "1kg"
+  },
+  "44": {
+    "category": "Herbs",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsqlvKSkdy63JB_1zan4kFnkQkTYU0zQed2w&s",
+    "name": "Cinnamon",
+    "price": "200",
+    "tamilName": "இலவங்கப்பட்டை",
+    "weight": "1kg"
+  },
+  "45": {
+    "category": "Herbs",
+    "image": "https://ashokchakranursery.com/wp-content/uploads/2024/12/blackky.webp",
+    "name": "Black Pepper",
+    "price": "220",
+    "tamilName": "கருப்பு மிளகு",
+    "weight": "1kg"
+  },
+  "46": {
+    "category": "Herbs",
+    "image": "https://www.bigbasket.com/media/uploads/p/l/40020040_11-fresho-turmeric-fresh.jpg",
+    "name": "Turmeric",
+    "price": "150",
+    "tamilName": "மஞ்சள்",
+    "weight": "1kg"
+  },
+  "47": {
+    "category": "Herbs",
+    "image": "https://rukminim2.flixcart.com/image/850/1000/xif0q/plant-seed/q/o/1/50-rxi-16-cloves-lavanga-seeds-50-seeds-vibex-original-imaggnksk72yapmb.jpeg?q=20&crop=false",
+    "name": "Cloves",
+    "price": "180",
+    "tamilName": "கிராம்பு",
+    "weight": "1kg"
+  },
+  "48": {
+    "category": "Herbs",
+    "image": "https://mangalorespice.com/cdn/shop/products/SP_08-02.jpg?v=1734783515&width=1445",
+    "name": "Cardamom",
+    "price": "450",
+    "tamilName": "ஏலக்காய்",
+    "weight": "1kg"
+  },
+  "49": {
+    "category": "Herbs",
+    "image": "https://www.bbassets.com/media/uploads/p/l/40288349_2-super-saver-bb-super-saver-bay-leaf-50g.jpg",
+    "name": "Bay Leaves",
+    "price": "100",
+    "tamilName": "வளைகுடா இலைகள்",
+    "weight": "1kg"
+  },
+  "50": {
+    "category": "Herbs",
+    "image": "https://c.ndtvimg.com/2023-03/p4igk5po_dry-coriander-leaves_625x300_10_March_23.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=675",
+    "name": "Coriander Powder",
+    "price": "120",
+    "tamilName": "கொத்தமல்லி பொடி",
+    "weight": "1kg"
+  },
+  "51": {
+    "category": "Seeds",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIxYjphT6AhMLmiUV85nNx_0urQI4VvNO9iw&s",
+    "name": "Fenugreek Seeds",
+    "price": "130",
+    "tamilName": "வெந்தய விதைகள்",
+    "weight": "1kg"
+  },
+  "52": {
+    "category": "Herbs",
+    "image": "https://www.bigbasket.com/media/uploads/p/l/10000314_14-fresho-basil-italian.jpg",
+    "name": "Basil",
+    "price": "160",
+    "tamilName": "துளசி",
+    "weight": "1kg"
+  },
+  "53": {
+    "category": "Herbs",
+    "image": "https://www.bbassets.com/media/uploads/p/l/30006429_1-fresho-rosemary.jpg",
+    "name": "Rosemary",
+    "price": "180",
+    "tamilName": "ரோஸ்மேரி",
+    "weight": "1kg"
+  },
+  "54": {
+    "category": "Herbs",
+    "image": "https://www.bigbasket.com/media/uploads/p/l/40026327_3-fresho-thyme.jpg",
+    "name": "Thyme",
+    "price": "200",
+    "tamilName": "தைம்",
+    "weight": "1kg"
+  },
+  "55": {
+    "category": "Herbs",
+    "image": "https://www.bbassets.com/media/uploads/p/l/40101325_1-fresho-kale-curled-american.jpg",
+    "name": "Parsley",
+    "price": "140",
+    "tamilName": "வோக்கோசு",
+    "weight": "1kg"
+  },
+  "56": {
+    "category": "Fruits",
+    "image": "https://www.bigbasket.com/media/uploads/p/l/40329344_1-fresho-papaya-medium.jpg",
+    "name": "Papaya",
+    "price": "180",
+    "tamilName": "பப்பாளி",
+    "weight": "1kg"
+  },
+  "57": {
+    "category": "Vegetables",
+    "image": "https://www.bbassets.com/media/uploads/p/l/50000491_7-fresho-cucumber-organically-grown.jpg",
+    "name": "Cucumber",
+    "price": "90",
+    "tamilName": "வெள்ளரிக்காய்",
+    "weight": "1kg"
+  },
+  "58": {
+    "category": "Fruits",
+    "image": "https://www.bbassets.com/media/uploads/p/l/10000297_23-fresho-watermelon-striped-large.jpg",
+    "name": "Watermelon",
+    "price": "300",
+    "tamilName": "தர்பூசணி",
+    "weight": "1kg"
+  },
+  "59": {
+    "category": "Fruits",
+    "image": "https://www.bbassets.com/media/uploads/p/l/40008982_16-fresho-dragon-fruit.jpg",
+    "name": "Dragon Fruit",
+    "price": "450",
+    "tamilName": "டிராகன் பழம்",
+    "weight": "1kg"
+  },
+  "60": {
+    "category": "Fruits",
+    "image": "https://www.bigbasket.com/media/uploads/p/l/10000156_30-fresho-pineapple.jpg",
+    "name": "Pineapple",
+    "price": "230",
+    "tamilName": "அன்னாசிப்பழம்",
+    "weight": "1kg"
+  },
+  "61": {
+    "category": "Herbs",
+    "image": "https://www.bbassets.com/media/uploads/p/l/10000338_15-fresho-ginger.jpg",
+    "name": "Ginger",
+    "price": "130",
+    "tamilName": "இஞ்சி",
+    "weight": "1kg"
+  },
+  "62": {
+    "category": "Herbs",
+    "image": "https://www.bbassets.com/media/uploads/p/l/10000114_18-fresho-garlic.jpg",
+    "name": "Garlic",
+    "price": "120",
+    "tamilName": "பூண்டு",
+    "weight": "1kg"
+  },
+  "63": {
+    "category": "Vegetables",
+    "image": "https://www.bigbasket.com/media/uploads/p/l/10000045_19-fresho-beetroot.jpg",
+    "name": "Beetroot",
+    "price": "140",
+    "tamilName": "பீட்ரூட்",
+    "weight": "1kg"
+  },
+  "64": {
+    "category": "Herbs",
+    "image": "https://cdn.britannica.com/68/143768-050-108B71EC/Celery.jpg",
+    "name": "Celery",
+    "price": "160",
+    "tamilName": "செலரி",
+    "weight": "1kg"
+  },
+  "65": {
+    "category": "Herbs",
+    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3RPU-SU7J8vgl7dSEkLGCRCjMXTH0312AjQ&s",
+    "name": "Brussels Sprouts",
+    "price": "250",
+    "tamilName": "புருசெல்ஸ் முளைகள்",
+    "weight": "1kg"
+  },
+  "user123": {
+    "dashboard": {
+      "earnings": 25529,
+      "ordersGraph": {
+        "values": [10, 20, 15, 30, 25, 40, 35]
+      },
+      "prices": {
+        "Carrots": 88,
+        "Tomatoes": 137,
+        "Onions": 106
+      },
+      "recommendation": {
+        "crop": "Onions"
+      },
+      "news": {
+        "news1": {
+          "title": "New Farming Techniques",
+          "content": "Latest updates on farming techniques...",
+          "timestamp": 1648771200000
+        },
+        "news2": {
+          "title": "Weather Impact",
+          "content": "How weather affects crops this season...",
+          "timestamp": 1648658400000
+        }
+      }
+    },
+    "products": {
+      "product1": {
+        "name": "Carrots",
+        "image": "https://images.unsplash.com/photo-1598170845058-32b9d6a5da37",
+        "status": "active"
+      },
+      "product2": {
+        "name": "Tomatoes",
+        "image": "https://images.unsplash.com/photo-1607305387299-a3d9611cd469",
+        "status": "active"
+      }
+    },
+    "orders": {
+      "order1": {
+        "orderId": 125,
+        "amount": 2000,
+        "status": "pending",
+        "timestamp": 1648771200000
+      },
+      "order2": {
+        "orderId": 126,
+        "amount": 1500,
+        "status": "processing",
+        "timestamp": 1648771200000
+      },
+      "order3": {
+        "orderId": 123,
+        "amount": 5000,
+        "status": "completed",
+        "timestamp": 1648658400000
+      }
+    }
+  }
+}

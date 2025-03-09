@@ -1,75 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
-import { Mic, User, Settings, LogOut } from "lucide-react";
-
-// Product Data with Categories (fixed prices to be consistent numbers)
-const products = [
-  { id: 1, name: "Fresh Carrots", tamilName: "கேரட்" , weight: "1kg", category: "Vegetables" , price: "100", image: "https://www.bigbasket.com/media/uploads/p/xxl/10000070_16-fresho-carrot-orange.jpg" },
-  { id: 2, name: "Organic Tomatoes", tamilName: "தக்காளி", category: "Vegetables" , weight: "1kg", price: "199", image: "https://img.freepik.com/free-photo/top-view-fresh-red-tomatoes-inside-basket_140725-57742.jpg" },
-  { id: 3, name: "Green Apples", tamilName:"பச்சை ஆப்பிள்கள்" , category: "Fruits" , weight: "1kg", price: "250", image: "https://st3.depositphotos.com/30407070/36782/i/450/depositphotos_367825706-stock-photo-green-apples-plate-brown-wooden.jpg" },
-  { id: 4, name: "Bananas", weight: "1kg", tamilName:"வாழைப்பழம்" , category: "Fruits" ,  price: "50", image: "https://thumbs.dreamstime.com/b/bunch-bananas-plate-great-creative-professional-projects-356584793.jpg" },
-  { id: 5, name: "Almond Seeds",  weight: "1kg", tamilName:"பாதாம் விதைகள்" , category: "Seeds" , price: "500", image: "https://cbx-prod.b-cdn.net/COLOURBOX47480356.jpg?width=800&height=800&quality=70" },
-  { id: 6, name: "Fresh Milk",tamilName:"பால்" , category: "Dairy Products" , weight: "1kg", price: "40", image: "https://img.freepik.com/free-photo/fresh-milk-bottle-glass_1150-17631.jpg" },
-  { id: 7, name: "Cheese",tamilName:"சீஸ்" , category: "Dairy Products" , weight: "1kg", price: "180", image: "https://www.allrecipes.com/thmb/PwgOsAXFGvpolr0hUiB7pVlS75k=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Yellow-vs-White-Cheddar-Cheese-4x3-de76c824c4814aa8a5d52569d572713d.png" },
-  { id: 8, name: "Organic Fertilizer",tamilName:"ஆர்கானிக் உரம்" , category: "Fertilizers" , weight: "1kg", price: "1200", image: "https://rukminim2.flixcart.com/image/850/1000/kr0ynbk0/soil-manure/z/j/c/5-nutri-rich-organic-fertilizer-pack-of-1-5-kg-agriboost-original-imag4wkknzezzzcc.jpeg?q=90&crop=false" },
-  { id: 9, name: "Strawberries", tamilName:"ஸ்ட்ராபெர்ரி" , category: "Fruits" ,weight: "1kg", price: "249", image: "https://thumbs.dreamstime.com/b/strawberries-wooden-bowl-brown-table-closeup-red-ripe-berries-fresh-juicy-strawberry-background-selective-focus-209011618.jpg" },
-  { id: 10, name: "Cabbage",tamilName:"முட்டைக்கோஸ்" , category: "Dairy Products" , weight: "1kg", price: "120", image: "https://static.vecteezy.com/system/resources/previews/040/995/503/non_2x/ai-generated-cabbage-in-basket-on-wooden-table-photo.jpg" },
-  { id: 11, name: "Sunflower Seeds",tamilName:"சூரியகாந்தி விதைகள்" , category: "Seeds" , weight: "1kg", price: "80", image: "https://m.media-amazon.com/images/I/71yz2Pi2SBL._AC_UF1000,1000_QL80_.jpg" },
-  { id: 12, name: "Butter", weight: "1kg", tamilName:"வெண்ணெய்" , category: "Dairy Products" , price: "99", image: "https://5.imimg.com/data5/FN/OM/MY-23458232/fresh-butter-500x500.jpg" },
-    { id: 13, name: "Black Grapes", tamilName:"கருப்பு திராட்சை" , category: "Fruits" , weight: "1kg", price: "220", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPXqZQuBk0ljkT6dYMb5SzPVVihG0zlx7h1A&s" },
-    { id: 14, name: "Walnut Seeds", tamilName:"வால்நட் விதைகள்" , category: "Seeds" , weight: "1kg", price: "600", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl1uFxggfeCevz0KDDxI0yRFtimetZlW8gBg&s" },
-    { id: 15, name: "Whole Wheat Bread", tamilName:"முழு கோதுமை ரொட்டி" , category: "Dairy Products" , weight: "1kg", price: "80", image: "https://www.theredheadbaker.com/wp-content/uploads/2020/10/white-whole-wheat-bread-featured.jpg" },
-    { id: 16, name: "Broccoli", tamilName:"ப்ரோக்கோலி" , category: "Vegetables" , weight: "1kg", price: "150", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSgEtPkkoSROnlZhTWPkKfoiWjz438Ymptu4A&s" },
-    { id: 17, name: "Cashew Nuts", tamilName:"முந்திரி" , category: "Seeds" , weight: "1kg", price: "750", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNSFJxH-ALmXYpmgoNJQxMKiprNNiqkdpcrA&s" },
-    { id: 18, name: "Soy Milk", tamilName:"சோயா பால்" , category: "Dairy Products" , weight: "1kg", price: "120", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5WhsVF0dPYb_uCLSQBM9h5YV28R6rx1BUgQ&s" },
-    { id: 19, name: "Paneer", tamilName:"பன்னீர்" , category: "Dairy Products" , weight: "1kg", price: "180", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE0FvAhZ2WHLHm2ct5sSG4qWz3zDnFZb68Dg&s" },
-    { id: 20, name: "Oranges", tamilName:"ஆரஞ்சு" , category: "Fruits" , weight: "1kg", price: "200", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTK_H77qrveJBGq8lTx2HGqe_CLmL9mnml_Uw&s" },
-    { id: 21, name: "Peanut Butter", tamilName:"வேர்க்கடலை வெண்ணெய்" , category: "Dairy Products" , weight: "1kg", price: "350", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkzcqsa9CEKuTEKeQACf23-NFIsd5LCWg9zA&s" },
-    { id: 23, name: "Chia Seeds",  tamilName:"சியா விதைகள்" , category: "Seeds" , weight: "1kg", price: "300", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvZjGXEwMOZGqAA8Hci-B0z7bAoUyH-DiABg&s" },
-    { id: 24, name: "Pistachios", tamilName:"பிஸ்தா" , category: "Seeds" , weight: "1kg", price: "900", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRllzjvljJNOZtXHWCf4e0Pcc9Lgh0vEq30cA&s" },
-    { id: 25, name: "Pumpkin Seeds", tamilName:"பூசணி விதைகள்" , category: "Seeds" , weight: "1kg", price: "450", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf2eV4W2kvtv0U0eKWRUak0R35oTbMrsI0OQ&s" },
-    { id: 26, name: "Brown Rice", tamilName:"பழுப்பு அரிசி" , category: "Seeds" , weight: "1kg", price: "110", image: "https://images.onlymyhealth.com/imported/images/2024/June/26_Jun_2024/mn-brown-rice.jpg" },
-    { id: 27, name: "Quinoa", tamilName:"குயினோவா" , category: "Seeds" , weight: "1kg", price: "500", image: "https://imgs.littleextralove.com/wp-content/uploads/2022/11/quinoa-for-hair-feat.jpg" },
-    { id: 28, name: "Avocado", tamilName:"வெண்ணெய் பழம்" , category: "Fruits" , weight: "1kg", price: "400", image: "https://blog.lexmed.com/images/librariesprovider80/blog-post-featured-images/avocadosea5afd66b7296e538033ff0000e6f23e.jpg?sfvrsn=a273930b_0" },
-    { id: 29, name: "Mushrooms", tamilName:"காளான்" , category: "Vegetables" , weight: "1kg", price: "220", image: "https://www.jiomart.com/images/product/original/590000245/button-mushroom-200-g-product-images-o590000245-p590000245-0-202408070949.jpg?im=Resize=(1000,1000)" },
-    { id: 30, name: "Spinach", tamilName:"கீரை" , category: "Vegetables" , weight: "1kg", price: "80", image: "https://www.trustbasket.com/cdn/shop/articles/Spinach.webp?v=1686909241" },
-    { id: 32, name: "Blueberries", tamilName:"ப்ளூபெர்ரி" , category: "Fruits" , weight: "1kg", price: "280", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkaRYA3YtnHmmmLs_RfYtReyNjpHdfPZ29Hw&s" },
-    { id: 33, name: "Raspberries", tamilName:"ராஸ்பெர்ரி" , category: "Fruits" , weight: "1kg", price: "320", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReWPuQA-aaHdlRrC6z6wGMKXJvKGxoGTH8Yw&s" },
-    { id: 34, name: "Coconut Oil", tamilName:"தேங்காய் எண்ணெய்" , category: "Herbs" , weight: "1kg", price: "350", image: "https://kumarmetal.com/wp-content/uploads/2021/08/setting-up-virgin-coconut-oil-plant.jpg" },
-    { id: 35, name: "Olive Oil", tamilName:"ஆலிவ் எண்ணெய்" , category: "Herbs" , weight: "1kg", price: "500", image: "https://www.tatasimplybetter.com/cdn/shop/files/DSC09606_2048x2048.jpg?v=1734608321" },
-    { id: 36, name: "Flaxseeds", tamilName:"ஆளி விதைகள்" , category: "Seeds" , weight: "1kg", price: "180", image: "https://domf5oio6qrcr.cloudfront.net/medialibrary/5961/cba8bd1b-be70-4f55-8818-9caf1b3df3de.jpg" },
-    { id: 37, name: "Honey", tamilName:"தேன்" , category: "Herbs" , weight: "1kg", price: "300", image: "https://5.imimg.com/data5/UD/MB/MY-42635865/natural-honey-500x500.jpg" },
-    { id: 38, name: "Almond Butter", tamilName:"பாதாம் வெண்ணெய்" , category: "Dairy Products" , weight: "1kg", price: "450", image: "https://www.inspiredtaste.net/wp-content/uploads/2020/06/Homemade-Almond-Butter-Recipe-1200.jpg" },
-    { id: 40, name: "Zucchini", tamilName:"சீமை சுரைக்காய்" , category: "Vegetables" , weight: "1kg", price: "140", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRNZ2hJYtaYVZYq1AdkzdUAK3kPZ8hUjFkz7A&s" },
-    { id: 41, name: "Mangoes", tamilName:"மாங்காய்" , category: "Fruits" , weight: "1kg", price: "250", image: "https://deyga.in/cdn/shop/articles/mangoes-cover-1.jpg?v=1617118328" },
-    { id: 42, name: "Lettuce", tamilName:"லெட்டூஸ்" , category: "Vegetables" , weight: "1kg", price: "90", image: "https://cdn.britannica.com/77/170677-050-F7333D51/lettuce.jpg" },
-    { id: 43, name: "Eggs", tamilName:"முட்டை" , category: "Dairy Products" , weight: "1kg", price: "160", image: "https://cdn.britannica.com/94/151894-050-F72A5317/Brown-eggs.jpg" },
-    { id: 44, name: "Cinnamon",  tamilName:"இலவங்கப்பட்டை" , category: "Herbs" , weight: "1kg", price: "200", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsqlvKSkdy63JB_1zan4kFnkQkTYU0zQed2w&s" },
-    { id: 45, name: "Black Pepper", tamilName:"கருப்பு மிளகு" , category: "Herbs" , weight: "1kg", price: "220", image: "https://ashokchakranursery.com/wp-content/uploads/2024/12/blackky.webp" },
-    { id: 46, name: "Turmeric", tamilName:"மஞ்சள்" , category: "Herbs" , weight: "1kg", price: "150", image: "https://m.media-amazon.com/images/I/6143Jp46RpL.jpg" },
-    { id: 47, name: "Cloves", tamilName:"கிராம்பு" , category: "Herbs" , weight: "1kg", price: "180", image: "https://rukminim2.flixcart.com/image/850/1000/xif0q/plant-seed/q/o/1/50-rxi-16-cloves-lavanga-seeds-50-seeds-vibex-original-imaggnksk72yapmb.jpeg?q=20&crop=false" },
-    { id: 48, name: "Cardamom", tamilName:"ஏலக்காய்" , category: "Herbs" , weight: "1kg", price: "450", image: "https://mangalorespice.com/cdn/shop/products/SP_08-02.jpg?v=1734783515&width=1445" },
-    { id: 49, name: "Bay Leaves", tamilName:"வளைகுடா இலைகள்" , category: "Herbs" , weight: "1kg", price: "100", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRtgEThIf3xCwbmi9Zp-8TShveI4Tu4yUwtLw&s" },
-    { id: 50, name: "Coriander Powder", tamilName:"கொத்தமல்லி பொடி" , category: "Herbs" , weight: "1kg", price: "120", image: "https://c.ndtvimg.com/2023-03/p4igk5po_dry-coriander-leaves_625x300_10_March_23.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=675" },
-    { id: 51, name: "Fenugreek Seeds", tamilName:"வெந்தய விதைகள்" , category: "Seeds" , weight: "1kg", price: "130", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIxYjphT6AhMLmiUV85nNx_0urQI4VvNO9iw&s" },
-    { id: 52, name: "Basil", tamilName:"துளசி" , category: "Herbs" , weight: "1kg", price: "160", image: "https://aanmc.org/wp-content/uploads/2021/08/987-1024x681.jpg" },
-    { id: 53, name: "Rosemary", tamilName:"ரோஸ்மேரி" , category: "Herbs" , weight: "1kg", price: "180", image: "https://images.immediate.co.uk/production/volatile/sites/30/2020/02/Rosemary-sprig-7d96e10.jpg" },
-    { id: 54, name: "Thyme", tamilName:"தைம்" , category: "Herbs" , weight: "1kg", price: "200", image: "https://www.greendna.in/cdn/shop/products/ThymeLeaves1_1076x.jpg?v=1586944767" },
-    { id: 55, name: "Parsley", tamilName:"வோக்கோசு" , category: "Herbs" , weight: "1kg", price: "140", image: "https://www.greendna.in/cdn/shop/products/parsley_600x.jpg?v=1582188747" },
-    { id: 56, name: "Papaya",  tamilName:"பப்பாளி" , category: "Fruits" , weight: "1kg", price: "180", image: "https://www.dreamfoodscaribe.com/wp-content/uploads/2024/07/papaya-fruit.webp" },
-    { id: 57, name: "Cucumber", tamilName:"வெள்ளரிக்காய்" , category: "Vegetables" , weight: "1kg", price: "90", image: "https://www.bigbasket.com/media/uploads/p/xl/10000102_19-fresho-cucumber.jpg" },
-    { id: 58, name: "Watermelon", tamilName:"தர்பூசணி" , category: "Fruits" , weight: "1kg", price: "300", image: "https://hips.hearstapps.com/hmg-prod/images/fresh-ripe-watermelon-slices-on-wooden-table-royalty-free-image-1723738944.jpg" },
-    { id: 59, name: "Dragon Fruit", tamilName:"டிராகன் பழம்" , category: "Fruits" , weight: "1kg", price: "450", image: "https://media.post.rvohealth.io/wp-content/uploads/2024/01/A-pink-pitahaya-cut-it-in-half-Dragon-Fruit-header.jpg" },
-    { id: 60, name: "Pineapple", tamilName:"அன்னாசிப்பழம்" , category: "Fruits" , weight: "1kg", price: "230", image: "https://organicmandya.com/cdn/shop/files/Pineapple.jpg?v=1721375225&width=1500" },
-    { id: 61, name: "Ginger", tamilName:"இஞ்சி" , category: "Herbs" , weight: "1kg", price: "130", image: "https://www.garnierusa.com/-/media/project/loreal/brand-sites/garnier/usa/us/articles_new/strengthen-fragile-hair-with-ginger/garnier_article-header_ginger.jpg?rev=07e043606da3401aa15837849d8fef41&h=496&w=890&la=en&hash=C756272A42D8E095BF63E44BA3DE2897" },
-    { id: 62, name: "Garlic", tamilName:"பூண்டு" , category: "Herbs" , weight: "1kg", price: "120", image: "https://www.jiomart.com/images/product/original/590003532/indian-garlic-200-g-product-images-o590003532-p590003532-0-202408070949.jpg?im=Resize=(1000,1000)" },
-    { id: 63, name: "Beetroot", tamilName:"பீட்ரூட்" , category: "Vegetables" , weight: "1kg", price: "140", image: "https://www.fitterfly.com/blog/wp-content/uploads/2022/09/Is-Beetroot-Good-for-Diabetes-2.webp" },
-    { id: 64, name: "Celery", tamilName:"செலரி" , category: "Herbs" , weight: "1kg", price: "160", image: "https://cdn.britannica.com/68/143768-050-108B71EC/Celery.jpg" },
-    { id: 65, name: "Brussels Sprouts", tamilName:"புருசெல்ஸ் முளைகள்" , category: "Herbs" ,  weight: "1kg", price: "250", image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3RPU-SU7J8vgl7dSEkLGCRCjMXTH0312AjQ&s" }  
-];
+import { useNavigate } from "react-router-dom";
+import { Mic, User, Settings, LogOut, ShoppingCart } from "lucide-react";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { ref, onValue } from 'firebase/database';
+import { db } from '../firebase'; // Adjusted path to src/firebase.js
 
 const ProductSelection = () => {
+  const navigate = useNavigate();
+  const [products, setProducts] = useState([]);
   const [selectedProducts, setSelectedProducts] = useState([]);
   const [billList, setBillList] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -79,11 +19,58 @@ const ProductSelection = () => {
   const [isListening, setIsListening] = useState(false);
   const [showSettings, setShowSettings] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const [farmerInfo, setFarmerInfo] = useState({ name: "John Doe", email: "john@example.com" });
+  const [farmerInfo] = useState({ name: "John Doe", email: "john@example.com" });
+  const [cartCount, setCartCount] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  // Fetch products from Realtime Database
+  useEffect(() => {
+    setLoading(true);
+    const productsRef = ref(db, '/');
+    onValue(
+      productsRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        if (data) {
+          const productsArray = Object.keys(data).map((key) => ({
+            id: key,
+            ...data[key],
+            price: data[key].price || "0",
+            category: data[key].category || "Uncategorized",
+          }));
+          setProducts(productsArray);
+        } else {
+          setProducts([]);
+          toast.warn("No products found in the database", {
+            position: "top-right",
+            autoClose: 3000,
+          });
+        }
+        setLoading(false);
+      },
+      (error) => {
+        console.error("Error fetching products:", error);
+        setError("Failed to load products. Please try again later.");
+        toast.error("Failed to load products", {
+          position: "top-right",
+          autoClose: 3000,
+        });
+        setLoading(false);
+      }
+    );
+  }, []);
 
   // Voice Recognition Setup
   useEffect(() => {
-    if (!("webkitSpeechRecognition" in window)) return;
+    if (!("webkitSpeechRecognition" in window)) {
+      toast.warn("Speech recognition is not supported in your browser", {
+        position: "top-right",
+        autoClose: 3000,
+      });
+      return;
+    }
+
     const recognition = new window.webkitSpeechRecognition();
     recognition.continuous = false;
     recognition.interimResults = false;
@@ -91,28 +78,55 @@ const ProductSelection = () => {
 
     recognition.onresult = (event) => {
       const transcript = event.results[0][0].transcript.toLowerCase();
-      const product = products.find((p) =>
-        p.name.toLowerCase().includes(transcript) ||
-        (language === "Tamil" && p.tamilName.toLowerCase().includes(transcript))
+      const product = products.find(
+        (p) =>
+          p.name.toLowerCase().includes(transcript) ||
+          (language === "தமிழ்" && p.tamilName.toLowerCase().includes(transcript))
       );
-      if (product) toggleSelection(product);
+      if (product) {
+        toggleSelection(product);
+      } else {
+        toast.info(`No product found for "${transcript}"`, {
+          position: "top-right",
+          autoClose: 2000,
+        });
+      }
       setIsListening(false);
     };
 
-    recognition.onerror = () => setIsListening(false);
+    recognition.onerror = () => {
+      setIsListening(false);
+      toast.error("Speech recognition error", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    };
     recognition.onend = () => setIsListening(false);
 
     if (isListening) recognition.start();
     return () => recognition.stop();
-  }, [isListening, language]);
+  }, [isListening, language, products]);
 
-  // Product Selection Logic
+  // Product Selection Logic with Toast
   const toggleSelection = (product) => {
-    setSelectedProducts((prev) =>
-      prev.some((p) => p.id === product.id)
-        ? prev.filter((p) => p.id !== product.id)
-        : [...prev, product]
-    );
+    setSelectedProducts((prev) => {
+      const isSelected = prev.some((p) => p.id === product.id);
+      if (isSelected) {
+        toast.error(`${product.name} removed from cart`, {
+          position: "top-right",
+          autoClose: 2000,
+        });
+        setCartCount((prev) => prev - 1);
+        return prev.filter((p) => p.id !== product.id);
+      } else {
+        toast.success(`${product.name} added to cart`, {
+          position: "top-right",
+          autoClose: 2000,
+        });
+        setCartCount((prev) => prev + 1);
+        return [...prev, product];
+      }
+    });
   };
 
   const addToBill = () => {
@@ -122,21 +136,31 @@ const ProductSelection = () => {
         const existingIndex = updatedBill.findIndex((item) => item.id === product.id);
         if (existingIndex !== -1) {
           updatedBill[existingIndex].qty += 1;
-          updatedBill[existingIndex].finalPrice = updatedBill[existingIndex].qty * Number(product.price);
+          updatedBill[existingIndex].finalPrice =
+            updatedBill[existingIndex].qty * Number(product.price);
         } else {
-          updatedBill.push({ ...product, qty: 1, finalPrice: Number(product.price) });
+          updatedBill.push({
+            ...product,
+            qty: 1,
+            finalPrice: Number(product.price),
+          });
         }
       });
       return updatedBill;
     });
     setSelectedProducts([]);
+    setCartCount(0);
   };
 
   const updateQuantity = (id, newQty) => {
     setBillList((prev) =>
       prev.map((item) =>
         item.id === id
-          ? { ...item, qty: Math.max(1, newQty), finalPrice: Math.max(1, newQty) * Number(item.price) }
+          ? {
+              ...item,
+              qty: Math.max(1, newQty),
+              finalPrice: Math.max(1, newQty) * Number(item.price),
+            }
           : item
       )
     );
@@ -150,6 +174,15 @@ const ProductSelection = () => {
     if (newDispute.trim()) {
       setDisputes((prev) => [...prev, newDispute]);
       setNewDispute("");
+      toast.success("Dispute submitted", {
+        position: "top-right",
+        autoClose: 2000,
+      });
+    } else {
+      toast.warn("Please enter a dispute before submitting", {
+        position: "top-right",
+        autoClose: 2000,
+      });
     }
   };
 
@@ -160,39 +193,65 @@ const ProductSelection = () => {
   );
 
   const categorizedBill = {
-    Vegetables: billList.filter((item) => item.category === "Vegetables"),
+    Vegetables: billList.filter(
+      (item) =>
+        item.category === "Vegetables" ||
+        ["Cabbage", "Broccoli", "Mushrooms", "Spinach", "Zucchini", "Lettuce", "Cucumber", "Beetroot"].includes(item.name)
+    ),
     Fruits: billList.filter((item) => item.category === "Fruits"),
     Seeds: billList.filter((item) => item.category === "Seeds"),
     Fertilizers: billList.filter((item) => item.category === "Fertilizers"),
     Herbs: billList.filter((item) => item.category === "Herbs"),
-    "Dairy Products": billList.filter((item) => item.category === "Dairy Products"), // Fixed key
+    "Dairy Products": billList.filter(
+      (item) =>
+        item.category === "Dairy Products" &&
+        !["Cabbage"].includes(item.name)
+    ),
   };
 
   const totalAmount = billList.reduce((sum, item) => sum + Number(item.finalPrice), 0);
 
-  // Animation Variants
   const pageVariants = {
     initial: { opacity: 0, scale: 0.95 },
-    animate: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut", staggerChildren: 0.1 } }
+    animate: { opacity: 1, scale: 1, transition: { duration: 0.8, ease: "easeOut", staggerChildren: 0.1 } },
   };
 
   const containerVariants = {
     hidden: { opacity: 0, y: 50 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", when: "beforeChildren", staggerChildren: 0.1 } }
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut", when: "beforeChildren", staggerChildren: 0.1 } },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, scale: 0.9, y: 20 },
-    visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+    visible: { opacity: 1, scale: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-teal-800 text-xl">Loading products...</p>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <p className="text-red-600 text-xl">{error}</p>
+      </div>
+    );
+  }
 
   return (
     <motion.div
-      className={`min-h-screen p-6 font-sans ${darkMode ? "bg-gray-900 text-white" : "bg-gradient-to-br from-teal-50 via-emerald-50 to-cyan-50 text-gray-800"}`}
+      className={`min-h-screen p-6 font-sans ${
+        darkMode ? "bg-gray-900 text-white" : "bg-gradient-to-br from-teal-50 via-emerald-50 to-cyan-50 text-gray-800"
+      }`}
       variants={pageVariants}
       initial="initial"
       animate="animate"
     >
+      <ToastContainer />
       {/* Header */}
       <motion.header
         className="flex justify-between items-center mb-8 bg-white/90 backdrop-blur-md p-4 rounded-2xl shadow-lg"
@@ -210,6 +269,17 @@ const ProductSelection = () => {
           </h1>
         </div>
         <div className="flex items-center space-x-4">
+          <motion.div
+            className="relative p-2 bg-teal-100 rounded-full hover:bg-teal-200"
+            whileHover={{ scale: 1.1 }}
+          >
+            <ShoppingCart className="w-6 h-6 text-teal-800" />
+            {cartCount > 0 && (
+              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
+                {cartCount}
+              </span>
+            )}
+          </motion.div>
           <motion.button
             onClick={() => setShowSettings(!showSettings)}
             className="p-2 bg-teal-100 rounded-full hover:bg-teal-200"
@@ -250,7 +320,7 @@ const ProductSelection = () => {
               className="w-full p-2 rounded-lg border border-teal-200"
             >
               <option value="English">English</option>
-              <option value="Tamil">தமிழ்</option>
+              <option value="தமிழ்">தமிழ்</option>
             </select>
             <button
               onClick={() => setDarkMode(!darkMode)}
@@ -284,17 +354,26 @@ const ProductSelection = () => {
         </div>
 
         {/* Product Grid */}
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8" variants={containerVariants}>
+        <motion.div
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8"
+          variants={containerVariants}
+        >
           {filteredProducts.map((product) => (
             <motion.div
               key={product.id}
               variants={itemVariants}
               onClick={() => toggleSelection(product)}
               className={`p-4 bg-white/90 rounded-2xl shadow-md hover:shadow-xl transition-all cursor-pointer border-2 ${
-                selectedProducts.some((p) => p.id === product.id) ? "border-teal-500" : "border-transparent"
+                selectedProducts.some((p) => p.id === product.id)
+                  ? "border-teal-500"
+                  : "border-transparent"
               }`}
             >
-              <img src={product.image} alt={product.name} className="w-full h-40 object-cover rounded-lg mb-3" />
+              <img
+                src={product.image}
+                alt={product.name}
+                className="w-full h-40 object-cover rounded-lg mb-3"
+              />
               <h3 className="text-lg font-semibold text-teal-800">
                 {language === "English" ? product.name : product.tamilName}
               </h3>
@@ -319,70 +398,98 @@ const ProductSelection = () => {
 
         {/* Bill Section */}
         {billList.length > 0 && (
-          <motion.div className="mt-8 p-6 bg-white/90 rounded-2xl shadow-lg" variants={containerVariants}>
+          <motion.div
+            className="mt-8 p-6 bg-white/90 rounded-2xl shadow-lg"
+            variants={containerVariants}
+          >
             <h2 className="text-2xl font-bold text-teal-800 mb-4">
               {language === "English" ? "Your Bill" : "உங்கள் பில்"}
             </h2>
-            {["Vegetables", "Fruits", "Seeds", "Dairy Products", "Herbs", "Fertilizers"].map((category) => (
-              categorizedBill[category].length > 0 && (
-                <div key={category} className="mb-6">
-                  <h3 className="text-xl font-semibold text-teal-700">
-                    {language === "English" ? category : {
-                      Vegetables: "காய்கறிகள்",
-                      Fruits: "பழங்கள்",
-                      Seeds: "விதைகள்",
-                      "Dairy Products": "பால் பொருட்கள்",
-                      Fertilizers: "உரங்கள்",
-                      Herbs: "மூலிகைகள்"
-                    }[category]}
-                  </h3>
-                  {categorizedBill[category].map((item) => (
-                    <motion.div
-                      key={item.id}
-                      className="flex items-center justify-between p-4 border-b border-teal-100"
-                      variants={itemVariants}
-                    >
-                      <div className="flex items-center space-x-4">
-                        <img src={item.image} alt={item.name} className="w-16 h-16 rounded-lg" />
-                        <div>
-                          <p className="font-medium text-teal-800">
-                            {language === "English" ? item.name : item.tamilName}
-                          </p>
-                          <p className="text-sm text-gray-600">{item.weight}</p>
+            {["Vegetables", "Fruits", "Seeds", "Dairy Products", "Herbs", "Fertilizers"].map(
+              (category) =>
+                categorizedBill[category].length > 0 && (
+                  <div key={category} className="mb-6">
+                    <h3 className="text-xl font-semibold text-teal-700">
+                      {language === "English"
+                        ? category
+                        : {
+                            Vegetables: "காய்கறிகள்",
+                            Fruits: "பழங்கள்",
+                            Seeds: "விதைகள்",
+                            "Dairy Products": "பால் பொருட்கள்",
+                            Fertilizers: "உரங்கள்",
+                            Herbs: "மூலிகைகள்",
+                          }[category]}
+                    </h3>
+                    {categorizedBill[category].map((item) => (
+                      <motion.div
+                        key={item.id}
+                        className="flex items-center justify-between p-4 border-b border-teal-100"
+                        variants={itemVariants}
+                      >
+                        <div className="flex items-center space-x-4">
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-16 h-16 rounded-lg"
+                          />
+                          <div>
+                            <p className="font-medium text-teal-800">
+                              {language === "English" ? item.name : item.tamilName}
+                            </p>
+                            <p className="text-sm text-gray-600">{item.weight}</p>
+                          </div>
                         </div>
-                      </div>
-                      <div className="flex items-center space-x-4">
-                        <input
-                          type="number"
-                          value={item.qty}
-                          onChange={(e) => updateQuantity(item.id, parseInt(e.target.value) || 1)}
-                          className="w-16 p-2 rounded-lg border border-teal-200 text-center"
-                          min="1"
-                        />
-                        <p className="text-teal-700 font-medium">₹{item.finalPrice}</p>
-                        <button
-                          onClick={() => removeItem(item.id)}
-                          className="text-red-600 hover:text-red-800"
-                        >
-                          ✕
-                        </button>
-                      </div>
-                    </motion.div>
-                  ))}
-                  <p className="text-right font-semibold text-teal-800 mt-2">
-                    {language === "English" ? "Subtotal" : "துணை மொத்தம்"}: ₹{categorizedBill[category].reduce((sum, item) => sum + Number(item.finalPrice), 0)}
-                  </p>
-                </div>
-              )
-            ))}
+                        <div className="flex items-center space-x-4">
+                          <input
+                            type="number"
+                            value={item.qty}
+                            onChange={(e) =>
+                              updateQuantity(item.id, parseInt(e.target.value) || 1)
+                            }
+                            className="w-16 p-2 rounded-lg border border-teal-200 text-center"
+                            min="1"
+                          />
+                          <p className="text-teal-700 font-medium">₹{item.finalPrice}</p>
+                          <button
+                            onClick={() => removeItem(item.id)}
+                            className="text-red-600 hover:text-red-800"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                      </motion.div>
+                    ))}
+                    <p className="text-right font-semibold text-teal-800 mt-2">
+                      {language === "English" ? "Subtotal" : "துணை மொத்தம்"}: ₹
+                      {categorizedBill[category].reduce(
+                        (sum, item) => sum + Number(item.finalPrice),
+                        0
+                      )}
+                    </p>
+                  </div>
+                )
+            )}
             <p className="text-2xl font-bold text-teal-800 text-right">
               {language === "English" ? "Total" : "மொத்தம்"}: ₹{totalAmount}
             </p>
+            <motion.button
+              onClick={() => navigate("/payment", { state: { billList, totalAmount } })}
+              className="mt-4 w-full py-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 shadow-md"
+              variants={itemVariants}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              {language === "English" ? "Proceed to Payment" : "பணம் செலுத்துதலுக்கு செல்"}
+            </motion.button>
           </motion.div>
         )}
 
         {/* Additional Features */}
-        <motion.div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6" variants={containerVariants}>
+        <motion.div
+          className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6"
+          variants={containerVariants}
+        >
           {/* Disputes */}
           <div className="p-6 bg-white/90 rounded-2xl shadow-lg">
             <h2 className="text-xl font-bold text-teal-800 mb-4">
@@ -392,7 +499,9 @@ const ProductSelection = () => {
               type="text"
               value={newDispute}
               onChange={(e) => setNewDispute(e.target.value)}
-              placeholder={language === "English" ? "Reply to query..." : "வாடிக்கையாளர்களின் கேள்விக்கு பதில்..."}
+              placeholder={
+                language === "English" ? "Reply to query..." : "வாடிக்கையாளர்களின் கேள்விக்கு பதில்..."
+              }
               className="w-full p-3 rounded-lg border border-teal-200 mb-3"
             />
             <button
