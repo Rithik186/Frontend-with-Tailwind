@@ -1763,6 +1763,1808 @@
           "tamilName": "பாதாம் எண்ணெய்",
           "hindiName": "बादाम का तेल",
           "weight": "1kg"
-        }
-      }
+      },
+        "customerDashboard": {
+          "products": {
+            "1": {
+              "category": "Vegetables",
+              "image": "https://www.bigbasket.com/media/uploads/p/xxl/10000070_16-fresho-carrot-orange.jpg",
+              "name": "Fresh Carrot",
+              "price": "100",
+              "tamilName": "கேரட்",
+              "weight": "1kg",
+              "farmerName": "GreenFields",
+              "rating": 4.5,
+              "quantity": 1,
+              "about": "Freshly harvested carrots, rich in beta-carotene and perfect for a healthy diet.",
+              "otherInfo": {
+                "sourcedBy": "GreenFields",
+                "bestBefore": "30 days",
+                "disclaimer": "Color may vary slightly.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.5,
+                "count": 120,
+                "sampleReview": "Great quality carrots!"
+              },
+              "additionalImages": [
+                "https://www.bigbasket.com/media/uploads/p/l/10000070_16-fresho-carrot-orange.jpg",
+                "https://via.placeholder.com/150/FF0000",
+                "https://via.placeholder.com/150/00FF00"
+              ]
+            },
+            "2": {
+              "category": "Vegetables",
+              "image": "https://www.bbassets.com/media/uploads/p/l/40130385_8-fresho-tomato-local-organically-grown.jpg",
+              "name": "Organic Tomatoes",
+              "price": "199",
+              "tamilName": "தக்காளி",
+              "weight": "1kg",
+              "farmerName": "SunnyAcres",
+              "rating": 4.8,
+              "quantity": 1,
+              "about": "Organically grown tomatoes, juicy and flavorful for your dishes.",
+              "otherInfo": {
+                "sourcedBy": "SunnyAcres",
+                "bestBefore": "25 days",
+                "disclaimer": "Natural variations in size.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.8,
+                "count": 150,
+                "sampleReview": "Really fresh and tasty!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/40130385_8-fresho-tomato-local-organically-grown.jpg",
+                "https://via.placeholder.com/150/FF00FF",
+                "https://via.placeholder.com/150/00FFFF"
+              ]
+            },
+            "3": {
+              "category": "Fruits",
+              "image": "https://www.bbassets.com/media/uploads/p/l/20000964_11-fresho-green-apple.jpg",
+              "name": "Green Apples",
+              "price": "250",
+              "tamilName": "பச்சை ஆப்பிள்கள்",
+              "weight": "1kg",
+              "farmerName": "GreenFields",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Crisp and tart green apples, perfect for snacking or baking.",
+              "otherInfo": {
+                "sourcedBy": "GreenFields",
+                "bestBefore": "45 days",
+                "disclaimer": "May have minor blemishes.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 90,
+                "sampleReview": "Love the crispness!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/20000964_11-fresho-green-apple.jpg",
+                "https://via.placeholder.com/150/FFFF00",
+                "https://via.placeholder.com/150/0000FF"
+              ]
+            },
+            "4": {
+              "category": "Fruits",
+              "image": "https://www.bbassets.com/media/uploads/p/l/10000025_32-fresho-banana-robusta.jpg",
+              "name": "Bananas",
+              "price": "50",
+              "tamilName": "வாழைப்பழம்",
+              "weight": "1kg",
+              "farmerName": "SunnyAcres",
+              "rating": 4.3,
+              "quantity": 1,
+              "about": "Sweet and ripe bananas, a great source of potassium.",
+              "otherInfo": {
+                "sourcedBy": "SunnyAcres",
+                "bestBefore": "20 days",
+                "disclaimer": "Ripeness may vary.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.3,
+                "count": 200,
+                "sampleReview": "Perfect ripeness!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/10000025_32-fresho-banana-robusta.jpg",
+                "https://via.placeholder.com/150/FF4500",
+                "https://via.placeholder.com/150/8A2BE2"
+              ]
+            },
+            "5": {
+              "category": "Seeds",
+              "image": "https://cbx-prod.b-cdn.net/COLOURBOX47480356.jpg?width=800&height=800&quality=70",
+              "name": "Almond Seeds",
+              "price": "500",
+              "tamilName": "பாதாம் விதைகள்",
+              "weight": "1kg",
+              "farmerName": "NuttyFarms",
+              "rating": 4.7,
+              "quantity": 1,
+              "about": "High-quality almond seeds, rich in healthy fats and protein.",
+              "otherInfo": {
+                "sourcedBy": "NuttyFarms",
+                "bestBefore": "6 months",
+                "disclaimer": "Store in a cool, dry place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.7,
+                "count": 80,
+                "sampleReview": "Excellent quality nuts!"
+              },
+              "additionalImages": [
+                "https://cbx-prod.b-cdn.net/COLOURBOX47480356.jpg?width=800&height=800&quality=70",
+                "https://via.placeholder.com/150/FFD700",
+                "https://via.placeholder.com/150/ADFF2F"
+              ]
+            },
+            "6": {
+              "category": "Dairy Products",
+              "image": "https://img.freepik.com/free-photo/fresh-milk-bottle-glass_1150-17631.jpg",
+              "name": "Fresh Milk",
+              "price": "40",
+              "tamilName": "பால்",
+              "weight": "1kg",
+              "farmerName": "DairyDelight",
+              "rating": 4.9,
+              "quantity": 1,
+              "about": "Pure and fresh milk straight from the farm.",
+              "otherInfo": {
+                "sourcedBy": "DairyDelight",
+                "bestBefore": "7 days",
+                "disclaimer": "Keep refrigerated.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.9,
+                "count": 300,
+                "sampleReview": "Super fresh milk!"
+              },
+              "additionalImages": [
+                "https://img.freepik.com/free-photo/fresh-milk-bottle-glass_1150-17631.jpg",
+                "https://via.placeholder.com/150/FF69B4",
+                "https://via.placeholder.com/150/20B2AA"
+              ]
+            },
+            "7": {
+              "category": "Dairy Products",
+              "image": "https://www.allrecipes.com/thmb/PwgOsAXFGvpolr0hUiB7pVlS75k=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Yellow-vs-White-Cheddar-Cheese-4x3-de76c824c4814aa8a5d52569d572713d.png",
+              "name": "Cheese",
+              "price": "180",
+              "tamilName": "சீஸ்",
+              "weight": "1kg",
+              "farmerName": "DairyDelight",
+              "rating": 4.4,
+              "quantity": 1,
+              "about": "Creamy and rich cheese, perfect for sandwiches or snacks.",
+              "otherInfo": {
+                "sourcedBy": "DairyDelight",
+                "bestBefore": "2 months",
+                "disclaimer": "Store in a cool place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.4,
+                "count": 110,
+                "sampleReview": "Really tasty cheese!"
+              },
+              "additionalImages": [
+                "https://www.allrecipes.com/thmb/PwgOsAXFGvpolr0hUiB7pVlS75k=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Yellow-vs-White-Cheddar-Cheese-4x3-de76c824c4814aa8a5d52569d572713d.png",
+                "https://via.placeholder.com/150/FF0000",
+                "https://via.placeholder.com/150/00FF00"
+              ]
+            },
+            "8": {
+              "category": "Fertilizers",
+              "image": "https://www.bbassets.com/media/uploads/p/l/40008672_5-natures-plus-organic-fertiliser.jpg",
+              "name": "Organic Fertilizer",
+              "price": "1200",
+              "tamilName": "ஆர்கானிக் உரம்",
+              "weight": "1kg",
+              "farmerName": "EcoFarms",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Natural fertilizer to boost soil health and crop yield.",
+              "otherInfo": {
+                "sourcedBy": "EcoFarms",
+                "bestBefore": "1 year",
+                "disclaimer": "Keep away from children.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 70,
+                "sampleReview": "Works wonders for my plants!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/40008672_5-natures-plus-organic-fertiliser.jpg",
+                "https://via.placeholder.com/150/FF00FF",
+                "https://via.placeholder.com/150/00FFFF"
+              ]
+            },
+            "9": {
+              "category": "Fruits",
+              "image": "https://www.bbassets.com/media/uploads/p/l/10000263_14-fresho-strawberry.jpg",
+              "name": "Strawberries",
+              "price": "249",
+              "tamilName": "ஸ்ட்ராபெர்ரி",
+              "weight": "1kg",
+              "farmerName": "BerryFields",
+              "rating": 4.7,
+              "quantity": 1,
+              "about": "Sweet and juicy strawberries, perfect for desserts.",
+              "otherInfo": {
+                "sourcedBy": "BerryFields",
+                "bestBefore": "15 days",
+                "disclaimer": "Refrigerate for freshness.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.7,
+                "count": 130,
+                "sampleReview": "Fresh and delicious!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/10000263_14-fresho-strawberry.jpg",
+                "https://via.placeholder.com/150/FFFF00",
+                "https://via.placeholder.com/150/0000FF"
+              ]
+            },
+            "10": {
+              "category": "Dairy Products",
+              "image": "https://www.bbassets.com/media/uploads/p/l/40023473_6-fresho-cabbage-organically-grown.jpg",
+              "name": "Cabbage",
+              "price": "120",
+              "tamilName": "முட்டைக்கோஸ்",
+              "weight": "1kg",
+              "farmerName": "GreenFields",
+              "rating": 4.2,
+              "quantity": 1,
+              "about": "Crisp and fresh cabbage, ideal for salads and cooking.",
+              "otherInfo": {
+                "sourcedBy": "GreenFields",
+                "bestBefore": "30 days",
+                "disclaimer": "Natural color variation.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.2,
+                "count": 95,
+                "sampleReview": "Good quality cabbage!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/40023473_6-fresho-cabbage-organically-grown.jpg",
+                "https://via.placeholder.com/150/FF4500",
+                "https://via.placeholder.com/150/8A2BE2"
+              ]
+            },
+            "11": {
+              "category": "Seeds",
+              "image": "https://m.media-amazon.com/images/I/71yz2Pi2SBL._AC_UF1000,1000_QL80_.jpg",
+              "name": "Sunflower Seeds",
+              "price": "80",
+              "tamilName": "சூரியகாந்தி விதைகள்",
+              "weight": "1kg",
+              "farmerName": "NuttyFarms",
+              "rating": 4.5,
+              "quantity": 1,
+              "about": "Nutritious sunflower seeds, great for snacking or cooking.",
+              "otherInfo": {
+                "sourcedBy": "NuttyFarms",
+                "bestBefore": "6 months",
+                "disclaimer": "Store in a dry place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.5,
+                "count": 85,
+                "sampleReview": "Fresh and crunchy!"
+              },
+              "additionalImages": [
+                "https://m.media-amazon.com/images/I/71yz2Pi2SBL._AC_UF1000,1000_QL80_.jpg",
+                "https://via.placeholder.com/150/FFD700",
+                "https://via.placeholder.com/150/ADFF2F"
+              ]
+            },
+            "12": {
+              "category": "Dairy Products",
+              "image": "https://5.imimg.com/data5/FN/OM/MY-23458232/fresh-butter-500x500.jpg",
+              "name": "Butter",
+              "price": "99",
+              "tamilName": "வெண்ணெய்",
+              "weight": "1kg",
+              "farmerName": "DairyDelight",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Creamy and rich butter, made from fresh milk.",
+              "otherInfo": {
+                "sourcedBy": "DairyDelight",
+                "bestBefore": "2 months",
+                "disclaimer": "Refrigerate after opening.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 140,
+                "sampleReview": "Smooth and tasty!"
+              },
+              "additionalImages": [
+                "https://5.imimg.com/data5/FN/OM/MY-23458232/fresh-butter-500x500.jpg",
+                "https://via.placeholder.com/150/FF69B4",
+                "https://via.placeholder.com/150/20B2AA"
+              ]
+            },
+            "13": {
+              "category": "Fruits",
+              "image": "https://www.bbassets.com/media/uploads/p/l/40229414_5-fresho-grapes-black-imported.jpg",
+              "name": "Black Grapes",
+              "price": "220",
+              "tamilName": "கருப்பு திராட்சை",
+              "weight": "1kg",
+              "farmerName": "BerryFields",
+              "rating": 4.5,
+              "quantity": 1,
+              "about": "Sweet and juicy black grapes, rich in antioxidants.",
+              "otherInfo": {
+                "sourcedBy": "BerryFields",
+                "bestBefore": "20 days",
+                "disclaimer": "Refrigerate for best taste.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.5,
+                "count": 110,
+                "sampleReview": "Very sweet grapes!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/40229414_5-fresho-grapes-black-imported.jpg",
+                "https://via.placeholder.com/150/FF0000",
+                "https://via.placeholder.com/150/00FF00"
+              ]
+            },
+            "14": {
+              "category": "Seeds",
+              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl1uFxggfeCevz0KDDxI0yRFtimetZlW8gBg&s",
+              "name": "Walnut Seeds",
+              "price": "600",
+              "tamilName": "வால்நட் விதைகள்",
+              "weight": "1kg",
+              "farmerName": "NuttyFarms",
+              "rating": 4.8,
+              "quantity": 1,
+              "about": "Premium walnuts, packed with omega-3 fatty acids.",
+              "otherInfo": {
+                "sourcedBy": "NuttyFarms",
+                "bestBefore": "6 months",
+                "disclaimer": "Store in airtight container.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.8,
+                "count": 95,
+                "sampleReview": "High-quality walnuts!"
+              },
+              "additionalImages": [
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQl1uFxggfeCevz0KDDxI0yRFtimetZlW8gBg&s",
+                "https://via.placeholder.com/150/FF00FF",
+                "https://via.placeholder.com/150/00FFFF"
+              ]
+            },
+            "15": {
+              "category": "Dairy Products",
+              "image": "https://www.bbassets.com/media/uploads/p/l/40232043_5-tasties-whole-wheat-bread.jpg",
+              "name": "Whole Wheat Bread",
+              "price": "80",
+              "tamilName": "முழு கோதுமை ரொட்டி",
+              "weight": "1kg",
+              "farmerName": "DairyDelight",
+              "rating": 4.3,
+              "quantity": 1,
+              "about": "Healthy whole wheat bread, freshly baked.",
+              "otherInfo": {
+                "sourcedBy": "DairyDelight",
+                "bestBefore": "7 days",
+                "disclaimer": "Store in a cool place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.3,
+                "count": 120,
+                "sampleReview": "Great taste and texture!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/40232043_5-tasties-whole-wheat-bread.jpg",
+                "https://via.placeholder.com/150/FFFF00",
+                "https://via.placeholder.com/150/0000FF"
+              ]
+            },
+            "16": {
+              "category": "Vegetables",
+              "image": "https://www.bbassets.com/media/uploads/p/l/10000063_21-fresho-broccoli.jpg",
+              "name": "Broccoli",
+              "price": "150",
+              "tamilName": "ப்ரோக்கோலி",
+              "weight": "1kg",
+              "farmerName": "GreenFields",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Nutrient-rich broccoli, perfect for steaming or stir-frying.",
+              "otherInfo": {
+                "sourcedBy": "GreenFields",
+                "bestBefore": "20 days",
+                "disclaimer": "Natural color variation.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 100,
+                "sampleReview": "Fresh and healthy!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/10000063_21-fresho-broccoli.jpg",
+                "https://via.placeholder.com/150/FF4500",
+                "https://via.placeholder.com/150/8A2BE2"
+              ]
+            },
+            "17": {
+              "category": "Seeds",
+              "image": "https://www.bigbasket.com/media/uploads/p/l/40210969_2-super-saver-cashews.jpg",
+              "name": "Cashew Nuts",
+              "price": "750",
+              "tamilName": "முந்திரி",
+              "weight": "1kg",
+              "farmerName": "NuttyFarms",
+              "rating": 4.9,
+              "quantity": 1,
+              "about": "Premium cashews, crunchy and delicious.",
+              "otherInfo": {
+                "sourcedBy": "NuttyFarms",
+                "bestBefore": "6 months",
+                "disclaimer": "Store in a dry place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.9,
+                "count": 150,
+                "sampleReview": "Best cashews ever!"
+              },
+              "additionalImages": [
+                "https://www.bigbasket.com/media/uploads/p/l/40210969_2-super-saver-cashews.jpg",
+                "https://via.placeholder.com/150/FFD700",
+                "https://via.placeholder.com/150/ADFF2F"
+              ]
+            },
+            "18": {
+              "category": "Dairy Products",
+              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5WhsVF0dPYb_uCLSQBM9h5YV28R6rx1BUgQ&s",
+              "name": "Soy Milk",
+              "price": "120",
+              "tamilName": "சோயா பால்",
+              "weight": "1kg",
+              "farmerName": "DairyDelight",
+              "rating": 4.4,
+              "quantity": 1,
+              "about": "Nutritious soy milk, a great dairy alternative.",
+              "otherInfo": {
+                "sourcedBy": "DairyDelight",
+                "bestBefore": "1 month",
+                "disclaimer": "Shake well before use.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.4,
+                "count": 90,
+                "sampleReview": "Perfect for my diet!"
+              },
+              "additionalImages": [
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS5WhsVF0dPYb_uCLSQBM9h5YV28R6rx1BUgQ&s",
+                "https://via.placeholder.com/150/FF69B4",
+                "https://via.placeholder.com/150/20B2AA"
+              ]
+            },
+            "19": {
+              "category": "Dairy Products",
+              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTE0FvAhZ2WHLHm2ct5sSG4qWz3zDnFZb68Dg&s",
+              "name": "Paneer",
+              "price": "180",
+              "tamilName": "பன்னீர்",
+              "weight": "1kg",
+              "farmerName": "DairyDelight",
+              "rating": 4.7,
+              "quantity": 1,
+              "about": "Soft and fresh paneer, ideal for Indian dishes.",
+              "otherInfo": {
+                "sourcedBy": "DairyDelight",
+                "bestBefore": "15 days",
+                "disclaimer": "Keep refrigerated.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.7,
+                "count": 130,
+                "sampleReview": "Very fresh paneer!"
+              },
+              "additionalImages": [
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:wght9GcTE0FvAhZ2WHLHm2ct5sSG4qWz3zDnFZb68Dg&s",
+                "https://via.placeholder.com/150/FF0000",
+                "https://via.placeholder.com/150/00FF00"
+              ]
+            },
+            "20": {
+              "category": "Fruits",
+              "image": "https://www.bbassets.com/media/uploads/p/l/10000384_11-fresho-orange-kinnow.jpg",
+              "name": "Oranges",
+              "price": "200",
+              "tamilName": "ஆரஞ்சு",
+              "weight": "1kg",
+              "farmerName": "SunnyAcres",
+              "rating": 4.5,
+              "quantity": 1,
+              "about": "Juicy and tangy oranges, packed with vitamin C.",
+              "otherInfo": {
+                "sourcedBy": "SunnyAcres",
+                "bestBefore": "30 days",
+                "disclaimer": "Natural blemishes possible.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.5,
+                "count": 140,
+                "sampleReview": "Really juicy oranges!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/10000384_11-fresho-orange-kinnow.jpg",
+                "https://via.placeholder.com/150/FF00FF",
+                "https://via.placeholder.com/150/00FFFF"
+              ]
+            },
+            "21": {
+              "category": "Dairy Products",
+              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkzcqsa9CEKuTEKeQACf23-NFIsd5LCWg9zA&s",
+              "name": "Peanut Butter",
+              "price": "350",
+              "tamilName": "வேர்க்கடலை வெண்ணெய்",
+              "weight": "1kg",
+              "farmerName": "NuttyFarms",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Creamy peanut butter, made from roasted peanuts.",
+              "otherInfo": {
+                "sourcedBy": "NuttyFarms",
+                "bestBefore": "6 months",
+                "disclaimer": "Stir well before use.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 110,
+                "sampleReview": "Perfect spread!"
+              },
+              "additionalImages": [
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkzcqsa9CEKuTEKeQACf23-NFIsd5LCWg9zA&s",
+                "https://via.placeholder.com/150/FFFF00",
+                "https://via.placeholder.com/150/0000FF"
+              ]
+            },
+            "23": {
+              "category": "Seeds",
+              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvZjGXEwMOZGqAA8Hci-B0z7bAoUyH-DiABg&s",
+              "name": "Chia Seeds",
+              "price": "300",
+              "tamilName": "சியா விதைகள்",
+              "weight": "1kg",
+              "farmerName": "NuttyFarms",
+              "rating": 4.7,
+              "quantity": 1,
+              "about": "Nutrient-packed chia seeds, great for smoothies.",
+              "otherInfo": {
+                "sourcedBy": "NuttyFarms",
+                "bestBefore": "6 months",
+                "disclaimer": "Soak before consuming.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.7,
+                "count": 100,
+                "sampleReview": "Super healthy seeds!"
+              },
+              "additionalImages": [
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRvZjGXEwMOZGqAA8Hci-B0z7bAoUyH-DiABg&s",
+                "https://via.placeholder.com/150/FF4500",
+                "https://via.placeholder.com/150/8A2BE2"
+              ]
+            },
+            "24": {
+              "category": "Seeds",
+              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRllzjvljJNOZtXHWCf4e0Pcc9Lgh0vEq30cA&s",
+              "name": "Pistachios",
+              "price": "900",
+              "tamilName": "பிஸ்தா",
+              "weight": "1kg",
+              "farmerName": "NuttyFarms",
+              "rating": 4.8,
+              "quantity": 1,
+              "about": "Premium pistachios, rich in flavor and nutrition.",
+              "otherInfo": {
+                "sourcedBy": "NuttyFarms",
+                "bestBefore": "6 months",
+                "disclaimer": "Store in a cool place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.8,
+                "count": 120,
+                "sampleReview": "Amazing taste!"
+              },
+              "additionalImages": [
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRllzjvljJNOZtXHWCf4e0Pcc9Lgh0vEq30cA&s",
+                "https://via.placeholder.com/150/FFD700",
+                "https://via.placeholder.com/150/ADFF2F"
+              ]
+            },
+            "25": {
+              "category": "Seeds",
+              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf2eV4W2kvtv0U0eKWRUak0R35oTbMrsI0OQ&s",
+              "name": "Pumpkin Seeds",
+              "price": "450",
+              "tamilName": "பூசணி விதைகள்",
+              "weight": "1kg",
+              "farmerName": "NuttyFarms",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Roasted pumpkin seeds, a healthy snack option.",
+              "otherInfo": {
+                "sourcedBy": "NuttyFarms",
+                "bestBefore": "6 months",
+                "disclaimer": "Keep sealed.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 90,
+                "sampleReview": "Great for snacking!"
+              },
+              "additionalImages": [
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf2eV4W2kvtv0U0eKWRUak0R35oTbMrsI0OQ&s",
+                "https://via.placeholder.com/150/FF69B4",
+                "https://via.placeholder.com/150/20B2AA"
+              ]
+            },
+            "26": {
+              "category": "Seeds",
+              "image": "https://images.onlymyhealth.com/imported/images/2024/June/26_Jun_2024/mn-brown-rice.jpg",
+              "name": "Brown Rice",
+              "price": "110",
+              "tamilName": "பழுப்பு அரிசி",
+              "weight": "1kg",
+              "farmerName": "GrainGrowers",
+              "rating": 4.4,
+              "quantity": 1,
+              "about": "Nutritious brown rice, perfect for a healthy diet.",
+              "otherInfo": {
+                "sourcedBy": "GrainGrowers",
+                "bestBefore": "1 year",
+                "disclaimer": "Store in a dry place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.4,
+                "count": 130,
+                "sampleReview": "Healthy and tasty!"
+              },
+              "additionalImages": [
+                "https://images.onlymyhealth.com/imported/images/2024/June/26_Jun_2024/mn-brown-rice.jpg",
+                "https://via.placeholder.com/150/FF0000",
+                "https://via.placeholder.com/150/00FF00"
+              ]
+            },
+            "27": {
+              "category": "Seeds",
+              "image": "https://imgs.littleextralove.com/wp-content/uploads/2022/11/quinoa-for-hair-feat.jpg",
+              "name": "Quinoa",
+              "price": "500",
+              "tamilName": "குயினோவா",
+              "weight": "1kg",
+              "farmerName": "GrainGrowers",
+              "rating": 4.7,
+              "quantity": 1,
+              "about": "Protein-rich quinoa, a superfood for all meals.",
+              "otherInfo": {
+                "sourcedBy": "GrainGrowers",
+                "bestBefore": "1 year",
+                "disclaimer": "Rinse before cooking.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.7,
+                "count": 110,
+                "sampleReview": "Love this quinoa!"
+              },
+              "additionalImages": [
+                "https://imgs.littleextralove.com/wp-content/uploads/2022/11/quinoa-for-hair-feat.jpg",
+                "https://via.placeholder.com/150/FF00FF",
+                "https://via.placeholder.com/150/00FFFF"
+              ]
+            },
+            "28": {
+              "category": "Fruits",
+              "image": "https://www.bbassets.com/media/uploads/p/l/10000312_21-fresho-avocado.jpg",
+              "name": "Avocado",
+              "price": "400",
+              "tamilName": "வெண்ணெய் பழம்",
+              "weight": "1kg",
+              "farmerName": "SunnyAcres",
+              "rating": 4.8,
+              "quantity": 1,
+              "about": "Creamy avocados, rich in healthy fats.",
+              "otherInfo": {
+                "sourcedBy": "SunnyAcres",
+                "bestBefore": "15 days",
+                "disclaimer": "Ripen at room temperature.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.8,
+                "count": 120,
+                "sampleReview": "Perfect avocados!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/10000312_21-fresho-avocado.jpg",
+                "https://via.placeholder.com/150/FFFF00",
+                "https://via.placeholder.com/150/0000FF"
+              ]
+            },
+            "29": {
+              "category": "Vegetables",
+              "image": "https://www.bbassets.com/media/uploads/p/l/10000273_17-fresho-mushrooms-button.jpg",
+              "name": "Mushrooms",
+              "price": "220",
+              "tamilName": "காளான்",
+              "weight": "1kg",
+              "farmerName": "GreenFields",
+              "rating": 4.5,
+              "quantity": 1,
+              "about": "Fresh button mushrooms, great for cooking.",
+              "otherInfo": {
+                "sourcedBy": "GreenFields",
+                "bestBefore": "10 days",
+                "disclaimer": "Refrigerate for freshness.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.5,
+                "count": 100,
+                "sampleReview": "Very fresh mushrooms!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/10000273_17-fresho-mushrooms-button.jpg",
+                "https://via.placeholder.com/150/FF4500",
+                "https://via.placeholder.com/150/8A2BE2"
+              ]
+            },
+            "30": {
+              "category": "Vegetables",
+              "image": "https://www.bigbasket.com/media/uploads/p/l/40217496_3-fresho-spinach-hydroponically-grown.jpg",
+              "name": "Spinach",
+              "price": "80",
+              "tamilName": "கீரை",
+              "weight": "1kg",
+              "farmerName": "GreenFields",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Hydroponically grown spinach, rich in iron.",
+              "otherInfo": {
+                "sourcedBy": "GreenFields",
+                "bestBefore": "15 days",
+                "disclaimer": "Wash before use.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 115,
+                "sampleReview": "Fresh and nutritious!"
+              },
+              "additionalImages": [
+                "https://www.bigbasket.com/media/uploads/p/l/40217496_3-fresho-spinach-hydroponically-grown.jpg",
+                "https://via.placeholder.com/150/FFD700",
+                "https://via.placeholder.com/150/ADFF2F"
+              ]
+            },
+            "32": {
+              "category": "Fruits",
+              "image": "https://www.bbassets.com/media/uploads/p/l/30009286_12-fresho-blueberry.jpg",
+              "name": "Blueberries",
+              "price": "280",
+              "tamilName": "ப்ளூபெர்ரி",
+              "weight": "1kg",
+              "farmerName": "BerryFields",
+              "rating": 4.7,
+              "quantity": 1,
+              "about": "Sweet blueberries, packed with antioxidants.",
+              "otherInfo": {
+                "sourcedBy": "BerryFields",
+                "bestBefore": "15 days",
+                "disclaimer": "Refrigerate for freshness.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.7,
+                "count": 130,
+                "sampleReview": "Delicious berries!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/30009286_12-fresho-blueberry.jpg",
+                "https://via.placeholder.com/150/FF69B4",
+                "https://via.placeholder.com/150/20B2AA"
+              ]
+            },
+            "33": {
+              "category": "Fruits",
+              "image": "https://www.bigbasket.com/media/uploads/p/l/40099570_2-fresho-raspberry.jpg",
+              "name": "Raspberries",
+              "price": "320",
+              "tamilName": "ராஸ்பெர்ரி",
+              "weight": "1kg",
+              "farmerName": "BerryFields",
+              "rating": 4.8,
+              "quantity": 1,
+              "about": "Tart and sweet raspberries, perfect for desserts.",
+              "otherInfo": {
+                "sourcedBy": "BerryFields",
+                "bestBefore": "10 days",
+                "disclaimer": "Handle with care.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.8,
+                "count": 140,
+                "sampleReview": "Amazing flavor!"
+              },
+              "additionalImages": [
+                "https://www.bigbasket.com/media/uploads/p/l/40099570_2-fresho-raspberry.jpg",
+                "https://via.placeholder.com/150/FF0000",
+                "https://via.placeholder.com/150/00FF00"
+              ]
+            },
+            "34": {
+              "category": "Herbs",
+              "image": "https://kumarmetal.com/wp-content/uploads/2021/08/setting-up-virgin-coconut-oil-plant.jpg",
+              "name": "Coconut Oil",
+              "price": "350",
+              "tamilName": "தேங்காய் எண்ணெய்",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Pure coconut oil, ideal for cooking and skincare.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "1 year",
+                "disclaimer": "Store in a cool place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 120,
+                "sampleReview": "Great quality oil!"
+              },
+              "additionalImages": [
+                "https://kumarmetal.com/wp-content/uploads/2021/08/setting-up-virgin-coconut-oil-plant.jpg",
+                "https://via.placeholder.com/150/FF00FF",
+                "https://via.placeholder.com/150/00FFFF"
+              ]
+            },
+            "35": {
+              "category": "Herbs",
+              "image": "https://www.tatasimplybetter.com/cdn/shop/files/DSC09606_2048x2048.jpg?v=1734608321",
+              "name": "Olive Oil",
+              "price": "500",
+              "tamilName": "ஆலிவ் எண்ணெய்",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.7,
+              "quantity": 1,
+              "about": "Extra virgin olive oil, perfect for salads and cooking.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "1 year",
+                "disclaimer": "Store in a dark place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.7,
+                "count": 130,
+                "sampleReview": "Excellent olive oil!"
+              },
+              "additionalImages": [
+                "https://www.tatasimplybetter.com/cdn/shop/files/DSC09606_2048x2048.jpg?v=1734608321",
+                "https://via.placeholder.com/150/FFFF00",
+                "https://via.placeholder.com/150/0000FF"
+              ]
+            },
+            "36": {
+              "category": "Seeds",
+              "image": "https://domf5oio6qrcr.cloudfront.net/medialibrary/5961/cba8bd1b-be70-4f55-8818-9caf1b3df3de.jpg",
+              "name": "Flaxseeds",
+              "price": "180",
+              "tamilName": "ஆளி விதைகள்",
+              "weight": "1kg",
+              "farmerName": "NuttyFarms",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Rich in omega-3, flaxseeds are a superfood.",
+              "otherInfo": {
+                "sourcedBy": "NuttyFarms",
+                "bestBefore": "6 months",
+                "disclaimer": "Grind before use for best results.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 100,
+                "sampleReview": "Healthy and fresh!"
+              },
+              "additionalImages": [
+                "https://domf5oio6qrcr.cloudfront.net/medialibrary/5961/cba8bd1b-be70-4f55-8818-9caf1b3df3de.jpg",
+                "https://via.placeholder.com/150/FF4500",
+                "https://via.placeholder.com/150/8A2BE2"
+              ]
+            },
+            "37": {
+              "category": "Herbs",
+              "image": "https://5.imimg.com/data5/UD/MB/MY-42635865/natural-honey-500x500.jpg",
+              "name": "Honey",
+              "price": "300",
+              "tamilName": "தேன்",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.8,
+              "quantity": 1,
+              "about": "Pure and natural honey, straight from the hive.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "2 years",
+                "disclaimer": "May crystallize over time.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.8,
+                "count": 150,
+                "sampleReview": "Sweet and pure!"
+              },
+              "additionalImages": [
+                "https://5.imimg.com/data5/UD/MB/MY-42635865/natural-honey-500x500.jpg",
+                "https://via.placeholder.com/150/FFD700",
+                "https://via.placeholder.com/150/ADFF2F"
+              ]
+            },
+            "38": {
+              "category": "Dairy Products",
+              "image": "https://www.inspiredtaste.net/wp-content/uploads/2020/06/Homemade-Almond-Butter-Recipe-1200.jpg",
+              "name": "Almond Butter",
+              "price": "450",
+              "tamilName": "பாதாம் வெண்ணெய்",
+              "weight": "1kg",
+              "farmerName": "NuttyFarms",
+              "rating": 4.7,
+              "quantity": 1,
+              "about": "Smooth almond butter, made from roasted almonds.",
+              "otherInfo": {
+                "sourcedBy": "NuttyFarms",
+                "bestBefore": "6 months",
+                "disclaimer": "Stir well before use.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.7,
+                "count": 110,
+                "sampleReview": "Creamy and delicious!"
+              },
+              "additionalImages": [
+                "https://www.inspiredtaste.net/wp-content/uploads/2020/06/Homemade-Almond-Butter-Recipe-1200.jpg",
+                "https://via.placeholder.com/150/FF69B4",
+                "https://via.placeholder.com/150/20B2AA"
+              ]
+            },
+            "40": {
+              "category": "Vegetables",
+              "image": "https://www.bbassets.com/media/uploads/p/l/40211817_3-fresho-zucchini-green.jpg",
+              "name": "Zucchini",
+              "price": "140",
+              "tamilName": "சீமை சுரைக்காய்",
+              "weight": "1kg",
+              "farmerName": "GreenFields",
+              "rating": 4.5,
+              "quantity": 1,
+              "about": "Fresh zucchini, great for grilling or baking.",
+              "otherInfo": {
+                "sourcedBy": "GreenFields",
+                "bestBefore": "20 days",
+                "disclaimer": "Natural color variation.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.5,
+                "count": 90,
+                "sampleReview": "Fresh and versatile!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/40211817_3-fresho-zucchini-green.jpg",
+                "https://via.placeholder.com/150/FF0000",
+                "https://via.placeholder.com/150/00FF00"
+              ]
+            },
+            "41": {
+              "category": "Fruits",
+              "image": "https://www.bigbasket.com/media/uploads/p/l/40324153_2-fresho-mango-badami.jpg",
+              "name": "Mangoes",
+              "price": "250",
+              "tamilName": "மாங்காய்",
+              "weight": "1kg",
+              "farmerName": "SunnyAcres",
+              "rating": 4.9,
+              "quantity": 1,
+              "about": "Sweet and juicy mangoes, the king of fruits.",
+              "otherInfo": {
+                "sourcedBy": "SunnyAcres",
+                "bestBefore": "20 days",
+                "disclaimer": "Ripen at room temperature.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.9,
+                "count": 200,
+                "sampleReview": "Best mangoes ever!"
+              },
+              "additionalImages": [
+                "https://www.bigbasket.com/media/uploads/p/l/40324153_2-fresho-mango-badami.jpg",
+                "https://via.placeholder.com/150/FF00FF",
+                "https://via.placeholder.com/150/00FFFF"
+              ]
+            },
+            "42": {
+              "category": "Vegetables",
+              "image": "https://www.bbassets.com/media/uploads/p/l/10000318_14-fresho-lettuce-green.jpg",
+              "name": "Lettuce",
+              "price": "90",
+              "tamilName": "லெட்டூஸ்",
+              "weight": "1kg",
+              "farmerName": "GreenFields",
+              "rating": 4.4,
+              "quantity": 1,
+              "about": "Crisp green lettuce, perfect for salads.",
+              "otherInfo": {
+                "sourcedBy": "GreenFields",
+                "bestBefore": "15 days",
+                "disclaimer": "Refrigerate for freshness.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.4,
+                "count": 100,
+                "sampleReview": "Fresh and crunchy!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/10000318_14-fresho-lettuce-green.jpg",
+                "https://via.placeholder.com/150/FFFF00",
+                "https://via.placeholder.com/150/0000FF"
+              ]
+            },
+            "43": {
+              "category": "Dairy Products",
+              "image": "https://www.bbassets.com/media/uploads/p/l/150502_6-fresho-farm-eggs-table-tray-medium-antibiotic-residue-free.jpg",
+              "name": "Eggs",
+              "price": "160",
+              "tamilName": "முட்டை",
+              "weight": "1kg",
+              "farmerName": "DairyDelight",
+              "rating": 4.7,
+              "quantity": 1,
+              "about": "Farm-fresh eggs, free from antibiotics.",
+              "otherInfo": {
+                "sourcedBy": "DairyDelight",
+                "bestBefore": "30 days",
+                "disclaimer": "Store in a cool place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.7,
+                "count": 150,
+                "sampleReview": "Fresh eggs every time!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/150502_6-fresho-farm-eggs-table-tray-medium-antibiotic-residue-free.jpg",
+                "https://via.placeholder.com/150/FF4500",
+                "https://via.placeholder.com/150/8A2BE2"
+              ]
+            },
+            "44": {
+              "category": "Herbs",
+              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsqlvKSkdy63JB_1zan4kFnkQkTYU0zQed2w&s",
+              "name": "Cinnamon",
+              "price": "200",
+              "tamilName": "இலவங்கப்பட்டை",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Aromatic cinnamon sticks, perfect for spices and tea.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "1 year",
+                "disclaimer": "Store in a dry place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 110,
+                "sampleReview": "Great aroma!"
+              },
+              "additionalImages": [
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTsqlvKSkdy63JB_1zan4kFnkQkTYU0zQed2w&s",
+                "https://via.placeholder.com/150/FFD700",
+                "https://via.placeholder.com/150/ADFF2F"
+              ]
+            },
+            "45": {
+              "category": "Herbs",
+              "image": "https://ashokchakranursery.com/wp-content/uploads/2024/12/blackky.webp",
+              "name": "Black Pepper",
+              "price": "220",
+              "tamilName": "கருப்பு மிளகு",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.7,
+              "quantity": 1,
+              "about": "Spicy black pepper, freshly harvested.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "1 year",
+                "disclaimer": "Store in a cool place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.7,
+                "count": 120,
+                "sampleReview": "Perfect spice!"
+              },
+              "additionalImages": [
+                "https://ashokchakranursery.com/wp-content/uploads/2024/12/blackky.webp",
+                "https://via.placeholder.com/150/FF69B4",
+                "https://via.placeholder.com/150/20B2AA"
+              ]
+            },
+            "46": {
+              "category": "Herbs",
+              "image": "https://www.bigbasket.com/media/uploads/p/l/40020040_11-fresho-turmeric-fresh.jpg",
+              "name": "Turmeric",
+              "price": "150",
+              "tamilName": "மஞ்சள்",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.5,
+              "quantity": 1,
+              "about": "Fresh turmeric, rich in curcumin.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "1 month",
+                "disclaimer": "Wash before use.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.5,
+                "count": 100,
+                "sampleReview": "Fresh and vibrant!"
+              },
+              "additionalImages": [
+                "https://www.bigbasket.com/media/uploads/p/l/40020040_11-fresho-turmeric-fresh.jpg",
+                "https://via.placeholder.com/150/FF0000",
+                "https://via.placeholder.com/150/00FF00"
+              ]
+            },
+            "47": {
+              "category": "Herbs",
+              "image": "https://rukminim2.flixcart.com/image/850/1000/xif0q/plant-seed/q/o/1/50-rxi-16-cloves-lavanga-seeds-50-seeds-vibex-original-imaggnksk72yapmb.jpeg?q=20&crop=false",
+              "name": "Cloves",
+              "price": "180",
+              "tamilName": "கிராம்பு",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Aromatic cloves, great for cooking and remedies.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "1 year",
+                "disclaimer": "Store in a dry place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 110,
+                "sampleReview": "Strong aroma!"
+              },
+              "additionalImages": [
+                "https://rukminim2.flixcart.com/image/850/1000/xif0q/plant-seed/q/o/1/50-rxi-16-cloves-lavanga-seeds-50-seeds-vibex-original-imaggnksk72yapmb.jpeg?q=20&crop=false",
+                "https://via.placeholder.com/150/FF00FF",
+                "https://via.placeholder.com/150/00FFFF"
+              ]
+            },
+            "48": {
+              "category": "Herbs",
+              "image": "https://mangalorespice.com/cdn/shop/products/SP_08-02.jpg?v=1734783515&width=1445",
+              "name": "Cardamom",
+              "price": "450",
+              "tamilName": "ஏலக்காய்",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.8,
+              "quantity": 1,
+              "about": "Premium cardamom, perfect for sweets and tea.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "1 year",
+                "disclaimer": "Store in a cool place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.8,
+                "count": 130,
+                "sampleReview": "Excellent quality!"
+              },
+              "additionalImages": [
+                "https://mangalorespice.com/cdn/shop/products/SP_08-02.jpg?v=1734783515&width=1445",
+                "https://via.placeholder.com/150/FFFF00",
+                "https://via.placeholder.com/150/0000FF"
+              ]
+            },
+            "49": {
+              "category": "Herbs",
+              "image": "https://www.bigbasket.com/media/uploads/p/l/40288349_2-super-saver-bb-super-saver-bay-leaf-50g.jpg",
+              "name": "Bay Leaves",
+              "price": "100",
+              "tamilName": "வளைகுடா இலைகள்",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.4,
+              "quantity": 1,
+              "about": "Dried bay leaves, ideal for flavoring dishes.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "1 year",
+                "disclaimer": "Store in a dry place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.4,
+                "count": 90,
+                "sampleReview": "Good for cooking!"
+              },
+              "additionalImages": [
+                "https://www.bigbasket.com/media/uploads/p/l/40288349_2-super-saver-bb-super-saver-bay-leaf-50g.jpg",
+                "https://via.placeholder.com/150/FF4500",
+                "https://via.placeholder.com/150/8A2BE2"
+              ]
+            },
+            "50": {
+              "category": "Herbs",
+              "image": "https://c.ndtvimg.com/2023-03/p4igk5po_dry-coriander-leaves_625x300_10_March_23.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=675",
+              "name": "Coriander Powder",
+              "price": "120",
+              "tamilName": "கொத்தமல்லி பொடி",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.5,
+              "quantity": 1,
+              "about": "Freshly ground coriander powder, a kitchen essential.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "1 year",
+                "disclaimer": "Store in a cool place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.5,
+                "count": 100,
+                "sampleReview": "Fresh and aromatic!"
+              },
+              "additionalImages": [
+                "https://c.ndtvimg.com/2023-03/p4igk5po_dry-coriander-leaves_625x300_10_March_23.jpg?im=FaceCrop,algorithm=dnn,width=1200,height=675",
+                "https://via.placeholder.com/150/FFD700",
+                "https://via.placeholder.com/150/ADFF2F"
+              ]
+            },
+            "51": {
+              "category": "Seeds",
+              "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIxYjphT6AhMLmiUV85nNx_0urQI4VvNO9iw&s",
+              "name": "Fenugreek Seeds",
+              "price": "130",
+              "tamilName": "வெந்தய விதைகள்",
+              "weight": "1kg",
+              "farmerName": "NuttyFarms",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Nutritious fenugreek seeds, great for cooking and health.",
+              "otherInfo": {
+                "sourcedBy": "NuttyFarms",
+                "bestBefore": "1 year",
+                "disclaimer": "Soak before use.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 110,
+                "sampleReview": "Fresh and healthy!"
+              },
+              "additionalImages": [
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIxYjphT6AhMLmiUV85nNx_0urQI4VvNO9iw&s",
+                "https://via.placeholder.com/150/FF69B4",
+                "https://via.placeholder.com/150/20B2AA"
+              ]
+            },
+            "52": {
+              "category": "Herbs",
+              "image": "https://www.bigbasket.com/media/uploads/p/l/10000314_14-fresho-basil-italian.jpg",
+              "name": "Basil",
+              "price": "160",
+              "tamilName": "துளசி",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.7,
+              "quantity": 1,
+              "about": "Fresh Italian basil, perfect for pesto and salads.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "10 days",
+                "disclaimer": "Refrigerate for freshness.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.7,
+                "count": 120,
+                "sampleReview": "Lovely aroma!"
+              },
+              "additionalImages": [
+                "https://www.bigbasket.com/media/uploads/p/l/10000314_14-fresho-basil-italian.jpg",
+                "https://via.placeholder.com/150/FF0000",
+                "https://via.placeholder.com/150/00FF00"
+              ]
+            },
+            "53": {
+              "category": "Herbs",
+              "image": "https://www.bbassets.com/media/uploads/p/l/30006429_1-fresho-rosemary.jpg",
+              "name": "Rosemary",
+              "price": "180",
+              "tamilName": "ரோஸ்மேரி",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Aromatic rosemary, ideal for roasting and seasoning.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "15 days",
+                "disclaimer": "Store in a cool place.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 110,
+                "sampleReview": "Great for cooking!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/30006429_1-fresho-rosemary.jpg",
+                "https://via.placeholder.com/150/FF00FF",
+                "https://via.placeholder.com/150/00FFFF"
+              ]
+            },
+            "54": {
+              "category": "Herbs",
+              "image": "https://www.bigbasket.com/media/uploads/p/l/40026327_3-fresho-thyme.jpg",
+              "name": "Thyme",
+              "price": "200",
+              "tamilName": "தைம்",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.7,
+              "quantity": 1,
+              "about": "Fresh thyme, perfect for soups and stews.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "15 days",
+                "disclaimer": "Refrigerate for freshness.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.7,
+                "count": 120,
+                "sampleReview": "Wonderful flavor!"
+              },
+              "additionalImages": [
+                "https://www.bigbasket.com/media/uploads/p/l/40026327_3-fresho-thyme.jpg",
+                "https://via.placeholder.com/150/FFFF00",
+                "https://via.placeholder.com/150/0000FF"
+              ]
+            },
+            "55": {
+              "category": "Herbs",
+              "image": "https://www.bbassets.com/media/uploads/p/l/40101325_1-fresho-kale-curled-american.jpg",
+              "name": "Parsley",
+              "price": "140",
+              "tamilName": "வோக்கோசு",
+              "weight": "1kg",
+              "farmerName": "HerbHaven",
+              "rating": 4.5,
+              "quantity": 1,
+              "about": "Fresh parsley, great for garnishing and cooking.",
+              "otherInfo": {
+                "sourcedBy": "HerbHaven",
+                "bestBefore": "10 days",
+                "disclaimer": "Wash before use.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.5,
+                "count": 100,
+                "sampleReview": "Fresh and green!"
+              },
+              "additionalImages": [
+                "https://www.bbassets.com/media/uploads/p/l/40101325_1-fresho-kale-curled-american.jpg",
+                "https://via.placeholder.com/150/FF4500",
+                "https://via.placeholder.com/150/8A2BE2"
+              ]
+            },
+            "56": {
+              "category": "Fruits",
+              "image": "https://www.bigbasket.com/media/uploads/p/l/40329344_1-fresho-papaya-medium.jpg",
+              "name": "Papaya",
+              "price": "180",
+              "tamilName": "பப்பாளி",
+              "weight": "1kg",
+              "farmerName": "SunnyAcres",
+              "rating": 4.6,
+              "quantity": 1,
+              "about": "Sweet and juicy papaya, rich in vitamins.",
+              "otherInfo": {
+                "sourcedBy": "SunnyAcres",
+                "bestBefore": "15 days",
+                "disclaimer": "Ripen at room temperature.",
+                "origin": "India"
+              },
+              "contactInfo": "support@farmfresh.com | +91 98765-43210",
+              "reviews": {
+                "averageRating": 4.6,
+                "count": 110,
+                "sampleReview": "Very tasty papaya!"
+              },
+              "additionalImages": [
+                "https://www.bigbasket.com/media/uploads/p/l/40329344_1-fresho-papaya-medium.jpg",
+                "https://via.placeholder.com/150/FFD700",
+                "https://via.placeholder.com/150/ADFF2F"
+              ]
+            },
+                  "57": {
+                    "category": "Vegetables",
+                    "image": "https://www.bbassets.com/media/uploads/p/l/50000491_7-fresho-cucumber-organically-grown.jpg",
+                    "name": "Cucumber",
+                    "price": "90",
+                    "tamilName": "வெள்ளரிக்காய்",
+                    "weight": "1kg",
+                    "farmerName": "GreenFields",
+                    "rating": 4.4,
+                    "quantity": 1,
+                    "about": "Crisp and fresh cucumbers, perfect for salads and hydration.",
+                    "otherInfo": {
+                      "sourcedBy": "GreenFields",
+                      "bestBefore": "20 days",
+                      "disclaimer": "Natural size variation.",
+                      "origin": "India"
+                    },
+                    "contactInfo": "support@farmfresh.com | +91 98765-43210",
+                    "reviews": {
+                      "averageRating": 4.4,
+                      "count": 95,
+                      "sampleReview": "Really fresh cucumbers!"
+                    },
+                    "additionalImages": [
+                      "https://www.bbassets.com/media/uploads/p/l/50000491_7-fresho-cucumber-organically-grown.jpg",
+                      "https://via.placeholder.com/150/FF4500",
+                      "https://via.placeholder.com/150/8A2BE2"
+                    ]
+                  },
+                  "58": {
+                    "category": "Fruits",
+                    "image": "https://www.bbassets.com/media/uploads/p/l/10000297_23-fresho-watermelon-striped-large.jpg",
+                    "name": "Watermelon",
+                    "price": "300",
+                    "tamilName": "தர்பூசணி",
+                    "weight": "1kg",
+                    "farmerName": "SunnyAcres",
+                    "rating": 4.7,
+                    "quantity": 1,
+                    "about": "Sweet and juicy watermelon, perfect for summer.",
+                    "otherInfo": {
+                      "sourcedBy": "SunnyAcres",
+                      "bestBefore": "15 days",
+                      "disclaimer": "Refrigerate for best taste.",
+                      "origin": "India"
+                    },
+                    "contactInfo": "support@farmfresh.com | +91 98765-43210",
+                    "reviews": {
+                      "averageRating": 4.7,
+                      "count": 130,
+                      "sampleReview": "Super juicy watermelon!"
+                    },
+                    "additionalImages": [
+                      "https://www.bbassets.com/media/uploads/p/l/10000297_23-fresho-watermelon-striped-large.jpg",
+                      "https://via.placeholder.com/150/FFD700",
+                      "https://via.placeholder.com/150/ADFF2F"
+                    ]
+                  },
+                  "59": {
+                    "category": "Fruits",
+                    "image": "https://www.bbassets.com/media/uploads/p/l/40008982_16-fresho-dragon-fruit.jpg",
+                    "name": "Dragon Fruit",
+                    "price": "450",
+                    "tamilName": "டிராகன் பழம்",
+                    "weight": "1kg",
+                    "farmerName": "SunnyAcres",
+                    "rating": 4.8,
+                    "quantity": 1,
+                    "about": "Exotic dragon fruit, rich in antioxidants.",
+                    "otherInfo": {
+                      "sourcedBy": "SunnyAcres",
+                      "bestBefore": "20 days",
+                      "disclaimer": "Ripen at room temperature.",
+                      "origin": "India"
+                    },
+                    "contactInfo": "support@farmfresh.com | +91 98765-43210",
+                    "reviews": {
+                      "averageRating": 4.8,
+                      "count": 110,
+                      "sampleReview": "Unique and delicious!"
+                    },
+                    "additionalImages": [
+                      "https://www.bbassets.com/media/uploads/p/l/40008982_16-fresho-dragon-fruit.jpg",
+                      "https://via.placeholder.com/150/FF69B4",
+                      "https://via.placeholder.com/150/20B2AA"
+                    ]
+                  },
+                  "60": {
+                    "category": "Fruits",
+                    "image": "https://www.bigbasket.com/media/uploads/p/l/10000156_30-fresho-pineapple.jpg",
+                    "name": "Pineapple",
+                    "price": "230",
+                    "tamilName": "அன்னாசிப்பழம்",
+                    "weight": "1kg",
+                    "farmerName": "SunnyAcres",
+                    "rating": 4.6,
+                    "quantity": 1,
+                    "about": "Sweet and tangy pineapple, perfect for desserts.",
+                    "otherInfo": {
+                      "sourcedBy": "SunnyAcres",
+                      "bestBefore": "20 days",
+                      "disclaimer": "Ripen at room temperature.",
+                      "origin": "India"
+                    },
+                    "contactInfo": "support@farmfresh.com | +91 98765-43210",
+                    "reviews": {
+                      "averageRating": 4.6,
+                      "count": 120,
+                      "sampleReview": "Fresh and flavorful!"
+                    },
+                    "additionalImages": [
+                      "https://www.bigbasket.com/media/uploads/p/l/10000156_30-fresho-pineapple.jpg",
+                      "https://via.placeholder.com/150/FF0000",
+                      "https://via.placeholder.com/150/00FF00"
+                    ]
+                  },
+                  "61": {
+                    "category": "Herbs",
+                    "image": "https://www.bbassets.com/media/uploads/p/l/10000338_15-fresho-ginger.jpg",
+                    "name": "Ginger",
+                    "price": "130",
+                    "tamilName": "இஞ்சி",
+                    "weight": "1kg",
+                    "farmerName": "HerbHaven",
+                    "rating": 4.5,
+                    "quantity": 1,
+                    "about": "Fresh ginger, perfect for tea and cooking.",
+                    "otherInfo": {
+                      "sourcedBy": "HerbHaven",
+                      "bestBefore": "30 days",
+                      "disclaimer": "Store in a cool place.",
+                      "origin": "India"
+                    },
+                    "contactInfo": "support@farmfresh.com | +91 98765-43210",
+                    "reviews": {
+                      "averageRating": 4.5,
+                      "count": 100,
+                      "sampleReview": "Great quality ginger!"
+                    },
+                    "additionalImages": [
+                      "https://www.bbassets.com/media/uploads/p/l/10000338_15-fresho-ginger.jpg",
+                      "https://via.placeholder.com/150/FF00FF",
+                      "https://via.placeholder.com/150/00FFFF"
+                    ]
+                  },
+                  "62": {
+                    "category": "Herbs",
+                    "image": "https://www.bbassets.com/media/uploads/p/l/10000114_18-fresho-garlic.jpg",
+                    "name": "Garlic",
+                    "price": "120",
+                    "tamilName": "பூண்டு",
+                    "weight": "1kg",
+                    "farmerName": "HerbHaven",
+                    "rating": 4.6,
+                    "quantity": 1,
+                    "about": "Fresh garlic, a must-have for every kitchen.",
+                    "otherInfo": {
+                      "sourcedBy": "HerbHaven",
+                      "bestBefore": "2 months",
+                      "disclaimer": "Store in a dry place.",
+                      "origin": "India"
+                    },
+                    "contactInfo": "support@farmfresh.com | +91 98765-43210",
+                    "reviews": {
+                      "averageRating": 4.6,
+                      "count": 110,
+                      "sampleReview": "Strong and fresh!"
+                    },
+                    "additionalImages": [
+                      "https://www.bbassets.com/media/uploads/p/l/10000114_18-fresho-garlic.jpg",
+                      "https://via.placeholder.com/150/FFFF00",
+                      "https://via.placeholder.com/150/0000FF"
+                    ]
+                  },
+                  "63": {
+                    "category": "Vegetables",
+                    "image": "https://www.bigbasket.com/media/uploads/p/l/10000045_19-fresho-beetroot.jpg",
+                    "name": "Beetroot",
+                    "price": "140",
+                    "tamilName": "பீட்ரூட்",
+                    "weight": "1kg",
+                    "farmerName": "GreenFields",
+                    "rating": 4.5,
+                    "quantity": 1,
+                    "about": "Rich and earthy beetroot, great for salads and juices.",
+                    "otherInfo": {
+                      "sourcedBy": "GreenFields",
+                      "bestBefore": "30 days",
+                      "disclaimer": "Natural color variation.",
+                      "origin": "India"
+                    },
+                    "contactInfo": "support@farmfresh.com | +91 98765-43210",
+                    "reviews": {
+                      "averageRating": 4.5,
+                      "count": 100,
+                      "sampleReview": "Fresh and vibrant!"
+                    },
+                    "additionalImages": [
+                      "https://www.bigbasket.com/media/uploads/p/l/10000045_19-fresho-beetroot.jpg",
+                      "https://via.placeholder.com/150/FF4500",
+                      "https://via.placeholder.com/150/8A2BE2"
+                    ]
+                  },
+                  "64": {
+                    "category": "Herbs",
+                    "image": "https://cdn.britannica.com/68/143768-050-108B71EC/Celery.jpg",
+                    "name": "Celery",
+                    "price": "160",
+                    "tamilName": "செலரி",
+                    "weight": "1kg",
+                    "farmerName": "HerbHaven",
+                    "rating": 4.4,
+                    "quantity": 1,
+                    "about": "Crisp celery, perfect for soups and salads.",
+                    "otherInfo": {
+                      "sourcedBy": "HerbHaven",
+                      "bestBefore": "20 days",
+                      "disclaimer": "Refrigerate for freshness.",
+                      "origin": "India"
+                    },
+                    "contactInfo": "support@farmfresh.com | +91 98765-43210",
+                    "reviews": {
+                      "averageRating": 4.4,
+                      "count": 90,
+                      "sampleReview": "Fresh and crunchy!"
+                    },
+                    "additionalImages": [
+                      "https://cdn.britannica.com/68/143768-050-108B71EC/Celery.jpg",
+                      "https://via.placeholder.com/150/FFD700",
+                      "https://via.placeholder.com/150/ADFF2F"
+                    ]
+                  },
+                  "65": {
+                    "category": "Herbs",
+                    "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3RPU-SU7J8vgl7dSEkLGCRCjMXTH0312AjQ&s",
+                    "name": "Brussels Sprouts",
+                    "price": "250",
+                    "tamilName": "புருசெல்ஸ் முளைகள்",
+                    "weight": "1kg",
+                    "farmerName": "GreenFields",
+                    "rating": 4.6,
+                    "quantity": 1,
+                    "about": "Nutritious Brussels sprouts, great for roasting.",
+                    "otherInfo": {
+                      "sourcedBy": "GreenFields",
+                      "bestBefore": "20 days",
+                      "disclaimer": "Wash before use.",
+                      "origin": "India"
+                    },
+                    "contactInfo": "support@farmfresh.com | +91 98765-43210",
+                    "reviews": {
+                      "averageRating": 4.6,
+                      "count": 105,
+                      "sampleReview": "Tasty and fresh!"
+                    },
+                    "additionalImages": [
+                      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT3RPU-SU7J8vgl7dSEkLGCRCjMXTH0312AjQ&s",
+                      "https://via.placeholder.com/150/FF69B4",
+                      "https://via.placeholder.com/150/20B2AA"
+                    ]
+                  }
+                }
+              }
+            }
   }

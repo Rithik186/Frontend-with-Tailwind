@@ -1,444 +1,763 @@
-import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ShoppingCart, Search, Filter, User, Settings, LogOut, Package, Star, ChevronDown, ChevronUp, Mic } from "lucide-react";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import { ref, onValue } from "firebase/database";
-import { db } from "../firebase"; // Ensure this path matches your Firebase config file
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { FaUser, FaHome, FaShoppingCart, FaList, FaHeart, FaMapMarkerAlt, FaCreditCard, FaSignOutAlt, FaSearch, FaPlus, FaTrash, FaBars, FaMicrophone, FaStar } from 'react-icons/fa';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const CustomerDashboard = () => {
-  const navigate = useNavigate();
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState([]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [filterCategory, setFilterCategory] = useState("All");
-  const [sortOption, setSortOption] = useState("default");
-  const [showSettings, setShowSettings] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
-  const [showCart, setShowCart] = useState(false);
-  const [orders, setOrders] = useState([]);
-  const [showOrders, setShowOrders] = useState(false);
-  const [language, setLanguage] = useState("English");
+  const [language, setLanguage] = useState('English');
+  const [currentPage, setCurrentPage] = useState('home');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedProducts, setSelectedProducts] = useState([]);
+  const [cart, setCart] = useState([]);
+  const [addresses, setAddresses] = useState([{ id: 1, type: 'Home', details: '12 Lotus Lane, Chennai' }]);
+  const [newAddress, setNewAddress] = useState({ type: '', details: '' });
+  const [paymentMethods, setPaymentMethods] = useState([{ id: 1, type: 'UPI', value: 'priya@upi' }]);
+  const [newPayment, setNewPayment] = useState({ type: '', value: '' });
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [sortBy, setSortBy] = useState('relevance');
+  const [filterBy, setFilterBy] = useState('all');
   const [isListening, setIsListening] = useState(false);
-  const [user] = useState({ name: "Jane Doe", email: "jane@example.com" });
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [searchLoading, setSearchLoading] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null); // For product details page
 
-  // Fetch products from Firebase
-  useEffect(() => {
-    setLoading(true);
-    const productsRef = ref(db, "/");
-    onValue(
-      productsRef,
-      (snapshot) => {
-        const data = snapshot.val();
-        if (data) {
-          const productsArray = Object.keys(data).map((key) => ({
-            id: key,
-            ...data[key],
-            price: data[key].price || "0",
-            category: data[key].category || "Uncategorized",
-            rating: data[key].rating || 4.0,
-            stock: data[key].stock || 10,
-            name: data[key].name || "Unnamed Product",
-            image: data[key].image || "https://via.placeholder.com/150",
-            tamilName: data[key].tamilName || data[key].name,
-            images: data[key].images || [data[key].image || "https://via.placeholder.com/150"], // Multiple images
-            description: data[key].description || "No description available",
-          }));
-          setProducts(productsArray);
-        } else {
-          setProducts([]);
-          toast.warn("No products found in the database", { position: "top-right", autoClose: 3000 });
-        }
-        setLoading(false);
-      },
-      (error) => {
-        console.error("Error fetching products:", error);
-        setError("Failed to load products. Please try again later.");
-        toast.error("Failed to load products", { position: "top-right", autoClose: 3000 });
-        setLoading(false);
-      }
-    );
-  }, []);
+  const customer = {
+    name: 'Priya Sharma',
+    email: 'priya@example.com',
+    phone: '+91 98765-43210',
+    joined: 'March 11, 2023',
+    address: '12 Lotus Lane, Chennai',
+    photo: 'https://via.placeholder.com/150',
+  };
 
-  // Voice Recognition
+  const farmers = [
+    {
+      id: 1,
+      name: 'GreenFields',
+      products: [
+        { id: 'p1', name: 'Organic Apples', tamilName: 'ஆர்கானிக் ஆப்பிள்கள்', hindiName: 'ऑर्गेनिक सेब', price: 5.99, image: 'https://via.placeholder.com/150', category: 'Fruits', rating: 4.5, images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150/FF0000', 'https://via.placeholder.com/150/00FF00'] },
+        { id: 'p2', name: 'Fresh Carrots', tamilName: 'புதிய கேரட்', hindiName: 'ताज़ी गाजर', price: 3.49, image: 'https://via.placeholder.com/150', category: 'Vegetables', rating: 4.2, images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150/FFFF00', 'https://via.placeholder.com/150/0000FF'] },
+      ],
+    },
+    {
+      id: 2,
+      name: 'SunnyAcres',
+      products: [
+        { id: 'p3', name: 'Tomatoes', tamilName: 'தக்காளி', hindiName: 'टमाटर', price: 4.29, image: 'https://via.placeholder.com/150', category: 'Vegetables', rating: 4.8, images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150/FF00FF', 'https://via.placeholder.com/150/00FFFF'] },
+        { id: 'p4', name: 'Cucumbers', tamilName: 'வெள்ளரி', hindiName: 'खीरा', price: 2.99, image: 'https://via.placeholder.com/150', category: 'Vegetables', rating: 4.0, images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150/FF4500', 'https://via.placeholder.com/150/8A2BE2'] },
+        { id: 'p5', name: 'Milk', tamilName: 'பால்', hindiName: 'दूध', price: 3.99, image: 'https://via.placeholder.com/150', category: 'Dairy', rating: 4.7, images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150/FFD700', 'https://via.placeholder.com/150/ADFF2F'] },
+        { id: 'p6', name: 'Sunflower Oil', tamilName: 'சூரியகாந்தி எண்ணெய்', hindiName: 'सूरजमुखी का तेल', price: 6.49, image: 'https://via.placeholder.com/150', category: 'Seeds and Oil', rating: 4.3, images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150/FF69B4', 'https://via.placeholder.com/150/20B2AA'] },
+      ],
+    },
+  ];
+
+  const orders = [
+    { id: 1, product: 'Organic Apples', farmer: 'GreenFields', status: 'Delivered', date: '2024-02-15' },
+    { id: 2, product: 'Tomatoes', farmer: 'SunnyAcres', status: 'On the Way', date: '2024-03-05' },
+  ];
+
+  const translations = {
+    English: { home: 'Home', profile: 'Profile', orders: 'Orders', wishlist: 'Wishlist', address: 'Address', payment: 'Payment Methods', logout: 'Logout', addToCart: 'Add to Cart', placeOrder: 'Place Order', search: 'Search products...', saveToWishlist: 'Save to Wishlist' },
+    Tamil: { home: 'முகப்பு', profile: 'சுயவிவரம்', orders: 'ஆர்டர்கள்', wishlist: 'விருப்பப்பட்டியல்', address: 'முகவரி', payment: 'பணம் செலுத்தும் முறைகள்', logout: 'வெளியேறு', addToCart: 'கார்ட்டில் சேர்', placeOrder: 'ஆர்டர் செய்', search: 'பொருட்களைத் தேடு...', saveToWishlist: 'விருப்பப்பட்டியலில் சேமி' },
+    Hindi: { home: 'होम', profile: 'प्रोफाइल', orders: 'ऑर्डर', wishlist: 'विशलिस्ट', address: 'पता', payment: 'भुगतान के तरीके', logout: 'लॉगआउट', addToCart: 'कार्ट में जोड़ें', placeOrder: 'ऑर्डर करें', search: 'उत्पाद खोजें...', saveToWishlist: 'विशलिस्ट में सहेजें' },
+  };
+
   useEffect(() => {
-    if (!("webkitSpeechRecognition" in window)) {
-      toast.warn("Speech recognition is not supported in your browser", { position: "top-right", autoClose: 3000 });
-      return;
-    }
-    const recognition = new window.webkitSpeechRecognition();
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!SpeechRecognition) return;
+
+    const recognition = new SpeechRecognition();
     recognition.continuous = false;
-    recognition.interimResults = false;
-    recognition.lang = language === "English" ? "en-US" : "ta-IN";
+    recognition.lang = language === 'English' ? 'en-US' : language === 'Tamil' ? 'ta-IN' : 'hi-IN';
 
+    recognition.onstart = () => setIsListening(true);
     recognition.onresult = (event) => {
-      const transcript = event.results[0][0].transcript.toLowerCase();
-      const product = products.find(
-        (p) => p.name.toLowerCase().includes(transcript) || (language === "தமிழ்" && p.tamilName.toLowerCase().includes(transcript))
-      );
-      if (product) addToCart(product);
-      else toast.info(`No product found for "${transcript}"`, { position: "top-right", autoClose: 2000 });
+      const command = event.results[0][0].transcript.toLowerCase().trim();
+      if (command.includes('home')) setCurrentPage('home');
+      else if (command.includes('profile')) setCurrentPage('profile');
+      else if (command.includes('orders')) setCurrentPage('orders');
+      else if (command.includes('wishlist')) setCurrentPage('wishlist');
+      else if (command.includes('address')) setCurrentPage('address');
+      else if (command.includes('payment')) setCurrentPage('payment');
+      else if (command.includes('cart')) setCurrentPage('cart');
+      else if (command.includes('logout')) toast.info('Logged out');
+      else {
+        const allProducts = farmers.flatMap((farmer) => farmer.products);
+        const matchedProduct = allProducts.find((product) =>
+          [product.name, product.tamilName, product.hindiName].some((name) => name.toLowerCase().includes(command))
+        );
+        if (matchedProduct) {
+          setSelectedProduct(matchedProduct);
+          setCurrentPage('productDetails');
+          toast.success(`Viewing "${matchedProduct.name}" via voice!`);
+        } else {
+          setSearchQuery(command);
+          setCurrentPage('home');
+          toast.info(`Searching for: "${command}"`);
+        }
+      }
       setIsListening(false);
     };
-
     recognition.onerror = () => {
+      toast.error('Voice recognition failed.');
       setIsListening(false);
-      toast.error("Speech recognition error", { position: "top-right", autoClose: 2000 });
     };
     recognition.onend = () => setIsListening(false);
 
-    if (isListening) recognition.start();
-    return () => recognition.stop();
-  }, [isListening, language, products]);
+    const voiceButton = document.querySelector('.voice-btn');
+    const handleVoiceButtonClick = () => recognition.start();
+    if (voiceButton) voiceButton.addEventListener('click', handleVoiceButtonClick);
 
-  // Add to Cart
-  const addToCart = (product) => {
+    return () => {
+      if (voiceButton) voiceButton.removeEventListener('click', handleVoiceButtonClick);
+    };
+  }, [language, farmers]);
+
+  const toggleDarkMode = () => setDarkMode(!darkMode);
+  const toggleNav = () => setIsNavOpen(!isNavOpen);
+
+  const toggleSelection = (product) => {
+    setSelectedProducts((prev) => {
+      const isSelected = prev.some((p) => p.id === product.id);
+      return isSelected ? prev.filter((p) => p.id !== product.id) : [...prev, { ...product, qty: 1 }];
+    });
+  };
+
+  const addToCart = (product, qty = 1) => {
     setCart((prev) => {
-      const existingItem = prev.find((item) => item.id === product.id);
-      if (existingItem) {
-        return prev.map((item) => (item.id === product.id ? { ...item, qty: item.qty + 1 } : item));
+      const updatedCart = [...prev];
+      const existingItemIndex = updatedCart.findIndex((item) => item.id === product.id);
+      if (existingItemIndex > -1) {
+        updatedCart[existingItemIndex].qty += qty;
+      } else {
+        updatedCart.push({ ...product, qty });
       }
-      toast.success(`${language === "English" ? product.name : product.tamilName} added to cart!`, { position: "top-right", autoClose: 2000 });
-      return [...prev, { ...product, qty: 1 }];
+      return updatedCart;
     });
+    toast.success(`${product.name} added to cart!`);
   };
 
-  // Remove from Cart
-  const removeFromCart = (id) => {
-    setCart((prev) => {
-      const item = prev.find((i) => i.id === id);
-      toast.error(`${language === "English" ? item.name : item.tamilName} removed from cart`, { position: "top-right", autoClose: 2000 });
-      return prev.filter((item) => item.id !== id);
-    });
-  };
-
-  // Update Quantity
-  const updateQuantity = (id, qty) => {
+  const updateCartItem = (id, qty) => {
     setCart((prev) => prev.map((item) => (item.id === id ? { ...item, qty: Math.max(1, qty) } : item)));
   };
 
-  // Place Order
-  const placeOrder = () => {
-    if (cart.length === 0) {
-      toast.warn(language === "English" ? "Cart is empty!" : "கார்ட் காலியாக உள்ளது!", { position: "top-right", autoClose: 2000 });
+  const removeCartItem = (id) => {
+    setCart((prev) => prev.filter((item) => item.id !== id));
+    toast.info('Item removed from cart.');
+  };
+
+  const addAddress = () => {
+    if (!newAddress.type || !newAddress.details) {
+      toast.warn('Please fill in all address fields');
       return;
     }
-    const newOrder = {
-      id: Date.now(),
-      items: [...cart],
-      total: cart.reduce((sum, item) => sum + Number(item.price) * item.qty, 0),
-      status: "Processing",
-      date: new Date().toLocaleDateString(),
-    };
-    setOrders((prev) => [...prev, newOrder]);
-    setCart([]);
-    setShowCart(false);
-    toast.success(language === "English" ? "Order placed successfully!" : "ஆர்டர் வெற்றிகரமாக வைக்கப்பட்டது!", { position: "top-right", autoClose: 2000 });
+    setAddresses((prev) => [...prev, { id: Date.now(), ...newAddress }]);
+    setNewAddress({ type: '', details: '' });
+    toast.success('Address added');
   };
 
-  // Search with Animation
-  useEffect(() => {
-    if (searchTerm) {
-      setSearchLoading(true);
-      const timer = setTimeout(() => setSearchLoading(false), 1000); // Simulate network delay
-      return () => clearTimeout(timer);
+  const removeAddress = (id) => setAddresses((prev) => prev.filter((addr) => addr.id !== id));
+
+  const addPaymentMethod = () => {
+    if (!newPayment.type || !newPayment.value) {
+      toast.warn('Please fill in all payment fields');
+      return;
     }
-  }, [searchTerm]);
-
-  // Filter and Sort Products
-  const filteredProducts = products
-    .filter((product) => (filterCategory === "All" ? true : product.category === filterCategory))
-    .filter((product) =>
-      language === "English"
-        ? product.name.toLowerCase().includes(searchTerm.toLowerCase())
-        : product.tamilName.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .sort((a, b) => {
-      if (sortOption === "priceLow") return Number(a.price) - Number(b.price);
-      if (sortOption === "priceHigh") return Number(b.price) - Number(a.price);
-      if (sortOption === "rating") return b.rating - a.rating;
-      return 0;
-    });
-
-  // Animation Variants
-  const pageVariants = { initial: { opacity: 0, y: 20 }, animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }, exit: { opacity: 0, y: -20 } };
-  const itemVariants = { hidden: { opacity: 0, scale: 0.95 }, visible: { opacity: 1, scale: 1, transition: { duration: 0.3 } } };
-
-  if (loading) return <div className="min-h-screen flex items-center justify-center"><p className="text-teal-800 dark:text-teal-300 text-xl">{language === "English" ? "Loading products..." : "தயாரிப்புகளை ஏற்றுகிறது..."}</p></div>;
-  if (error) return <div className="min-h-screen flex items-center justify-center"><p className="text-red-600 dark:text-red-400 text-xl">{error}</p></div>;
-
-  return (
-    <motion.div className={`min-h-screen p-4 sm:p-6 font-sans ${darkMode ? "bg-gray-900 text-white" : "bg-gradient-to-br from-teal-50 via-cyan-50 to-emerald-50 text-gray-800"}`} variants={pageVariants} initial="initial" animate="animate">
-      <ToastContainer />
-
-      {/* Header */}
-      <header className="flex flex-col sm:flex-row justify-between items-center mb-6 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md p-4 rounded-xl shadow-lg">
-        <div className="flex items-center space-x-4 mb-4 sm:mb-0">
-          <motion.img src="https://i.pinimg.com/736x/a8/f4/6a/a8f46ad882c293af8c3fe011ce13bbb0.jpg" alt="Logo" className="w-12 h-12 rounded-full border-2 border-teal-300 dark:border-teal-500" whileHover={{ scale: 1.1, rotate: 360 }} transition={{ duration: 0.5 }} />
-          <h1 className="text-xl sm:text-2xl font-bold text-teal-700 dark:text-teal-300">{language === "English" ? "Customer Dashboard" : "வாடிக்கையாளர் டாஷ்போர்டு"}</h1>
-        </div>
-        <div className="flex items-center space-x-2 sm:space-x-4">
-          <motion.button onClick={() => setShowCart(!showCart)} className="relative p-2 bg-teal-100 dark:bg-teal-700 rounded-full hover:bg-teal-200 dark:hover:bg-teal-600" whileHover={{ scale: 1.1 }}>
-            <ShoppingCart className="w-5 h-5 sm:w-6 sm:h-6 text-teal-700 dark:text-teal-200" />
-            {cart.length > 0 && <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">{cart.length}</span>}
-          </motion.button>
-          <motion.button onClick={() => setShowOrders(!showOrders)} className="p-2 bg-teal-100 dark:bg-teal-700 rounded-full hover:bg-teal-200 dark:hover:bg-teal-600" whileHover={{ scale: 1.1 }}>
-            <Package className="w-5 h-5 sm:w-6 sm:h-6 text-teal-700 dark:text-teal-200" />
-          </motion.button>
-          <motion.button onClick={() => setShowSettings(!showSettings)} className="p-2 bg-teal-100 dark:bg-teal-700 rounded-full hover:bg-teal-200 dark:hover:bg-teal-600" whileHover={{ scale: 1.1 }}>
-            <Settings className="w-5 h-5 sm:w-6 sm:h-6 text-teal-700 dark:text-teal-200" />
-          </motion.button>
-          <motion.button className="p-2 bg-red-100 dark:bg-red-700 rounded-full hover:bg-red-200 dark:hover:bg-red-600" whileHover={{ scale: 1.1 }}>
-            <LogOut className="w-5 h-5 sm:w-6 sm:h-6 text-red-700 dark:text-red-200" />
-          </motion.button>
-        </div>
-      </header>
-
-      {/* Settings Dropdown */}
-      <AnimatePresence>
-        {showSettings && (
-          <motion.div className="absolute top-20 right-4 sm:right-6 z-10 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-xl border border-teal-200 dark:border-teal-600" initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -20 }}>
-            <div className="space-y-4">
-              <div>
-                <p className="font-semibold text-teal-700 dark:text-teal-300">{user.name}</p>
-                <p className="text-sm text-gray-600 dark:text-gray-300">{user.email}</p>
-              </div>
-              <select value={language} onChange={(e) => setLanguage(e.target.value)} className="w-full p-2 rounded-lg border border-teal-200 dark:border-teal-600 bg-white dark:bg-gray-700">
-                <option value="English">English</option>
-                <option value="தமிழ்">தமிழ்</option>
-              </select>
-              <button onClick={() => setDarkMode(!darkMode)} className="w-full p-2 bg-teal-600 text-white rounded-lg hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-400">{darkMode ? "Light Mode" : "Dark Mode"}</button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Main Content */}
-      <div className="max-w-7xl mx-auto">
-        {/* Search, Filter, Sort, and Voice */}
-        <div className="flex flex-col sm:flex-row items-center space-y-4 sm:space-y-0 sm:space-x-4 mb-6">
-          <div className="relative flex-1 w-full">
-            <input
-              type="text"
-              placeholder={language === "English" ? "Search products..." : "தயாரிப்புகளைத் தேடு..."}
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full p-3 pl-10 rounded-lg border border-teal-200 dark:border-teal-600 bg-white/90 dark:bg-gray-700 focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-500 focus:outline-none"
-            />
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-teal-500 dark:text-teal-300" />
-          </div>
-          <select value={filterCategory} onChange={(e) => setFilterCategory(e.target.value)} className="w-full sm:w-auto p-3 rounded-lg border border-teal-200 dark:border-teal-600 bg-white/90 dark:bg-gray-700 focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-500 focus:outline-none">
-            <option value="All">{language === "English" ? "All Categories" : "அனைத்து பிரிவுகள்"}</option>
-            <option value="Vegetables">{language === "English" ? "Vegetables" : "காய்கறிகள்"}</option>
-            <option value="Fruits">{language === "English" ? "Fruits" : "பழங்கள்"}</option>
-            <option value="Nuts & Seeds">{language === "English" ? "Nuts & Seeds" : "நட்ஸ் & விதைகள்"}</option>
-            <option value="Oils">{language === "English" ? "Oils" : "எண்ணெய்கள்"}</option>
-            <option value="Dairy Products">{language === "English" ? "Dairy Products" : "பால் பொருட்கள்"}</option>
-          </select>
-          <select value={sortOption} onChange={(e) => setSortOption(e.target.value)} className="w-full sm:w-auto p-3 rounded-lg border border-teal-200 dark:border-teal-600 bg-white/90 dark:bg-gray-700 focus:ring-2 focus:ring-teal-400 dark:focus:ring-teal-500 focus:outline-none">
-            <option value="default">{language === "English" ? "Sort By" : "வரிசைப்படுத்து"}</option>
-            <option value="priceLow">{language === "English" ? "Price: Low to High" : "விலை: குறைவு முதல் அதிகம்"}</option>
-            <option value="priceHigh">{language === "English" ? "Price: High to Low" : "விலை: அதிகம் முதல் குறைவு"}</option>
-            <option value="rating">{language === "English" ? "Rating" : "மதிப்பீடு"}</option>
-          </select>
-          <motion.button onClick={() => setIsListening(!isListening)} className={`p-3 rounded-full ${isListening ? "bg-red-500" : "bg-teal-500"} text-white`} whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
-            <Mic className="w-5 h-5 sm:w-6 sm:h-6" />
-          </motion.button>
-        </div>
-
-        {/* Search Loading Animation */}
-        {searchLoading && (
-          <div className="flex justify-center mb-6">
-            <motion.div className="w-10 h-10 border-4 border-teal-500 border-t-transparent rounded-full animate-spin" initial={{ rotate: 0 }} animate={{ rotate: 360 }} transition={{ duration: 1, repeat: Infinity }} />
-          </div>
-        )}
-
-        {/* Product Grid */}
-        <motion.div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6" layout>
-          <AnimatePresence>
-            {filteredProducts.map((product) => (
-              <motion.div
-                key={product.id}
-                variants={itemVariants}
-                initial="hidden"
-                animate="visible"
-                exit="hidden"
-                className={`p-4 bg-white dark:bg-gray-800 rounded-xl shadow-md transition-all cursor-pointer border border-teal-100 dark:border-teal-700 ${darkMode ? "hover:backdrop-blur-md hover:shadow-[0_0_15px_rgba(0,255,255,0.3)]" : "hover:shadow-xl"}`}
-                whileHover={{ scale: 1.05 }}
-                onClick={() => navigate(`/product/${product.id}`, { state: { product } })}
-              >
-                <img src={product.image} alt={product.name} className="w-full h-40 sm:h-48 object-cover rounded-lg mb-3" />
-                <h3 className="text-lg font-semibold text-teal-700 dark:text-teal-300">{language === "English" ? product.name : product.tamilName}</h3>
-                <div className="flex items-center space-x-1">
-                  <Star className="w-4 h-4 text-yellow-400" />
-                  <span className="text-sm text-gray-600 dark:text-gray-300">{product.rating}</span>
-                </div>
-                <p className="text-teal-600 dark:text-teal-400 font-medium">₹{product.price}</p>
-                <p className="text-sm text-gray-500 dark:text-gray-400">{language === "English" ? "Stock" : "இருப்பு"}: {product.stock}</p>
-                <motion.button onClick={(e) => { e.stopPropagation(); addToCart(product); }} className="mt-3 w-full p-2 bg-teal-500 text-white rounded-lg hover:bg-teal-600 dark:bg-teal-600 dark:hover:bg-teal-500" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }} disabled={product.stock === 0}>
-                  {product.stock > 0 ? (language === "English" ? "Add to Cart" : "கார்ட்டில் சேர்") : (language === "English" ? "Out of Stock" : "இருப்பு இல்லை")}
-                </motion.button>
-              </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-
-        {/* Cart Sidebar */}
-        <AnimatePresence>
-          {showCart && (
-            <motion.div className="fixed top-0 right-0 h-full w-72 sm:w-80 bg-white dark:bg-gray-800 shadow-2xl p-4 sm:p-6 z-20 overflow-y-auto" initial={{ x: 300 }} animate={{ x: 0 }} exit={{ x: 300 }} transition={{ duration: 0.4 }}>
-              <h2 className="text-xl font-bold text-teal-700 dark:text-teal-300 mb-4">{language === "English" ? "Your Cart" : "உங்கள் கார்ட்"}</h2>
-              {cart.length === 0 ? (
-                <p className="text-gray-600 dark:text-gray-300">{language === "English" ? "Cart is empty" : "கார்ட் காலியாக உள்ளது"}</p>
-              ) : (
-                <>
-                  {cart.map((item) => (
-                    <div key={item.id} className="flex items-center space-x-4 mb-4">
-                      <img src={item.image} alt={item.name} className="w-12 h-12 rounded-lg object-cover" />
-                      <div className="flex-1">
-                        <p className="font-medium text-teal-700 dark:text-teal-300">{language === "English" ? item.name : item.tamilName}</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">₹{Number(item.price)}</p>
-                        <input type="number" value={item.qty} onChange={(e) => updateQuantity(item.id, parseInt(e.target.value))} className="w-16 p-1 mt-1 rounded border border-teal-200 dark:border-teal-600 bg-white dark:bg-gray-700" min="1" />
-                      </div>
-                      <button onClick={() => removeFromCart(item.id)} className="text-red-600 hover:text-red-800">✕</button>
-                    </div>
-                  ))}
-                  <p className="text-lg font-bold text-teal-700 dark:text-teal-300">{language === "English" ? "Total" : "மொத்தம்"}: ₹{cart.reduce((sum, item) => sum + Number(item.price) * item.qty, 0)}</p>
-                  <motion.button onClick={placeOrder} className="mt-4 w-full p-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700 dark:bg-teal-500 dark:hover:bg-teal-400" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                    {language === "English" ? "Place Order" : "ஆர்டர் வை"}
-                  </motion.button>
-                </>
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-
-        {/* Order Tracking */}
-        <AnimatePresence>
-          {showOrders && (
-            <motion.div className="mt-6 p-4 sm:p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg" initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }}>
-              <h2 className="text-xl sm:text-2xl font-bold text-teal-700 dark:text-teal-300 mb-4">{language === "English" ? "Your Orders" : "உங்கள் ஆர்டர்கள்"}</h2>
-              {orders.length === 0 ? (
-                <p className="text-gray-600 dark:text-gray-300">{language === "English" ? "No orders yet" : "இன்னும் ஆர்டர்கள் இல்லை"}</p>
-              ) : (
-                orders.map((order) => (
-                  <div key={order.id} className="border-b border-teal-100 dark:border-teal-700 py-4">
-                    <div className="flex justify-between items-center">
-                      <div>
-                        <p className="font-semibold text-teal-700 dark:text-teal-300">{language === "English" ? "Order #" : "ஆர்டர் #"}{order.id}</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">{order.date}</p>
-                      </div>
-                      <p className="text-teal-600 dark:text-teal-400 font-medium">₹{order.total}</p>
-                    </div>
-                    <p className="text-sm text-gray-600 dark:text-gray-300 mt-2">{language === "English" ? "Status" : "நிலை"}: {order.status}</p>
-                    <details className="mt-2">
-                      <summary className="cursor-pointer text-teal-700 dark:text-teal-300 flex items-center space-x-2">
-                        <span>{language === "English" ? "Items" : "பொருட்கள்"}</span>
-                        <ChevronDown className="w-4 h-4" />
-                      </summary>
-                      <ul className="ml-4 mt-2 text-gray-600 dark:text-gray-300">
-                        {order.items.map((item) => (
-                          <li key={item.id}>{language === "English" ? item.name : item.tamilName} - {item.qty} x ₹{item.price}</li>
-                        ))}
-                      </ul>
-                    </details>
-                  </div>
-                ))
-              )}
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </div>
-    </motion.div>
-  );
-};
-
-// Product Details Page Component
-const ProductDetails = () => {
-  const { state } = useLocation();
-  const { product } = state || {};
-  const [selectedImage, setSelectedImage] = useState(product?.images[0]);
-  const [feedback, setFeedback] = useState("");
-  const [feedbacks, setFeedbacks] = useState([{ user: "John", comment: "Great product!", rating: 5 }]);
-  const [zoom, setZoom] = useState(false);
-
-  if (!product) return <div className="min-h-screen flex items-center justify-center"><p className="text-red-600">Product not found</p></div>;
-
-  const addToCart = () => {
-    // Add to cart logic here (you can pass it back to the parent component or use context)
-    toast.success(`${product.name} added to cart!`, { position: "top-right", autoClose: 2000 });
+    setPaymentMethods((prev) => [...prev, { id: Date.now(), ...newPayment }]);
+    setNewPayment({ type: '', value: '' });
+    toast.success('Payment method added');
   };
 
-  const buyNow = () => {
-    toast.success(`Proceeding to buy ${product.name}!`, { position: "top-right", autoClose: 2000 });
-    // Add buy now logic here
-  };
+  const removePaymentMethod = (id) => setPaymentMethods((prev) => prev.filter((pm) => pm.id !== id));
 
-  const submitFeedback = () => {
-    if (feedback.trim()) {
-      setFeedbacks((prev) => [...prev, { user: "Jane", comment: feedback, rating: 4 }]);
-      setFeedback("");
-      toast.success("Feedback submitted!", { position: "top-right", autoClose: 2000 });
+  const totalAmount = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
+
+  const sortedAndFilteredProducts = () => {
+    let products = farmers.flatMap((farmer) => farmer.products);
+    if (filterBy !== 'all') products = products.filter((product) => product.category === filterBy);
+    switch (sortBy) {
+      case 'lowToHigh': return products.sort((a, b) => a.price - b.price);
+      case 'highToLow': return products.sort((a, b) => b.price - a.price);
+      case 'featured': return products.sort(() => Math.random() - 0.5);
+      case 'rating': return products.sort((a, b) => b.rating - a.rating);
+      default: return products;
     }
   };
 
-  return (
-    <motion.div className="min-h-screen p-4 sm:p-6 bg-gradient-to-br from-teal-50 via-cyan-50 to-emerald-50" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
-      <div className="max-w-5xl mx-auto bg-white rounded-xl shadow-lg p-4 sm:p-6">
-        <h1 className="text-2xl sm:text-3xl font-bold text-teal-700 mb-4">{product.name}</h1>
+  const ProductDetails = ({ product }) => {
+    const [selectedImage, setSelectedImage] = useState(product.images[0]);
+    const [quantity, setQuantity] = useState(1);
+
+    return (
+      <motion.div
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="p-4 sm:p-6 md:p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-4xl mx-auto"
+      >
         <div className="flex flex-col md:flex-row gap-6">
-          <div className="flex-1">
-            <motion.img
-              src={selectedImage}
-              alt={product.name}
-              className="w-full h-64 sm:h-96 object-cover rounded-lg mb-4 cursor-pointer"
-              whileHover={{ scale: zoom ? 1.5 : 1 }}
-              onMouseEnter={() => setZoom(true)}
-              onMouseLeave={() => setZoom(false)}
-            />
-            <div className="flex space-x-2 overflow-x-auto">
-              {product.images.map((img, idx) => (
-                <img key={idx} src={img} alt={`${product.name}-${idx}`} className="w-16 h-16 object-cover rounded-lg cursor-pointer hover:opacity-80" onClick={() => setSelectedImage(img)} />
+          {/* Left Side: Product Images */}
+          <div className="flex flex-col items-center">
+            <img src={selectedImage} alt={product.name} className="w-64 h-64 object-cover rounded-lg mb-4" />
+            <div className="flex space-x-2">
+              {product.images.map((img, index) => (
+                <img
+                  key={index}
+                  src={img}
+                  alt={`${product.name} ${index + 1}`}
+                  className={`w-16 h-16 object-cover rounded-md cursor-pointer ${selectedImage === img ? 'border-2 border-teal-400' : ''}`}
+                  onClick={() => setSelectedImage(img)}
+                />
               ))}
             </div>
           </div>
+
+          {/* Right Side: Product Info */}
           <div className="flex-1">
-            <p className="text-gray-600 mb-4">{product.description}</p>
-            <p className="text-teal-600 font-bold text-xl mb-4">₹{product.price}</p>
-            <div className="flex items-center mb-4">
-              <Star className="w-5 h-5 text-yellow-400" />
-              <span className="ml-1 text-gray-600">{product.rating}</span>
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-teal-300">{language === 'English' ? product.name : language === 'Tamil' ? product.tamilName : product.hindiName}</h1>
+            <p className="text-xl text-teal-600 dark:text-teal-400 mt-2">${product.price.toFixed(2)}</p>
+            <p className="text-gray-600 dark:text-gray-400">Sold by: {farmers.find((f) => f.products.some((p) => p.id === product.id)).name}</p>
+            <div className="flex items-center mt-2">
+              {[...Array(5)].map((_, i) => (
+                <FaStar key={i} className={i < Math.round(product.rating) ? 'text-yellow-400' : 'text-gray-300'} />
+              ))}
+              <span className="ml-2 text-gray-600 dark:text-gray-400">({product.rating}/5)</span>
             </div>
-            <p className="text-gray-600 mb-4">{language === "English" ? "Stock" : "இருப்பு"}: {product.stock}</p>
-            <div className="flex space-x-4">
-              <button onClick={addToCart} className="flex-1 p-3 bg-teal-500 text-white rounded-lg hover:bg-teal-600" disabled={product.stock === 0}>{language === "English" ? "Add to Cart" : "கார்ட்டில் சேர்"}</button>
-              <button onClick={buyNow} className="flex-1 p-3 bg-green-500 text-white rounded-lg hover:bg-green-600">{language === "English" ? "Buy Now" : "இப்போது வாங்கு"}</button>
+
+            {/* Quantity Selection */}
+            <div className="mt-4">
+              <p className="text-gray-800 dark:text-gray-200 font-semibold">Quantity:</p>
+              <div className="flex space-x-2 mt-2">
+                {[1, 2, 3].map((kg) => (
+                  <button
+                    key={kg}
+                    onClick={() => setQuantity(kg)}
+                    className={`p-2 rounded-lg ${quantity === kg ? 'bg-teal-500 text-white' : 'bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200'} hover:bg-teal-400 transition-colors`}
+                  >
+                    {kg} kg
+                  </button>
+                ))}
+                <input
+                  type="number"
+                  min="1"
+                  value={quantity}
+                  onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+                  className="w-16 p-2 rounded-lg border border-gray-300 dark:border-gray-600 text-center bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+                />
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="mt-6 flex space-x-4">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => addToCart(product, quantity)}
+                className="p-3 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-lg shadow-lg"
+              >
+                {translations[language].addToCart}
+              </motion.button>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => toast.success(`${product.name} saved to wishlist!`)}
+                className="p-3 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg shadow-lg"
+              >
+                {translations[language].saveToWishlist}
+              </motion.button>
             </div>
           </div>
         </div>
-        <div className="mt-8">
-          <h2 className="text-xl font-bold text-teal-700 mb-4">{language === "English" ? "Customer Feedback" : "வாடிக்கையாளர் கருத்து"}</h2>
-          <textarea value={feedback} onChange={(e) => setFeedback(e.target.value)} placeholder={language === "English" ? "Leave your feedback..." : "உங்கள் கருத்தை விடுங்கள்..."} className="w-full p-3 rounded-lg border border-teal-200 mb-4" rows="4" />
-          <button onClick={submitFeedback} className="w-full sm:w-auto p-3 bg-teal-600 text-white rounded-lg hover:bg-teal-700">{language === "English" ? "Submit Feedback" : "கருத்தை சமர்ப்பி"}</button>
-          <div className="mt-4">
-            {feedbacks.map((fb, idx) => (
-              <div key={idx} className="border-b border-teal-100 py-2">
-                <p className="font-semibold text-teal-700">{fb.user}</p>
-                <p className="text-gray-600">{fb.comment}</p>
-                <div className="flex items-center">
-                  <Star className="w-4 h-4 text-yellow-400" />
-                  <span className="ml-1 text-gray-600">{fb.rating}</span>
+
+        {/* Product Details Sections */}
+        <div className="mt-8 space-y-8">
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-teal-300">About the Product</h2>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">This is a premium quality {product.name} sourced directly from the farm. Fresh, organic, and packed with nutrients.</p>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-teal-300">Other Information</h2>
+            <ul className="text-gray-600 dark:text-gray-400 mt-2 space-y-1">
+              <li><strong>Sourced and Marketed by:</strong> {farmers.find((f) => f.products.some((p) => p.id === product.id)).name}</li>
+              <li><strong>Best Before:</strong> 30 days from packing</li>
+              <li><strong>Disclaimer:</strong> Product color may vary slightly due to natural factors.</li>
+              <li><strong>Country of Origin:</strong> India</li>
+            </ul>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-teal-300">For Queries/Feedback/Complaints</h2>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">Contact us at: support@farmfresh.com | +91 12345-67890</p>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-teal-300">Ratings and Reviews</h2>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">Average Rating: {product.rating}/5 (Based on 120 reviews)</p>
+            <button className="mt-2 text-teal-600 dark:text-teal-400 hover:underline">Write a Review</button>
+          </div>
+
+          <div>
+            <h2 className="text-xl font-semibold text-gray-800 dark:text-teal-300">Similar Products</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
+              {sortedAndFilteredProducts()
+                .filter((p) => p.category === product.category && p.id !== product.id)
+                .slice(0, 3)
+                .map((similarProduct) => (
+                  <div
+                    key={similarProduct.id}
+                    onClick={() => setSelectedProduct(similarProduct)}
+                    className="p-4 bg-white dark:bg-gray-800 rounded-lg shadow-lg cursor-pointer hover:border-teal-400 border-2 border-transparent transition-all"
+                  >
+                    <img src={similarProduct.image} alt={similarProduct.name} className="w-full h-24 object-cover rounded-md mb-2" />
+                    <p className="text-gray-800 dark:text-teal-300">{similarProduct.name}</p>
+                    <p className="text-teal-600 dark:text-teal-400">${similarProduct.price.toFixed(2)}</p>
+                  </div>
+                ))}
+            </div>
+          </div>
+        </div>
+      </motion.div>
+    );
+  };
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case 'home':
+        return (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="p-4 sm:p-6 md:p-8 rounded-2xl bg-white dark:bg-gray-900 shadow-2xl w-full max-w-7xl mx-auto"
+          >
+            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-teal-500 dark:from-indigo-400 dark:to-teal-300">
+              Explore Products
+            </h2>
+            <div className="flex flex-col sm:flex-row items-center mb-8 space-y-4 sm:space-y-0 sm:space-x-4">
+              <div className="flex items-center w-full sm:w-auto">
+                <FaSearch className="text-gray-500 dark:text-gray-300 mr-2" />
+                <input
+                  type="text"
+                  placeholder={translations[language].search}
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full sm:w-72 p-3 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-teal-400"
+                />
+              </div>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="w-full sm:w-48 p-3 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-teal-400"
+              >
+                <option value="relevance">Relevance</option>
+                <option value="lowToHigh">Low to High Price</option>
+                <option value="highToLow">High to Low Price</option>
+                <option value="featured">Featured</option>
+                <option value="rating">Customer Rating</option>
+              </select>
+              <select
+                value={filterBy}
+                onChange={(e) => setFilterBy(e.target.value)}
+                className="w-full sm:w-48 p-3 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-teal-400"
+              >
+                <option value="all">All Categories</option>
+                <option value="Vegetables">Vegetables</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Dairy">Dairy</option>
+                <option value="Seeds and Oil">Seeds and Oil</option>
+              </select>
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                className={`voice-btn p-3 rounded-full bg-gradient-to-r from-indigo-500 to-teal-500 text-white shadow-lg ${isListening ? 'animate-pulse' : ''}`}
+              >
+                <FaMicrophone />
+              </motion.button>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6 w-full min-h-[60vh]">
+              {sortedAndFilteredProducts()
+                .filter((product) =>
+                  language === 'English'
+                    ? product.name.toLowerCase().includes(searchQuery.toLowerCase())
+                    : language === 'Tamil'
+                    ? product.tamilName.toLowerCase().includes(searchQuery.toLowerCase())
+                    : product.hindiName.toLowerCase().includes(searchQuery.toLowerCase())
+                )
+                .map((product) => (
+                  <div
+                    key={product.id}
+                    className={`p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg cursor-pointer border-2 hover:border-teal-400 transition-all ${
+                      selectedProducts.some((p) => p.id === product.id) ? 'border-teal-400' : 'border-transparent'
+                    }`}
+                    onClick={() => setSelectedProduct(product) || setCurrentPage('productDetails')}
+                  >
+                    <img src={product.image} alt={product.name} className="w-full h-32 sm:h-40 object-cover rounded-md mb-4" />
+                    <h3 className="text-lg font-semibold text-gray-800 dark:text-teal-300">
+                      {language === 'English' ? product.name : language === 'Tamil' ? product.tamilName : product.hindiName}
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">By: {farmers.find((f) => f.products.some((p) => p.id === product.id)).name}</p>
+                    <p className="text-teal-600 dark:text-teal-400 font-medium">${product.price.toFixed(2)}</p>
+                    <p className="text-sm text-gray-500 dark:text-gray-500">Rating: {product.rating}/5</p>
+                  </div>
+                ))}
+            </div>
+            {selectedProducts.length > 0 && (
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => {
+                  selectedProducts.forEach((p) => addToCart(p));
+                  setSelectedProducts([]);
+                }}
+                className="mt-8 w-full sm:w-72 mx-auto block p-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-lg shadow-2xl"
+              >
+                {translations[language].addToCart}
+              </motion.button>
+            )}
+          </motion.div>
+        );
+      case 'productDetails':
+        return selectedProduct ? <ProductDetails product={selectedProduct} /> : null;
+      case 'profile':
+        return (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.7 }}
+            className="p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl bg-white dark:bg-gray-900 max-w-md mx-auto"
+          >
+            <div className="flex flex-col items-center space-y-6">
+              <motion.img src={customer.photo} alt="Profile" className="w-28 h-28 rounded-full shadow-xl border-4 border-teal-400" whileHover={{ scale: 1.15 }} />
+              <div className="text-center">
+                <h2 className="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-teal-500 dark:from-indigo-400 dark:to-teal-300">
+                  {customer.name}
+                </h2>
+                <div className="mt-4 space-y-3 text-gray-700 dark:text-gray-200">
+                  <p>{customer.phone}</p>
+                  <p>{customer.email}</p>
+                  <p>{customer.address}</p>
+                  <p>Joined: {customer.joined}</p>
                 </div>
               </div>
+            </div>
+          </motion.div>
+        );
+      case 'orders':
+        return (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl bg-white dark:bg-gray-900 w-full max-w-4xl mx-auto"
+          >
+            <h2 className="text-2xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-teal-500 dark:from-indigo-400 dark:to-teal-300">
+              {translations[language].orders}
+            </h2>
+            <div className="space-y-6">
+              {orders.map((order) => (
+                <motion.div key={order.id} whileHover={{ scale: 1.05 }} className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                  <p className="text-gray-800 dark:text-teal-300 font-semibold">{order.product}</p>
+                  <p className="text-gray-600 dark:text-gray-400">Farmer: {order.farmer}</p>
+                  <p className="text-gray-600 dark:text-gray-400">Status: {order.status}</p>
+                  <p className="text-gray-600 dark:text-gray-400">Date: {order.date}</p>
+                </motion.div>
+              ))}
+            </div>
+          </motion.div>
+        );
+      case 'wishlist':
+        return (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl bg-white dark:bg-gray-900 w-full max-w-4xl mx-auto"
+          >
+            <h2 className="text-2xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-teal-500 dark:from-indigo-400 dark:to-teal-300">
+              {translations[language].wishlist}
+            </h2>
+            <p className="text-gray-600 dark:text-gray-400">Wishlist items will appear here.</p>
+          </motion.div>
+        );
+      case 'address':
+        return (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl bg-white dark:bg-gray-900 max-w-md mx-auto"
+          >
+            <h2 className="text-2xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-teal-500 dark:from-indigo-400 dark:to-teal-300">
+              {translations[language].address}
+            </h2>
+            <div className="space-y-6 mb-8">
+              {addresses.map((addr) => (
+                <div key={addr.id} className="flex justify-between items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                  <div>
+                    <p className="text-gray-800 dark:text-teal-300 font-semibold">{addr.type}</p>
+                    <p className="text-gray-600 dark:text-gray-400">{addr.details}</p>
+                  </div>
+                  <button onClick={() => removeAddress(addr.id)} className="text-red-500 hover:text-red-700">
+                    <FaTrash />
+                  </button>
+                </div>
+              ))}
+            </div>
+            <div className="space-y-4">
+              <input
+                type="text"
+                placeholder="Address Type"
+                value={newAddress.type}
+                onChange={(e) => setNewAddress({ ...newAddress, type: e.target.value })}
+                className="w-full p-3 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-teal-400"
+              />
+              <input
+                type="text"
+                placeholder="Address Details"
+                value={newAddress.details}
+                onChange={(e) => setNewAddress({ ...newAddress, details: e.target.value })}
+                className="w-full p-3 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-teal-400"
+              />
+              <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} onClick={addAddress} className="w-full p-3 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-lg shadow-2xl">
+                <FaPlus className="mr-2 inline" /> Add Address
+              </motion.button>
+            </div>
+          </motion.div>
+        );
+      case 'payment':
+        return (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl bg-white dark:bg-gray-900 max-w-md mx-auto"
+          >
+            <h2 className="text-2xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-teal-500 dark:from-indigo-400 dark:to-teal-300">
+              {translations[language].payment}
+            </h2>
+            <div className="space-y-6 mb-8">
+              {paymentMethods.map((pm) => (
+                <div key={pm.id} className="flex justify-between items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                  <div>
+                    <p className="text-gray-800 dark:text-teal-300 font-semibold">{pm.type}</p>
+                    <p className="text-gray-600 dark:text-gray-400">{pm.value}</p>
+                  </div>
+                  <button onClick={() => removePaymentMethod(pm.id)} className="text-red-500 hover:text-red-700">
+                    <FaTrash />
+                  </button>
+                </div>
+              ))}
+            </div>
+            <div className="space-y-4">
+              <select
+                value={newPayment.type}
+                onChange={(e) => setNewPayment({ ...newPayment, type: e.target.value })}
+                className="w-full p-3 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-teal-400"
+              >
+                <option value="">Select Payment Type</option>
+                <option value="UPI">UPI</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Debit Card">Debit Card</option>
+              </select>
+              <input
+                type="text"
+                placeholder="Payment Details"
+                value={newPayment.value}
+                onChange={(e) => setNewPayment({ ...newPayment, value: e.target.value })}
+                className="w-full p-3 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100 border border-gray-300 dark:border-gray-600 focus:ring-2 focus:ring-teal-400"
+              />
+              <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} onClick={addPaymentMethod} className="w-full p-3 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-lg shadow-2xl">
+                <FaPlus className="mr-2 inline" /> Add Payment Method
+              </motion.button>
+            </div>
+          </motion.div>
+        );
+      case 'cart':
+        return (
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.7 }}
+            className="p-4 sm:p-6 md:p-8 rounded-2xl shadow-2xl bg-white dark:bg-gray-900 w-full max-w-4xl mx-auto"
+          >
+            <h2 className="text-2xl font-extrabold mb-6 bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-teal-500 dark:from-indigo-400 dark:to-teal-300">
+              Your Cart
+            </h2>
+            {cart.length === 0 ? (
+              <p className="text-gray-600 dark:text-gray-400">Your cart is empty.</p>
+            ) : (
+              <>
+                {cart.map((item) => (
+                  <motion.div key={item.id} className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl shadow-lg mb-6">
+                    <div className="flex items-center space-x-4">
+                      <img src={item.image} alt={item.name} className="w-16 h-16 rounded-md" />
+                      <div>
+                        <p className="text-gray-800 dark:text-teal-300 font-semibold">
+                          {language === 'English' ? item.name : language === 'Tamil' ? item.tamilName : item.hindiName}
+                        </p>
+                        <p className="text-gray-600 dark:text-gray-400">By: {farmers.find((f) => f.products.some((p) => p.id === item.id)).name}</p>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <input
+                        type="number"
+                        value={item.qty}
+                        onChange={(e) => updateCartItem(item.id, parseInt(e.target.value) || 1)}
+                        className="w-16 p-2 rounded-lg border border-gray-300 dark:border-gray-600 text-center bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+                        min="1"
+                      />
+                      <p className="text-teal-600 dark:text-teal-400 font-medium">${(item.qty * item.price).toFixed(2)}</p>
+                      <button onClick={() => removeCartItem(item.id)} className="text-red-500 hover:text-red-700">
+                        <FaTrash />
+                      </button>
+                    </div>
+                  </motion.div>
+                ))}
+                <p className="text-2xl font-bold text-gray-800 dark:text-teal-300 text-right mt-6">Total: ${totalAmount.toFixed(2)}</p>
+                <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="mt-8 w-full sm:w-72 mx-auto block py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-lg shadow-2xl">
+                  {translations[language].placeOrder}
+                </motion.button>
+              </>
+            )}
+          </motion.div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className={`min-h-screen font-sans flex flex-col ${darkMode ? 'bg-gray-900' : 'bg-gray-100'} transition-all duration-500`}>
+      <ToastContainer />
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.7 }}
+        className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-indigo-700 to-teal-600 dark:from-indigo-800 dark:to-teal-700 text-white p-4 shadow-2xl"
+      >
+        <div className="flex items-center justify-between max-w-7xl mx-auto">
+          <div className="text-2xl font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-200">FarmFresh</div>
+          <motion.button whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.9 }} onClick={toggleNav} className="sm:hidden text-2xl">
+            <FaBars />
+          </motion.button>
+          <AnimatePresence>
+            {isNavOpen && (
+              <motion.div
+                initial={{ opacity: 0, y: -20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                className="absolute top-16 left-0 right-0 bg-gradient-to-r from-indigo-700 to-teal-600 dark:from-indigo-800 dark:to-teal-700 p-4 sm:hidden shadow-lg rounded-b-xl"
+              >
+                <div className="space-y-4">
+                  {[
+                    { icon: <FaHome />, label: translations[language].home, page: 'home' },
+                    { icon: <FaUser />, label: translations[language].profile, page: 'profile' },
+                    { icon: <FaList />, label: translations[language].orders, page: 'orders' },
+                    { icon: <FaHeart />, label: translations[language].wishlist, page: 'wishlist' },
+                    { icon: <FaMapMarkerAlt />, label: translations[language].address, page: 'address' },
+                    { icon: <FaCreditCard />, label: translations[language].payment, page: 'payment' },
+                    { icon: <FaSignOutAlt />, label: translations[language].logout, page: 'logout' },
+                  ].map((item) => (
+                    <motion.button
+                      key={item.page}
+                      whileHover={{ scale: 1.15 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="w-full text-left p-3 rounded-lg flex items-center"
+                      onClick={() => {
+                        if (item.page === 'logout') toast.info('Logged out');
+                        else setCurrentPage(item.page);
+                        setIsNavOpen(false);
+                      }}
+                    >
+                      {item.icon} <span className="ml-3">{item.label}</span>
+                    </motion.button>
+                  ))}
+                </div>
+                <div className="mt-6">
+                  <select
+                    className="w-full p-3 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+                    value={language}
+                    onChange={(e) => setLanguage(e.target.value)}
+                  >
+                    <option value="English">English</option>
+                    <option value="Tamil">Tamil</option>
+                    <option value="Hindi">Hindi</option>
+                  </select>
+                  <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} onClick={toggleDarkMode} className="w-full mt-4 p-3 rounded-lg bg-gradient-to-r from-teal-500 to-indigo-500 text-white">
+                    {darkMode ? 'Light Mode' : 'Dark Mode'}
+                  </motion.button>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+          <div className="hidden sm:flex items-center space-x-4">
+            {[
+              { icon: <FaHome />, label: translations[language].home, page: 'home' },
+              { icon: <FaUser />, label: translations[language].profile, page: 'profile' },
+              { icon: <FaList />, label: translations[language].orders, page: 'orders' },
+              { icon: <FaHeart />, label: translations[language].wishlist, page: 'wishlist' },
+              { icon: <FaMapMarkerAlt />, label: translations[language].address, page: 'address' },
+              { icon: <FaCreditCard />, label: translations[language].payment, page: 'payment' },
+              { icon: <FaSignOutAlt />, label: translations[language].logout, page: 'logout' },
+            ].map((item) => (
+              <motion.button
+                key={item.page}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.95 }}
+                className="p-2 rounded-lg flex items-center"
+                onClick={() => {
+                  if (item.page === 'logout') toast.info('Logged out');
+                  else setCurrentPage(item.page);
+                }}
+              >
+                {item.icon} <span className="ml-2">{item.label}</span>
+              </motion.button>
             ))}
+            <select
+              className="p-2 rounded-lg bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
+              value={language}
+              onChange={(e) => setLanguage(e.target.value)}
+            >
+              <option value="English">EN</option>
+              <option value="Tamil">TA</option>
+              <option value="Hindi">HI</option>
+            </select>
+            <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} onClick={toggleDarkMode} className="p-2 rounded-lg bg-gradient-to-r from-teal-500 to-indigo-500 text-white">
+              {darkMode ? 'Light' : 'Dark'}
+            </motion.button>
           </div>
         </div>
+      </motion.nav>
+
+      <div className="flex-1 pt-24 pb-8 px-4 sm:px-6 md:px-8 max-w-7xl mx-auto w-full">
+        {renderPage()}
       </div>
-    </motion.div>
+
+      <motion.footer
+        initial={{ opacity: 0, y: 50 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.7, delay: 0.2 }}
+        className="bg-gradient-to-r from-indigo-700 to-teal-600 dark:from-indigo-800 dark:to-teal-700 text-white p-4 text-center shadow-2xl"
+      >
+        <p>© 2025 FarmFresh. All rights reserved.</p>
+        <p className="text-sm mt-2">Freshness delivered from farm to table.</p>
+      </motion.footer>
+
+      <motion.button
+        whileHover={{ scale: 1.1 }}
+        whileTap={{ scale: 0.95 }}
+        className="fixed top-20 right-6 bg-gradient-to-r from-teal-500 to-indigo-500 text-white p-4 rounded-full shadow-2xl flex items-center z-40"
+        onClick={() => setCurrentPage('cart')}
+      >
+        <FaShoppingCart className="text-xl" />
+        {cart.length > 0 && (
+          <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-sm">
+            {cart.length}
+          </span>
+        )}
+      </motion.button>
+    </div>
   );
 };
 
