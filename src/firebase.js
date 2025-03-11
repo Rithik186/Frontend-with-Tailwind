@@ -1,7 +1,7 @@
-// src/firebase.js
-import { initializeApp } from "firebase/app";
-import { getDatabase } from "firebase/database";
+import { initializeApp } from 'firebase/app';
+import { getDatabase } from 'firebase/database';
 
+// Your Firebase configuration (get this from Firebase Console)
 const firebaseConfig = {
   apiKey: "AIzaSyAzBNj20JCE39AUvRXWoV5VlgNaiL-o_94",
   authDomain: "sendora-9e14f.firebaseapp.com",
@@ -13,5 +13,8 @@ const firebaseConfig = {
   measurementId: "G-HEYHYSGKBL"
 };
 
+// Initialize Firebase
 const app = initializeApp(firebaseConfig);
-export const db = getDatabase(app);
+const db = getDatabase(app);
+
+export { db };

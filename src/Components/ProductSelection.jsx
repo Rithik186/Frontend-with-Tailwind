@@ -5,7 +5,7 @@ import { Mic, User, Settings, LogOut } from "lucide-react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { ref, onValue, set } from 'firebase/database';
-import { db } from '../firebase'; // Ensure correct path
+//import { db } from '../firebase'; // Ensure correct path
 
 const ProductSelection = () => {
   const navigate = useNavigate();

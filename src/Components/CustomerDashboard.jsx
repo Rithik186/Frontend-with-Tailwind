@@ -3,6 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { FaUser, FaHome, FaShoppingCart, FaList, FaHeart, FaMapMarkerAlt, FaCreditCard, FaSignOutAlt, FaSearch, FaPlus, FaTrash, FaBars, FaMicrophone, FaStar } from 'react-icons/fa';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { db } from '../firebase'; // Import the initialized database
+import { ref, onValue, set } from 'firebase/database'; // Firebase Realtime Database methods
 
 const CustomerDashboard = () => {
   const [darkMode, setDarkMode] = useState(false);
@@ -19,7 +21,8 @@ const CustomerDashboard = () => {
   const [sortBy, setSortBy] = useState('relevance');
   const [filterBy, setFilterBy] = useState('all');
   const [isListening, setIsListening] = useState(false);
-  const [selectedProduct, setSelectedProduct] = useState(null); // For product details page
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [products, setProducts] = useState([]); // State to hold Firebase products
 
   const customer = {
     name: 'Priya Sharma',
@@ -29,27 +32,6 @@ const CustomerDashboard = () => {
     address: '12 Lotus Lane, Chennai',
     photo: 'https://via.placeholder.com/150',
   };
-
-  const farmers = [
-    {
-      id: 1,
-      name: 'GreenFields',
-      products: [
-        { id: 'p1', name: 'Organic Apples', tamilName: 'ஆர்கானிக் ஆப்பிள்கள்', hindiName: 'ऑर्गेनिक सेब', price: 5.99, image: 'https://via.placeholder.com/150', category: 'Fruits', rating: 4.5, images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150/FF0000', 'https://via.placeholder.com/150/00FF00'] },
-        { id: 'p2', name: 'Fresh Carrots', tamilName: 'புதிய கேரட்', hindiName: 'ताज़ी गाजर', price: 3.49, image: 'https://via.placeholder.com/150', category: 'Vegetables', rating: 4.2, images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150/FFFF00', 'https://via.placeholder.com/150/0000FF'] },
-      ],
-    },
-    {
-      id: 2,
-      name: 'SunnyAcres',
-      products: [
-        { id: 'p3', name: 'Tomatoes', tamilName: 'தக்காளி', hindiName: 'टमाटर', price: 4.29, image: 'https://via.placeholder.com/150', category: 'Vegetables', rating: 4.8, images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150/FF00FF', 'https://via.placeholder.com/150/00FFFF'] },
-        { id: 'p4', name: 'Cucumbers', tamilName: 'வெள்ளரி', hindiName: 'खीरा', price: 2.99, image: 'https://via.placeholder.com/150', category: 'Vegetables', rating: 4.0, images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150/FF4500', 'https://via.placeholder.com/150/8A2BE2'] },
-        { id: 'p5', name: 'Milk', tamilName: 'பால்', hindiName: 'दूध', price: 3.99, image: 'https://via.placeholder.com/150', category: 'Dairy', rating: 4.7, images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150/FFD700', 'https://via.placeholder.com/150/ADFF2F'] },
-        { id: 'p6', name: 'Sunflower Oil', tamilName: 'சூரியகாந்தி எண்ணெய்', hindiName: 'सूरजमुखी का तेल', price: 6.49, image: 'https://via.placeholder.com/150', category: 'Seeds and Oil', rating: 4.3, images: ['https://via.placeholder.com/150', 'https://via.placeholder.com/150/FF69B4', 'https://via.placeholder.com/150/20B2AA'] },
-      ],
-    },
-  ];
 
   const orders = [
     { id: 1, product: 'Organic Apples', farmer: 'GreenFields', status: 'Delivered', date: '2024-02-15' },
@@ -62,6 +44,28 @@ const CustomerDashboard = () => {
     Hindi: { home: 'होम', profile: 'प्रोफाइल', orders: 'ऑर्डर', wishlist: 'विशलिस्ट', address: 'पता', payment: 'भुगतान के तरीके', logout: 'लॉगआउट', addToCart: 'कार्ट में जोड़ें', placeOrder: 'ऑर्डर करें', search: 'उत्पाद खोजें...', saveToWishlist: 'विशलिस्ट में सहेजें' },
   };
 
+  // Fetch products from Firebase Realtime Database
+  useEffect(() => {
+    const productsRef = ref(db, 'customerDashboard/products');
+    onValue(productsRef, (snapshot) => {
+      const data = snapshot.val();
+      if (data) {
+        const productsArray = Object.keys(data).map((key) => ({
+          id: key,
+          ...data[key],
+          price: parseFloat(data[key].price), // Convert price to number
+          images: data[key].additionalImages, // Map additionalImages to images for consistency
+        }));
+        setProducts(productsArray);
+      } else {
+        toast.error('No products found in the database.');
+      }
+    }, (error) => {
+      toast.error('Failed to fetch products: ' + error.message);
+    });
+  }, []);
+
+  // Voice recognition setup (unchanged)
   useEffect(() => {
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
     if (!SpeechRecognition) return;
@@ -82,9 +86,8 @@ const CustomerDashboard = () => {
       else if (command.includes('cart')) setCurrentPage('cart');
       else if (command.includes('logout')) toast.info('Logged out');
       else {
-        const allProducts = farmers.flatMap((farmer) => farmer.products);
-        const matchedProduct = allProducts.find((product) =>
-          [product.name, product.tamilName, product.hindiName].some((name) => name.toLowerCase().includes(command))
+        const matchedProduct = products.find((product) =>
+          [product.name, product.tamilName].some((name) => name.toLowerCase().includes(command))
         );
         if (matchedProduct) {
           setSelectedProduct(matchedProduct);
@@ -111,7 +114,7 @@ const CustomerDashboard = () => {
     return () => {
       if (voiceButton) voiceButton.removeEventListener('click', handleVoiceButtonClick);
     };
-  }, [language, farmers]);
+  }, [language, products]);
 
   const toggleDarkMode = () => setDarkMode(!darkMode);
   const toggleNav = () => setIsNavOpen(!isNavOpen);
@@ -173,14 +176,14 @@ const CustomerDashboard = () => {
   const totalAmount = cart.reduce((sum, item) => sum + item.qty * item.price, 0);
 
   const sortedAndFilteredProducts = () => {
-    let products = farmers.flatMap((farmer) => farmer.products);
-    if (filterBy !== 'all') products = products.filter((product) => product.category === filterBy);
+    let filteredProducts = [...products];
+    if (filterBy !== 'all') filteredProducts = filteredProducts.filter((product) => product.category === filterBy);
     switch (sortBy) {
-      case 'lowToHigh': return products.sort((a, b) => a.price - b.price);
-      case 'highToLow': return products.sort((a, b) => b.price - a.price);
-      case 'featured': return products.sort(() => Math.random() - 0.5);
-      case 'rating': return products.sort((a, b) => b.rating - a.rating);
-      default: return products;
+      case 'lowToHigh': return filteredProducts.sort((a, b) => a.price - b.price);
+      case 'highToLow': return filteredProducts.sort((a, b) => b.price - a.price);
+      case 'featured': return filteredProducts.sort(() => Math.random() - 0.5);
+      case 'rating': return filteredProducts.sort((a, b) => b.rating - a.rating);
+      default: return filteredProducts;
     }
   };
 
@@ -196,7 +199,6 @@ const CustomerDashboard = () => {
         className="p-4 sm:p-6 md:p-8 bg-white dark:bg-gray-900 rounded-2xl shadow-2xl max-w-4xl mx-auto"
       >
         <div className="flex flex-col md:flex-row gap-6">
-          {/* Left Side: Product Images */}
           <div className="flex flex-col items-center">
             <img src={selectedImage} alt={product.name} className="w-64 h-64 object-cover rounded-lg mb-4" />
             <div className="flex space-x-2">
@@ -211,20 +213,16 @@ const CustomerDashboard = () => {
               ))}
             </div>
           </div>
-
-          {/* Right Side: Product Info */}
           <div className="flex-1">
-            <h1 className="text-2xl font-bold text-gray-800 dark:text-teal-300">{language === 'English' ? product.name : language === 'Tamil' ? product.tamilName : product.hindiName}</h1>
-            <p className="text-xl text-teal-600 dark:text-teal-400 mt-2">${product.price.toFixed(2)}</p>
-            <p className="text-gray-600 dark:text-gray-400">Sold by: {farmers.find((f) => f.products.some((p) => p.id === product.id)).name}</p>
+            <h1 className="text-2xl font-bold text-gray-800 dark:text-teal-300">{language === 'English' ? product.name : product.tamilName}</h1>
+            <p className="text-xl text-teal-600 dark:text-teal-400 mt-2">₹{product.price.toFixed(2)}</p>
+            <p className="text-gray-600 dark:text-gray-400">Sold by: {product.farmerName}</p>
             <div className="flex items-center mt-2">
               {[...Array(5)].map((_, i) => (
                 <FaStar key={i} className={i < Math.round(product.rating) ? 'text-yellow-400' : 'text-gray-300'} />
               ))}
               <span className="ml-2 text-gray-600 dark:text-gray-400">({product.rating}/5)</span>
             </div>
-
-            {/* Quantity Selection */}
             <div className="mt-4">
               <p className="text-gray-800 dark:text-gray-200 font-semibold">Quantity:</p>
               <div className="flex space-x-2 mt-2">
@@ -246,8 +244,6 @@ const CustomerDashboard = () => {
                 />
               </div>
             </div>
-
-            {/* Action Buttons */}
             <div className="mt-6 flex space-x-4">
               <motion.button
                 whileHover={{ scale: 1.05 }}
@@ -268,35 +264,29 @@ const CustomerDashboard = () => {
             </div>
           </div>
         </div>
-
-        {/* Product Details Sections */}
         <div className="mt-8 space-y-8">
           <div>
             <h2 className="text-xl font-semibold text-gray-800 dark:text-teal-300">About the Product</h2>
-            <p className="text-gray-600 dark:text-gray-400 mt-2">This is a premium quality {product.name} sourced directly from the farm. Fresh, organic, and packed with nutrients.</p>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">{product.about}</p>
           </div>
-
           <div>
             <h2 className="text-xl font-semibold text-gray-800 dark:text-teal-300">Other Information</h2>
             <ul className="text-gray-600 dark:text-gray-400 mt-2 space-y-1">
-              <li><strong>Sourced and Marketed by:</strong> {farmers.find((f) => f.products.some((p) => p.id === product.id)).name}</li>
-              <li><strong>Best Before:</strong> 30 days from packing</li>
-              <li><strong>Disclaimer:</strong> Product color may vary slightly due to natural factors.</li>
-              <li><strong>Country of Origin:</strong> India</li>
+              <li><strong>Sourced and Marketed by:</strong> {product.otherInfo.sourcedBy}</li>
+              <li><strong>Best Before:</strong> {product.otherInfo.bestBefore}</li>
+              <li><strong>Disclaimer:</strong> {product.otherInfo.disclaimer}</li>
+              <li><strong>Country of Origin:</strong> {product.otherInfo.origin}</li>
             </ul>
           </div>
-
           <div>
             <h2 className="text-xl font-semibold text-gray-800 dark:text-teal-300">For Queries/Feedback/Complaints</h2>
-            <p className="text-gray-600 dark:text-gray-400 mt-2">Contact us at: support@farmfresh.com | +91 12345-67890</p>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">{product.contactInfo}</p>
           </div>
-
           <div>
             <h2 className="text-xl font-semibold text-gray-800 dark:text-teal-300">Ratings and Reviews</h2>
-            <p className="text-gray-600 dark:text-gray-400 mt-2">Average Rating: {product.rating}/5 (Based on 120 reviews)</p>
+            <p className="text-gray-600 dark:text-gray-400 mt-2">Average Rating: {product.reviews.averageRating}/5 (Based on {product.reviews.count} reviews)</p>
             <button className="mt-2 text-teal-600 dark:text-teal-400 hover:underline">Write a Review</button>
           </div>
-
           <div>
             <h2 className="text-xl font-semibold text-gray-800 dark:text-teal-300">Similar Products</h2>
             <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-4">
@@ -311,7 +301,7 @@ const CustomerDashboard = () => {
                   >
                     <img src={similarProduct.image} alt={similarProduct.name} className="w-full h-24 object-cover rounded-md mb-2" />
                     <p className="text-gray-800 dark:text-teal-300">{similarProduct.name}</p>
-                    <p className="text-teal-600 dark:text-teal-400">${similarProduct.price.toFixed(2)}</p>
+                    <p className="text-teal-600 dark:text-teal-400">₹{similarProduct.price.toFixed(2)}</p>
                   </div>
                 ))}
             </div>
@@ -364,8 +354,6 @@ const CustomerDashboard = () => {
                 <option value="all">All Categories</option>
                 <option value="Vegetables">Vegetables</option>
                 <option value="Fruits">Fruits</option>
-                <option value="Dairy">Dairy</option>
-                <option value="Seeds and Oil">Seeds and Oil</option>
               </select>
               <motion.button
                 whileHover={{ scale: 1.1 }}
@@ -380,9 +368,7 @@ const CustomerDashboard = () => {
                 .filter((product) =>
                   language === 'English'
                     ? product.name.toLowerCase().includes(searchQuery.toLowerCase())
-                    : language === 'Tamil'
-                    ? product.tamilName.toLowerCase().includes(searchQuery.toLowerCase())
-                    : product.hindiName.toLowerCase().includes(searchQuery.toLowerCase())
+                    : product.tamilName.toLowerCase().includes(searchQuery.toLowerCase())
                 )
                 .map((product) => (
                   <div
@@ -394,10 +380,10 @@ const CustomerDashboard = () => {
                   >
                     <img src={product.image} alt={product.name} className="w-full h-32 sm:h-40 object-cover rounded-md mb-4" />
                     <h3 className="text-lg font-semibold text-gray-800 dark:text-teal-300">
-                      {language === 'English' ? product.name : language === 'Tamil' ? product.tamilName : product.hindiName}
+                      {language === 'English' ? product.name : product.tamilName}
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">By: {farmers.find((f) => f.products.some((p) => p.id === product.id)).name}</p>
-                    <p className="text-teal-600 dark:text-teal-400 font-medium">${product.price.toFixed(2)}</p>
+                    <p className="text-sm text-gray-600 dark:text-gray-400">By: {product.farmerName}</p>
+                    <p className="text-teal-600 dark:text-teal-400 font-medium">₹{product.price.toFixed(2)}</p>
                     <p className="text-sm text-gray-500 dark:text-gray-500">Rating: {product.rating}/5</p>
                   </div>
                 ))}
@@ -594,9 +580,9 @@ const CustomerDashboard = () => {
                       <img src={item.image} alt={item.name} className="w-16 h-16 rounded-md" />
                       <div>
                         <p className="text-gray-800 dark:text-teal-300 font-semibold">
-                          {language === 'English' ? item.name : language === 'Tamil' ? item.tamilName : item.hindiName}
+                          {language === 'English' ? item.name : item.tamilName}
                         </p>
-                        <p className="text-gray-600 dark:text-gray-400">By: {farmers.find((f) => f.products.some((p) => p.id === item.id)).name}</p>
+                        <p className="text-gray-600 dark:text-gray-400">By: {item.farmerName}</p>
                       </div>
                     </div>
                     <div className="flex items-center space-x-4">
@@ -607,14 +593,14 @@ const CustomerDashboard = () => {
                         className="w-16 p-2 rounded-lg border border-gray-300 dark:border-gray-600 text-center bg-white dark:bg-gray-800 text-gray-800 dark:text-gray-100"
                         min="1"
                       />
-                      <p className="text-teal-600 dark:text-teal-400 font-medium">${(item.qty * item.price).toFixed(2)}</p>
+                      <p className="text-teal-600 dark:text-teal-400 font-medium">₹{(item.qty * item.price).toFixed(2)}</p>
                       <button onClick={() => removeCartItem(item.id)} className="text-red-500 hover:text-red-700">
                         <FaTrash />
                       </button>
                     </div>
                   </motion.div>
                 ))}
-                <p className="text-2xl font-bold text-gray-800 dark:text-teal-300 text-right mt-6">Total: ${totalAmount.toFixed(2)}</p>
+                <p className="text-2xl font-bold text-gray-800 dark:text-teal-300 text-right mt-6">Total: ₹{totalAmount.toFixed(2)}</p>
                 <motion.button whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }} className="mt-8 w-full sm:w-72 mx-auto block py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-lg shadow-2xl">
                   {translations[language].placeOrder}
                 </motion.button>

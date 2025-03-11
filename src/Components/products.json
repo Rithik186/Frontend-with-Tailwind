@@ -1763,7 +1763,8 @@
           "tamilName": "பாதாம் எண்ணெய்",
           "hindiName": "बादाम का तेल",
           "weight": "1kg"
-      },
+      }
+    },
         "customerDashboard": {
           "products": {
             "1": {
@@ -3564,7 +3565,7 @@
                       "https://via.placeholder.com/150/20B2AA"
                     ]
                   }
+                  
                 }
               }
             }
-  }
