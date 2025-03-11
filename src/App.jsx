@@ -4,7 +4,8 @@ import Dashboard from './Components/Dashboard.jsx'; // Renamed Home to Dashboard
 import ProductSelection from './Components/ProductSelection.jsx';
 import Home from './Components/Home.jsx';
 import Payment from './Components/Payment.jsx';
-import CustomerDashboard from './Components/Customerdashboard.jsx';
+import CustomerDashboard from './Components/CustomerDashboard.jsx';
+
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/get" element={<Dashboard />} />
-          <Route path="/addpro" element={<CustomerDashboard />} />
+          <Route path="/addpro" element={<ProductSelection />} />
           <Route path="/payment" element={<Payment />} />
         </Routes>
       </div>
